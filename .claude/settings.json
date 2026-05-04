@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"/Users/brettjohnson/Documents/Brettjo77GitHub/Reading Drones\" log --oneline -20)",
+      "Bash(git -C \"/Users/brettjohnson/Documents/Brettjo77GitHub/Reading Drones\" remote -v)",
+      "Read(//tmp/rd-peek/**)",
+      "Read(//private/tmp/rd-peek/**)",
+      "Bash(rm -rf /tmp/rd-bundle)",
+      "Bash(mkdir -p /tmp/rd-bundle)",
+      "Read(//tmp/**)",
+      "Read(//tmp/rd-bundle/**)",
+      "Read(//private/tmp/rd-bundle/src/**)",
+      "Read(//private/tmp/rd-bundle/**)"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+*.log
+npm-debug.log*
+
+# Vite build output
+site/dist/
+
+# Editor
+.vscode/
+.idea/
+
+# Claude Code local-only settings
+.claude/settings.local.json
+
+# Designer hand-off bundle — kept locally as source-of-truth, not in repo
+New Website May 2026/

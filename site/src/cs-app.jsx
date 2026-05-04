@@ -1,0 +1,60 @@
+import React from 'react'
+// Comic Studio — full site app: chrome + router + pages
+
+const CSAPP = (() => {
+  const { CSNav, CSFooter, SiteTweaks, useRoute, ScrollDrone, applyPalette, TWEAK_DEFAULTS } = window.SITE;
+  const { HomePage, ServicesPage, ContactPage, AboutPage, PortfolioPage } = window.CSPAGES;
+  const { RD_INK } = window;
+  // New pages (loaded after CSPAGES)
+  const PortfolioPage2 = window.CSPAGES2 && window.CSPAGES2.PortfolioPage;
+  const PricingPage    = window.CSPAGES2 && window.CSPAGES2.PricingPage;
+  const CaseStudyPage  = window.CSPAGES2 && window.CSPAGES2.CaseStudyPage;
+
+  function Site({ heroVariant = 'A' }) {
+    const [route, go] = useRoute();
+    const scrollerRef = React.useRef(null);
+    const [enableDrone, setEnableDrone] = React.useState(true);
+
+    // Initialise palette CSS vars on mount
+    React.useEffect(() => { applyPalette(TWEAK_DEFAULTS.palette); }, []);
+
+    // Watch tweak persistence to flip the drone on/off
+    React.useEffect(() => {
+      const handler = (e) => {
+        const d = e.data || {};
+        if (d.type === '__edit_mode_set_keys' && d.edits && 'showDroneOnScroll' in d.edits) {
+          setEnableDrone(!!d.edits.showDroneOnScroll);
+        }
+      };
+      window.addEventListener('message', handler);
+      return () => window.removeEventListener('message', handler);
+    }, []);
+
+    let body;
+    if (route === 'services') body = <ServicesPage go={go} />;
+    else if (route === 'contact') body = <ContactPage go={go} />;
+    else if (route === 'about') body = <AboutPage go={go} />;
+    else if (route === 'pricing' && PricingPage) body = <PricingPage go={go} />;
+    else if (route && route.indexOf && route.indexOf('case:') === 0 && CaseStudyPage) {
+      body = <CaseStudyPage go={go} id={route.slice(5)} />;
+    }
+    else if (route === 'portfolio') body = (PortfolioPage2 ? <PortfolioPage2 go={go} /> : <PortfolioPage go={go} />);
+    else body = <HomePage go={go} heroVariant={heroVariant} />;
+
+    return (
+      <div ref={scrollerRef} id="cs-scroller" className="device-scroll" style={{
+        width: '100%', height: '100%', overflow: 'auto', background: '#fff',
+        position: 'relative',
+      }}>
+        <CSNav route={route} go={go} />
+        {body}
+        <CSFooter go={go} />
+        <ScrollDrone enabled={enableDrone} scrollerRef={scrollerRef} />
+      </div>
+    );
+  }
+
+  return { Site, SiteTweaks };
+})();
+
+window.CSAPP = CSAPP;

@@ -1,0 +1,211 @@
+import React from 'react'
+// Comic Studio Site — Tweaks (palette) + small site-wide helpers
+
+const SITE = (() => {
+  const {
+    RD_INK, RD_CREAM, RD_PAPER, RD_YELLOW, RD_ORANGE, RD_TINT,
+    SpeechBadge, BurstBadge, CCBButton, CompactLockup, Icn, ICONS, HALFTONE,
+    SunburstRays, MavicHero,
+    TweaksPanel, useTweaks, TweakSection, TweakRadio, TweakColor, TweakToggle,
+  } = window;
+
+  // Palette presets — yellow vs orange dominance + alt accents
+  const PALETTES = {
+    'yellow-orange': { primary: '#fcd34d', accent: '#ef5a24', tint: '#2aa7c8', name: 'Yellow + Orange (default)' },
+    'orange-yellow': { primary: '#ef5a24', accent: '#fcd34d', tint: '#2aa7c8', name: 'Orange-led' },
+    'yellow-pink':   { primary: '#fcd34d', accent: '#ec4899', tint: '#5b9cf2', name: 'Yellow + Hot Pink' },
+    'mint-orange':   { primary: '#7ee0a3', accent: '#ef5a24', tint: '#0d0d10', name: 'Mint + Orange' },
+    'red-yellow':    { primary: '#e63946', accent: '#fcd34d', tint: '#0d0d10', name: 'Comic Red + Yellow' },
+    'cyan-magenta':  { primary: '#22d3ee', accent: '#e0399f', tint: '#fcd34d', name: 'Pop Art Cyan + Magenta' },
+  };
+
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "palette": "yellow-orange",
+    "comicIntensity": "default",
+    "showDroneOnScroll": true
+  }/*EDITMODE-END*/;
+
+  // Apply palette to CSS vars (so all comic studio pages can read them)
+  function applyPalette(key) {
+    const p = PALETTES[key] || PALETTES['yellow-orange'];
+    const r = document.documentElement.style;
+    r.setProperty('--rd-primary', p.primary);
+    r.setProperty('--rd-accent', p.accent);
+    r.setProperty('--rd-tint', p.tint);
+  }
+
+  function SiteTweaks() {
+    const [t, setT] = useTweaks(TWEAK_DEFAULTS);
+    React.useEffect(() => { applyPalette(t.palette); }, [t.palette]);
+
+    return (
+      <TweaksPanel title="Tweaks">
+        <TweakSection title="Palette">
+          <TweakRadio
+            label="Preset"
+            value={t.palette}
+            onChange={(v) => setT('palette', v)}
+            options={Object.entries(PALETTES).map(([k, v]) => ({ value: k, label: v.name }))}
+          />
+        </TweakSection>
+        <TweakSection title="Detail">
+          <TweakToggle
+            label="Drone scrolls between sections"
+            value={t.showDroneOnScroll}
+            onChange={(v) => setT('showDroneOnScroll', v)}
+          />
+        </TweakSection>
+      </TweaksPanel>
+    );
+  }
+
+  // Tiny router — query string ?p=services etc
+  function useRoute() {
+    const [route, setRoute] = React.useState(() => {
+      try { return new URL(location.href).searchParams.get('p') || 'home'; }
+      catch (e) { return 'home'; }
+    });
+    React.useEffect(() => {
+      const onPop = () => {
+        try { setRoute(new URL(location.href).searchParams.get('p') || 'home'); }
+        catch (e) { setRoute('home'); }
+      };
+      window.addEventListener('popstate', onPop);
+      return () => window.removeEventListener('popstate', onPop);
+    }, []);
+    const go = React.useCallback((p) => {
+      try {
+        const u = new URL(location.href);
+        if (p === 'home') u.searchParams.delete('p'); else u.searchParams.set('p', p);
+        history.pushState({}, '', u);
+      } catch (e) {}
+      setRoute(p);
+      // scroll the inner scroller back to top
+      try {
+        const sc = document.getElementById('cs-scroller');
+        if (sc) sc.scrollTop = 0;
+      } catch (e) {}
+    }, []);
+    return [route, go];
+  }
+
+  // CS-prefixed nav (uses CSS vars for primary/accent)
+  function CSNav({ route, go }) {
+    const links = [
+      ['home', 'Home'], ['services', 'Services'], ['portfolio', 'Portfolio'],
+      ['pricing', 'Pricing'], ['about', 'Studio'], ['contact', 'Contact'],
+    ];
+    return (
+      <header style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '18px 48px', background: RD_CREAM,
+        borderBottom: `4px solid ${RD_INK}`,
+        position: 'sticky', top: 0, zIndex: 30,
+      }}>
+        <a onClick={() => go('home')} style={{ cursor: 'pointer' }}><CompactLockup size={22} /></a>
+        <nav style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+          {links.map(([p, l]) => {
+            const on = route === p || (p === 'portfolio' && typeof route === 'string' && route.indexOf('case:') === 0);
+            return (
+              <a key={p} onClick={() => go(p)} className="cs-navlink" style={{
+                fontFamily: '"Archivo Black", sans-serif', fontSize: 13,
+                textTransform: 'uppercase', color: RD_INK, letterSpacing: '0.05em',
+                padding: '8px 14px', cursor: 'pointer', borderRadius: 8,
+                background: on ? 'var(--rd-primary)' : 'transparent',
+                border: on ? `2.5px solid ${RD_INK}` : '2.5px solid transparent',
+                boxShadow: on ? `3px 3px 0 ${RD_INK}` : 'none',
+              }}>{l}</a>
+            );
+          })}
+          <div style={{ marginLeft: 16 }}>
+            <button onClick={() => go('contact')} style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '12px 20px', background: 'var(--rd-accent)', color: RD_INK,
+              border: `2.8px solid ${RD_INK}`, borderRadius: 10,
+              fontFamily: '"Archivo Black", sans-serif', textTransform: 'uppercase',
+              fontSize: 13, letterSpacing: '0.04em',
+              boxShadow: `0 5px 0 ${RD_INK}`, cursor: 'pointer',
+            }}>Quote!</button>
+          </div>
+        </nav>
+      </header>
+    );
+  }
+
+  function CSFooter({ go }) {
+    return (
+      <footer style={{ background: RD_CREAM, color: RD_INK, padding: '56px 48px 24px', borderTop: `4px solid ${RD_INK}` }}>
+        <div style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr', gap: 36 }}>
+          <div>
+            <CompactLockup size={22} />
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, lineHeight: 1.5, marginTop: 14, opacity: 0.75, maxWidth: 280 }}>
+              Aerial photography, video and FPV tours from Reading, Berkshire.
+            </p>
+            <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
+              {[ICONS.yt, ICONS.ig, ICONS.fb].map((d, i) => (
+                <a key={i} className="cs-social" style={{
+                  width: 40, height: 40, borderRadius: 10, border: `2.5px solid ${RD_INK}`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+                  background: 'var(--rd-primary)', boxShadow: `3px 3px 0 ${RD_INK}`,
+                }}><svg viewBox="0 0 24 24" width={18} height={18} fill="none" stroke={RD_INK} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d={d} /></svg></a>
+              ))}
+            </div>
+          </div>
+          {[
+            { h: 'Services', items: [['services','Photography'], ['services','Video'], ['services','FPV Tours'], ['services','Inspections'], ['services','Day Rates']] },
+            { h: 'Studio',  items: [['about','About'], ['portfolio','Portfolio'], ['pricing','Pricing'], ['contact','Contact']] },
+            { h: 'Reach Us',  items: [['contact','contact@readingdrones.co.uk'], ['contact','07801 881403'], ['about','Reading, Berkshire']] },
+          ].map((col) => (
+            <div key={col.h}>
+              <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 13, color: 'var(--rd-accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>{col.h}</div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {col.items.map(([p, t]) => <li key={t} onClick={() => go(p)} style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, opacity: 0.78, cursor: 'pointer' }}>{t}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div style={{ borderTop: `2px solid ${RD_INK}`, marginTop: 36, paddingTop: 16, display: 'flex', justifyContent: 'space-between', fontFamily: '"Archivo Black", sans-serif', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+          <span>© 2026 Reading Drones</span>
+          <span>CAA A2 · £5M Coverdrone</span>
+        </div>
+      </footer>
+    );
+  }
+
+  // Scroll-flying drone — small drone that animates between sections as user scrolls
+  function ScrollDrone({ enabled, scrollerRef }) {
+    const [progress, setProgress] = React.useState(0);
+    React.useEffect(() => {
+      if (!enabled) return;
+      const el = scrollerRef.current;
+      if (!el) return;
+      const onScroll = () => {
+        const max = el.scrollHeight - el.clientHeight;
+        setProgress(max > 0 ? Math.min(1, el.scrollTop / max) : 0);
+      };
+      el.addEventListener('scroll', onScroll);
+      onScroll();
+      return () => el.removeEventListener('scroll', onScroll);
+    }, [enabled, scrollerRef]);
+
+    if (!enabled) return null;
+    // sweeps left↔right & dips up/down as scrolling progresses
+    const x = 8 + progress * 84;            // 8% → 92% across viewport
+    const y = 18 + Math.sin(progress * Math.PI * 2) * 10; // bob
+    const tilt = -8 + Math.sin(progress * Math.PI * 3) * 14;
+    return (
+      <div style={{
+        position: 'fixed', left: `${x}%`, top: `${y}%`,
+        transform: `translate(-50%, -50%) rotate(${tilt}deg)`,
+        pointerEvents: 'none', zIndex: 25, transition: 'left .12s linear, top .12s linear, transform .12s linear',
+        filter: `drop-shadow(0 6px 0 ${RD_INK}33)`,
+      }}>
+        <window.MavicHero treatment="comic" size={68} outline={RD_INK} accent="var(--rd-accent)" />
+      </div>
+    );
+  }
+
+  return { PALETTES, TWEAK_DEFAULTS, applyPalette, SiteTweaks, useRoute, CSNav, CSFooter, ScrollDrone };
+})();
+
+window.SITE = SITE;

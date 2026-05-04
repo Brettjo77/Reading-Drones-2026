@@ -1,0 +1,302 @@
+/* Reading Drones — Custom CSS
+   Loaded after assets/css/main.css to override/extend the Zerofour template.
+   Do not edit main.css directly.
+-------------------------------------------------- */
+
+/* -----------------------------------------------
+   1. BRAND VARIABLES
+----------------------------------------------- */
+:root {
+    --rd-navy: #1B2A4A;
+    --rd-amber: #F59E0B;
+    --rd-amber-hover: #D97706;
+}
+
+/* -----------------------------------------------
+   2. FONTS — Montserrat for headings
+----------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap");
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+/* -----------------------------------------------
+   3. AMBER CTA BUTTONS
+   Usage: <a class="button rd-cta">...</a>
+----------------------------------------------- */
+.button.rd-cta {
+    background-color: var(--rd-amber);
+    border-color: var(--rd-amber);
+    color: #fff;
+}
+.button.rd-cta:hover {
+    background-color: var(--rd-amber-hover);
+    border-color: var(--rd-amber-hover);
+}
+
+/* -----------------------------------------------
+   4. SERVICE PRICE STYLING
+----------------------------------------------- */
+.price {
+    color: var(--rd-amber);
+    font-weight: 800;
+    margin-left: 0.5em;
+}
+
+/* -----------------------------------------------
+   5. "PERFECT FOR" TAG PILLS
+----------------------------------------------- */
+.tag {
+    display: inline-block;
+    background: #f0f0f0;
+    border-radius: 4px;
+    padding: 0.25em 0.75em;
+    font-size: 0.8em;
+    margin: 0.25em 0.25em 0.25em 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #696969;
+}
+
+/* -----------------------------------------------
+   6. TRUST BADGES ROW
+----------------------------------------------- */
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3em;
+    padding: 1em 0;
+}
+
+.trust-badge {
+    text-align: center;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #404248;
+}
+
+.trust-badge .icon {
+    display: block;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    color: var(--rd-amber);
+}
+
+/* -----------------------------------------------
+   7. FAQ ACCORDION
+----------------------------------------------- */
+.faq-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.faq-item {
+    border-bottom: solid 1px #e8e8e8;
+    padding: 1em 0;
+}
+
+.faq-item:first-child {
+    border-top: solid 1px #e8e8e8;
+}
+
+.faq-question {
+    cursor: pointer;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.9em;
+    color: #404248;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    padding: 0.25em 0;
+}
+
+.faq-question:after {
+    content: '+';
+    font-size: 1.5em;
+    font-weight: 400;
+    flex-shrink: 0;
+    margin-left: 1em;
+    transition: transform 0.3s;
+}
+
+.faq-item.active .faq-question:after {
+    content: '\2212';
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    color: #7b818c;
+    line-height: 1.7;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px;
+    padding-top: 0.75em;
+}
+
+/* -----------------------------------------------
+   8. GALLERY FILTER BUTTONS
+----------------------------------------------- */
+.gallery-filters {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.gallery-filters .button {
+    margin: 0.25em;
+}
+
+.gallery-filters .button.active {
+    background-color: #4091bf;
+    border-color: #4091bf;
+}
+
+.gallery-filters .button:not(.active) {
+    background-color: #464a52;
+    border-color: #464a52;
+}
+
+/* -----------------------------------------------
+   9. GALLERY ITEMS
+----------------------------------------------- */
+.gallery-item {
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.gallery-item.hidden {
+    display: none;
+}
+
+/* -----------------------------------------------
+   10. INCLUDED BANNER (green tick list)
+----------------------------------------------- */
+.included-banner {
+    background: #f7f7f7;
+    border-radius: 8px;
+    padding: 2em 2.5em;
+    margin-bottom: 2em;
+}
+
+.included-banner ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    column-gap: 2em;
+}
+
+.included-banner li {
+    padding: 0.3em 0;
+    break-inside: avoid;
+}
+
+.included-banner li:before {
+    content: '\2713\00a0\00a0';
+    color: #4CAF50;
+    font-weight: 800;
+}
+
+@media screen and (max-width: 736px) {
+    .included-banner ul {
+        columns: 1;
+    }
+}
+
+/* -----------------------------------------------
+   11. INNER PAGE HEADER (shorter, no banner)
+----------------------------------------------- */
+body:not(.homepage) #header-wrapper {
+    padding: 3em 0 2em 0;
+}
+
+/* -----------------------------------------------
+   12. HEADER BACKGROUND OVERRIDES FOR INNER PAGES
+   These reference the images/ directory at project root.
+   main.css references it as: url("../../images/header.jpg")
+   from within assets/css/ — two levels up = project root.
+----------------------------------------------- */
+body.page-services #header-wrapper {
+    background-image: url("images/bg01.png"), url("../../images/header-services.jpg");
+}
+
+body.page-gallery #header-wrapper {
+    background-image: url("images/bg01.png"), url("../../images/header-gallery.jpg");
+}
+
+body.page-contact #header-wrapper {
+    background-image: url("images/bg01.png"), url("../../images/header-contact.jpg");
+}
+
+/* -----------------------------------------------
+   13. LOGO STYLING
+----------------------------------------------- */
+#logo {
+    font-family: 'Montserrat', 'Open Sans', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* -----------------------------------------------
+   14. FOOTER NAP DETAILS
+----------------------------------------------- */
+.contact-details dt {
+    font-weight: 700;
+    color: #404248;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.04em;
+    margin-top: 0.75em;
+}
+
+.contact-details dd {
+    margin-left: 0;
+    color: #7b818c;
+}
+
+.contact-details a {
+    color: #7b818c;
+}
+
+.contact-details a:hover {
+    color: var(--rd-amber);
+}
+
+/* -----------------------------------------------
+   15. SERVICE CARD IMAGES (ensure proper aspect ratio)
+----------------------------------------------- */
+.features .image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* -----------------------------------------------
+   16. WHY CHOOSE US — icon section
+----------------------------------------------- */
+.why-choose-us .section-icon {
+    font-size: 2em;
+    color: var(--rd-amber);
+    margin-bottom: 0.5em;
+    display: block;
+}
+
+/* -----------------------------------------------
+   17. RESPONSIVE TWEAKS
+----------------------------------------------- */
+@media screen and (max-width: 736px) {
+    .trust-badges {
+        gap: 1.5em;
+    }
+}

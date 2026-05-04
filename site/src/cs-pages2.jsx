@@ -485,8 +485,8 @@ const CSPAGES2 = (() => {
             <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 40, margin: '0 0 32px', textTransform: 'uppercase', textAlign: 'center' }}>
               Compare <span style={{ color: 'var(--rd-accent)' }}>packages.</span>
             </h2>
-            <div style={{ background: RD_CREAM, border: `4px solid ${RD_INK}`, borderRadius: 14, overflow: 'hidden', boxShadow: `8px 8px 0 ${RD_INK}` }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'Inter, sans-serif' }}>
+            <div style={{ background: RD_CREAM, border: `4px solid ${RD_INK}`, borderRadius: 14, overflow: 'auto', boxShadow: `8px 8px 0 ${RD_INK}`, WebkitOverflowScrolling: 'touch' }}>
+              <table style={{ width: '100%', minWidth: 560, borderCollapse: 'collapse', fontFamily: 'Inter, sans-serif' }}>
                 <thead>
                   <tr style={{ background: RD_INK, color: RD_CREAM }}>
                     <th style={{ textAlign: 'left', padding: '18px 24px', fontFamily: '"Archivo Black", sans-serif', fontSize: 13, textTransform: 'uppercase', letterSpacing: '0.08em' }}></th>

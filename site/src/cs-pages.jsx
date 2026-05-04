@@ -47,17 +47,17 @@ const CSPAGES = (() => {
               <CCBButton size={16} onClick={() => go('contact')}>Get a Quote</CCBButton>
             </div>
           </div>
-          <div style={{ position: 'relative', height: 520 }}>
-            <div style={{ position: 'absolute', right: 20, top: 20, width: 360, height: 280, border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(3deg)' }}>
+          <div className="cs-hero-stack" style={{ position: 'relative', height: 520 }}>
+            <div className="cs-hero-card cs-hero-card-1" style={{ position: 'absolute', right: 20, top: 20, width: 360, height: 280, border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(3deg)' }}>
               <AerialPlaceholder src="/assets/photos/traitors-castle.jpg" label="Mavic 4 Pro · 4K" />
             </div>
-            <div style={{ position: 'absolute', left: 0, bottom: 30, width: 320, height: 220, border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(-4deg)' }}>
+            <div className="cs-hero-card cs-hero-card-2" style={{ position: 'absolute', left: 0, bottom: 30, width: 320, height: 220, border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(-4deg)' }}>
               <AerialPlaceholder src="/assets/photos/shinfield-aerial.jpg" label="Aerial · Reading" />
             </div>
-            <div style={{ position: 'absolute', right: -20, bottom: -10 }}>
+            <div className="cs-hero-burst" style={{ position: 'absolute', right: -20, bottom: -10 }}>
               <BurstBadge size={140} rotate={-12}>From<br/>£150!</BurstBadge>
             </div>
-            <div style={{ position: 'absolute', left: -30, top: -10, transform: 'rotate(-12deg)' }}>
+            <div className="cs-hero-mavic" style={{ position: 'absolute', left: -30, top: -10, transform: 'rotate(-12deg)' }}>
               <MavicHero treatment="comic" size={150} />
             </div>
           </div>

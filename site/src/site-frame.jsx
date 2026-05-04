@@ -91,23 +91,25 @@ const SITE = (() => {
 
   // CS-prefixed nav (uses CSS vars for primary/accent)
   function CSNav({ route, go }) {
+    const [open, setOpen] = React.useState(false);
     const links = [
       ['home', 'Home'], ['services', 'Services'], ['portfolio', 'Portfolio'],
       ['pricing', 'Pricing'], ['about', 'Studio'], ['contact', 'Contact'],
     ];
+    const goAndClose = (p) => { setOpen(false); go(p); };
     return (
       <header style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '18px 48px', background: RD_CREAM,
         borderBottom: `4px solid ${RD_INK}`,
         position: 'sticky', top: 0, zIndex: 30,
-      }}>
-        <a onClick={() => go('home')} style={{ cursor: 'pointer' }}><CompactLockup size={22} /></a>
-        <nav style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+      }} className="cs-nav-header">
+        <a onClick={() => goAndClose('home')} style={{ cursor: 'pointer' }}><CompactLockup size={22} /></a>
+        <nav className={`cs-nav ${open ? 'cs-nav-open' : ''}`} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
           {links.map(([p, l]) => {
             const on = route === p || (p === 'portfolio' && typeof route === 'string' && route.indexOf('case:') === 0);
             return (
-              <a key={p} onClick={() => go(p)} className="cs-navlink" style={{
+              <a key={p} onClick={() => goAndClose(p)} className="cs-navlink" style={{
                 fontFamily: '"Archivo Black", sans-serif', fontSize: 13,
                 textTransform: 'uppercase', color: RD_INK, letterSpacing: '0.05em',
                 padding: '8px 14px', cursor: 'pointer', borderRadius: 8,
@@ -117,8 +119,8 @@ const SITE = (() => {
               }}>{l}</a>
             );
           })}
-          <div style={{ marginLeft: 16 }}>
-            <button onClick={() => go('contact')} style={{
+          <div className="cs-nav-quote" style={{ marginLeft: 16 }}>
+            <button onClick={() => goAndClose('contact')} style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               padding: '12px 20px', background: 'var(--rd-accent)', color: RD_INK,
               border: `2.8px solid ${RD_INK}`, borderRadius: 10,
@@ -128,6 +130,24 @@ const SITE = (() => {
             }}>Quote!</button>
           </div>
         </nav>
+        <button
+          aria-label="Menu"
+          aria-expanded={open}
+          onClick={() => setOpen(o => !o)}
+          className="cs-nav-burger"
+          style={{
+            display: 'none',
+            background: open ? 'var(--rd-accent)' : RD_CREAM,
+            border: `2.5px solid ${RD_INK}`, borderRadius: 8,
+            width: 44, height: 44, cursor: 'pointer', padding: 0,
+            boxShadow: `3px 3px 0 ${RD_INK}`,
+            alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 4,
+          }}
+        >
+          <span style={{ display: 'block', width: 22, height: 3, background: RD_INK, borderRadius: 2, transform: open ? 'translateY(7px) rotate(45deg)' : 'none', transition: 'transform .2s' }}></span>
+          <span style={{ display: 'block', width: 22, height: 3, background: RD_INK, borderRadius: 2, opacity: open ? 0 : 1, transition: 'opacity .2s' }}></span>
+          <span style={{ display: 'block', width: 22, height: 3, background: RD_INK, borderRadius: 2, transform: open ? 'translateY(-7px) rotate(-45deg)' : 'none', transition: 'transform .2s' }}></span>
+        </button>
       </header>
     );
   }

@@ -131,6 +131,11 @@
         .cs-hero-stack .cs-hero-mavic { display: none !important; }
       }
 
+      /* Hide nav social tiles on narrow viewports — already shown in homepage band, footer, and Contact sidebar */
+      @media (max-width: 900px) {
+        .cs-nav-socials { display: none !important; }
+      }
+
       /* Mobile nav: hamburger drawer */
       @media (max-width: 768px) {
         .cs-nav-header { padding: 14px 18px !important; }

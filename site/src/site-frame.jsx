@@ -104,7 +104,33 @@ const SITE = (() => {
         borderBottom: `4px solid ${RD_INK}`,
         position: 'sticky', top: 0, zIndex: 30,
       }} className="cs-nav-header">
-        <a onClick={() => goAndClose('home')} style={{ cursor: 'pointer' }}><CompactLockup size={22} /></a>
+        <div className="cs-nav-left" style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+          <a onClick={() => goAndClose('home')} style={{ cursor: 'pointer' }}><CompactLockup size={22} /></a>
+          <div className="cs-nav-socials" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            {Object.values(SOCIAL).map((s) => (
+              <a
+                key={s.key}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Follow Reading Drones on ${s.label}`}
+                title={s.label}
+                className="rd-social-tile"
+                style={{
+                  width: 32, height: 32, borderRadius: 8,
+                  border: `2px solid ${RD_INK}`,
+                  background: 'var(--rd-primary)',
+                  boxShadow: `2px 2px 0 ${RD_INK}`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  textDecoration: 'none', cursor: 'pointer',
+                  transition: 'transform .15s ease, box-shadow .15s ease, background .15s ease',
+                }}
+              >
+                <SocialIcon brand={s.key} size={16} fg={RD_INK} />
+              </a>
+            ))}
+          </div>
+        </div>
         <nav className={`cs-nav ${open ? 'cs-nav-open' : ''}`} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
           {links.map(([p, l]) => {
             const on = route === p || (p === 'portfolio' && typeof route === 'string' && route.indexOf('case:') === 0);

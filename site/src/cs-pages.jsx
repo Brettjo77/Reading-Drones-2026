@@ -397,7 +397,42 @@ const CSPAGES = (() => {
   function ContactPage({ go }) {
     const [vals, setVals] = React.useState({ name: '', email: '', phone: '', brief: '' });
     const [sent, setSent] = React.useState(false);
+    const [submitting, setSubmitting] = React.useState(false);
+    const [error, setError] = React.useState('');
     const set = (k) => (e) => setVals(v => ({ ...v, [k]: e.target.value }));
+
+    const submit = async (e) => {
+      e.preventDefault();
+      setSubmitting(true);
+      setError('');
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: 'a4699427-caf1-4493-b58c-5667fb23e40c',
+            from_name: 'Reading Drones website',
+            subject: `Quote request from ${vals.name || 'unknown'}`,
+            name: vals.name,
+            email: vals.email,
+            phone: vals.phone,
+            brief: vals.brief,
+            // Honeypot — Web3Forms ignores submissions where this is filled
+            botcheck: '',
+          }),
+        });
+        const data = await res.json();
+        if (data.success) {
+          setSent(true);
+        } else {
+          setError(data.message || 'Something went wrong. Please email us directly.');
+        }
+      } catch (err) {
+        setError('Network error. Please email contact@readingdrones.co.uk directly.');
+      } finally {
+        setSubmitting(false);
+      }
+    };
     return (
       <div>
         <section style={{ background: 'var(--rd-primary)', padding: '64px 48px', borderBottom: `4px solid ${RD_INK}`, position: 'relative', overflow: 'hidden' }}>
@@ -423,7 +458,7 @@ const CSPAGES = (() => {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+                <form onSubmit={submit}>
                   <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 32, margin: '0 0 8px', textTransform: 'uppercase' }}>Get a Quote</h2>
                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, color: RD_INK, opacity: 0.7, margin: '0 0 24px' }}>Quick form. We'll reply within a working day.</p>
                   {[['name','Your name','text'],['email','Email','email'],['phone','Phone','tel']].map(([k,l,t]) => (
@@ -445,14 +480,22 @@ const CSPAGES = (() => {
                       background: RD_CREAM, fontFamily: 'Inter, sans-serif', fontSize: 15, color: RD_INK, resize: 'vertical',
                     }}/>
                   </label>
-                  <button type="submit" style={{
+                  {error && (
+                    <div style={{
+                      background: '#ffe5e0', border: `2.5px solid ${RD_INK}`, borderRadius: 8,
+                      padding: '12px 16px', marginBottom: 16,
+                      fontFamily: 'Inter, sans-serif', fontSize: 14, color: RD_INK,
+                    }}>{error}</div>
+                  )}
+                  <button type="submit" disabled={submitting} style={{
                     display: 'inline-flex', alignItems: 'center', gap: 10,
-                    padding: '16px 28px', background: 'var(--rd-accent)', color: RD_INK,
+                    padding: '16px 28px', background: submitting ? RD_PAPER : 'var(--rd-accent)', color: RD_INK,
                     border: `3px solid ${RD_INK}`, borderRadius: 12,
                     fontFamily: '"Archivo Black", sans-serif', textTransform: 'uppercase',
                     fontSize: 16, letterSpacing: '0.04em',
-                    boxShadow: `0 6px 0 ${RD_INK}`, cursor: 'pointer',
-                  }}>Send it! <Icn d={ICONS.arrow} size={18} /></button>
+                    boxShadow: `0 6px 0 ${RD_INK}`, cursor: submitting ? 'wait' : 'pointer',
+                    opacity: submitting ? 0.7 : 1,
+                  }}>{submitting ? 'Sending…' : 'Send it!'} <Icn d={ICONS.arrow} size={18} /></button>
                 </form>
               )}
             </div>

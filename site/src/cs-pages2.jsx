@@ -529,7 +529,126 @@ const CSPAGES2 = (() => {
     );
   }
 
-  return { PortfolioPage, CaseStudyPage, PricingPage, PROJECTS };
+  // ── Videos page — embedded YouTube reels grouped by category
+  function VideosPage({ go }) {
+    const groups = [
+      {
+        kind: 'cinematic',
+        title: 'Cinematic',
+        accent: 'var(--rd-accent)',
+        blurb: 'Long-form cinematic work — the pieces we are most proud of. Best watched full-screen.',
+        videos: [
+          { id: 'thvwXQ9eoKY', t: 'Saltash · I' },
+          { id: 'vJJRWkx4cFw', t: 'Saltash · II' },
+          { id: 'k2ckxMDVvvk', t: 'Saltash · III' },
+        ],
+      },
+      {
+        kind: 'fpv',
+        title: 'FPV',
+        accent: 'var(--rd-tint)',
+        blurb: 'First-person flight. Cinewhoop walkthroughs, single-take fly-throughs — venues, properties, environments brought to life from the inside.',
+        videos: [
+          { id: 'V9MM7U9Y_b4', t: 'FPV reel · I' },
+          { id: 'f9mo7RJcfQk', t: 'FPV reel · II' },
+          { id: 'e1Uh7EBqz34', t: 'FPV reel · III' },
+          { id: '-qFVhbmP9ic', t: 'FPV reel · IV' },
+        ],
+      },
+      {
+        kind: 'construction',
+        title: 'Construction',
+        accent: 'var(--rd-primary)',
+        blurb: 'Infrastructure, sites, progress timelapses. Aerial captures from active sites and finished hand-overs.',
+        videos: [
+          { id: 't5ItrbnOego', t: 'Construction · I' },
+          { id: 'hM9Rv7eaxdI', t: 'Construction · II' },
+          { id: 'HFp3yQMKqlU', t: 'Construction · III' },
+        ],
+      },
+    ];
+
+    const VideoCard = ({ v, i }) => (
+      <div style={{
+        background: RD_PAPER, border: `4px solid ${RD_INK}`, borderRadius: 14,
+        overflow: 'hidden', boxShadow: `8px 8px 0 ${RD_INK}`,
+        transform: `rotate(${(i % 2 === 0 ? -0.4 : 0.4)}deg)`,
+        display: 'flex', flexDirection: 'column',
+      }}>
+        <div style={{ position: 'relative', aspectRatio: '16/9', borderBottom: `4px solid ${RD_INK}`, background: RD_INK }}>
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${v.id}?rel=0`}
+            title={v.t}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
+          />
+        </div>
+        <div style={{ padding: '14px 18px 16px' }}>
+          <h3 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 16, margin: 0, textTransform: 'uppercase', letterSpacing: '-0.005em' }}>{v.t}</h3>
+        </div>
+      </div>
+    );
+
+    return (
+      <div>
+        {/* Page hero */}
+        <section style={{ background: 'var(--rd-primary)', padding: '72px 48px 56px', borderBottom: `4px solid ${RD_INK}`, position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: HALFTONE, opacity: 0.1 }}></div>
+          <div style={{ position: 'relative', maxWidth: 1300, margin: '0 auto', textAlign: 'center' }}>
+            <SpeechBadge size={14} color={RD_CREAM} rotate={-3}>● Watch · Selected reels</SpeechBadge>
+            <h1 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 96, margin: '20px 0 12px', textTransform: 'uppercase', lineHeight: 0.88, letterSpacing: '-0.01em' }}>
+              In <span style={{ color: 'var(--rd-accent)', WebkitTextStroke: `4px ${RD_INK}`, paintOrder: 'stroke fill' }}>motion.</span>
+            </h1>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 18, lineHeight: 1.55, color: RD_INK, margin: '0 auto', maxWidth: 580 }}>
+              Cinematic, FPV and construction work — a hand-picked selection from the YouTube channel. Pop them full-screen.
+            </p>
+          </div>
+        </section>
+
+        {/* Groups */}
+        {groups.map((g) => (
+          <section key={g.kind} style={{ background: g.kind === 'fpv' ? RD_CREAM : RD_PAPER, padding: '72px 48px', borderBottom: `2px solid ${RD_INK}22` }}>
+            <div style={{ maxWidth: 1300, margin: '0 auto' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, marginBottom: 32 }}>
+                <div>
+                  <SpeechBadge size={12} color={g.accent} rotate={-2}>● {g.title}</SpeechBadge>
+                  <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 56, margin: '12px 0 8px', textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: '-0.01em' }}>
+                    {g.title}.
+                  </h2>
+                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 16, lineHeight: 1.55, color: RD_INK, opacity: 0.8, margin: 0, maxWidth: 640 }}>{g.blurb}</p>
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+                {g.videos.map((v, i) => <VideoCard key={v.id} v={v} i={i} />)}
+              </div>
+            </div>
+          </section>
+        ))}
+
+        {/* CTA */}
+        <section style={{ background: RD_INK, color: RD_CREAM, padding: '72px 48px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: HALFTONE, opacity: 0.06 }}></div>
+          <div style={{ position: 'relative', maxWidth: 900, margin: '0 auto' }}>
+            <BurstBadge size={110} rotate={-8}>More on<br/>YouTube!</BurstBadge>
+            <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 56, margin: '24px 0 16px', textTransform: 'uppercase', lineHeight: 0.95 }}>
+              Got a reel<br/><span style={{ color: 'var(--rd-primary)' }}>in mind?</span>
+            </h2>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, opacity: 0.85, margin: '0 auto 28px', maxWidth: 560, lineHeight: 1.55 }}>
+              Send the brief and we'll come back with a treatment, timing and a quote.
+            </p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <CCBButton primary size={16} onClick={() => go('contact')}>Start a project <Icn d={ICONS.arrow} size={18} /></CCBButton>
+              <CCBButton dark size={16} href="https://youtube.com/playlist?list=PLgzYa-pTCKVDYnkFEJiJYzoLVNZUQLP9_">Full playlist <Icn d={ICONS.arrow} size={18} /></CCBButton>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  return { PortfolioPage, CaseStudyPage, PricingPage, VideosPage, PROJECTS };
 })();
 
 window.CSPAGES2 = CSPAGES2;

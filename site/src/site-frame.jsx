@@ -94,7 +94,7 @@ const SITE = (() => {
     const [open, setOpen] = React.useState(false);
     const links = [
       ['home', 'Home'], ['services', 'Services'], ['portfolio', 'Portfolio'],
-      ['pricing', 'Packages'], ['about', 'Studio'], ['contact', 'Contact'],
+      ['videos', 'Videos'], ['pricing', 'Packages'], ['about', 'Studio'], ['contact', 'Contact'],
     ];
     const goAndClose = (p) => { setOpen(false); go(p); };
     return (

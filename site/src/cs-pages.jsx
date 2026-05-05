@@ -487,6 +487,68 @@ const CSPAGES = (() => {
             </div>
           </div>
         </section>
+
+        {/* About the studio */}
+        <section style={{ background: RD_PAPER, padding: '80px 48px', borderTop: `4px solid ${RD_INK}`, position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: HALFTONE, opacity: 0.06 }}></div>
+          <div style={{ position: 'relative', maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 48, alignItems: 'center' }}>
+            <div>
+              <SpeechBadge size={14} color="var(--rd-primary)" rotate={-3}>● The studio</SpeechBadge>
+              <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 72, margin: '20px 0 0', textTransform: 'uppercase', lineHeight: 0.92, letterSpacing: '-0.01em' }}>
+                Hi — we're<br/><span style={{ color: 'var(--rd-accent)', WebkitTextStroke: `3px ${RD_INK}`, paintOrder: 'stroke fill' }}>Reading Drones.</span>
+              </h2>
+              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, lineHeight: 1.65, color: RD_INK, opacity: 0.85, margin: '20px 0 14px', maxWidth: 540 }}>
+                A small Berkshire-based studio specialising in aerial photography and video. CAA-licensed, £5M insured, eight years in. We work directly with our clients — no account managers, no farming out.
+              </p>
+              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, lineHeight: 1.65, color: RD_INK, opacity: 0.85, margin: 0, maxWidth: 540 }}>
+                Reading Drones started in 2018 with a single Mavic and a stubborn belief that aerial photography in the UK could be friendlier and a lot more fun. Eight years and several hundred shoots later, we've got a small but properly stocked fleet, a client list across Berkshire and Oxfordshire, and a reputation for doing the job carefully — and on time.
+              </p>
+            </div>
+            <div style={{ position: 'relative', aspectRatio: '4/5', border: `4px solid ${RD_INK}`, borderRadius: 14, overflow: 'hidden', boxShadow: `12px 12px 0 var(--rd-primary)`, transform: 'rotate(2deg)' }}>
+              <AerialPlaceholder src="/assets/photos/brett-pilot.jpg" label="Pilot · Reading, Berks" />
+            </div>
+          </div>
+        </section>
+
+        {/* Stats */}
+        <section style={{ background: 'var(--rd-primary)', padding: '64px 48px', borderTop: `4px solid ${RD_INK}`, borderBottom: `4px solid ${RD_INK}` }}>
+          <div style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+            {[['8+','Years pro'],['400+','Projects flown'],['£5M','Public liability'],['20mi','Free travel']].map(([k,v]) => (
+              <div key={k} style={{ background: RD_CREAM, border: `4px solid ${RD_INK}`, borderRadius: 12, padding: '24px 20px', textAlign: 'center', boxShadow: `6px 6px 0 ${RD_INK}` }}>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 56, lineHeight: 1, color: 'var(--rd-accent)', WebkitTextStroke: `2px ${RD_INK}`, paintOrder: 'stroke fill' }}>{k}</div>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 12, marginTop: 8, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{v}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Credentials */}
+        <section style={{ background: RD_CREAM, padding: '80px 48px' }}>
+          <div style={{ maxWidth: 1300, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 40 }}>
+              <SpeechBadge size={12} color="var(--rd-accent)" rotate={-2}>★ Licensed & insured ★</SpeechBadge>
+              <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 48, margin: '16px 0 0', textTransform: 'uppercase', lineHeight: 0.95 }}>Credentials.</h2>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
+              {[
+                { src: '/assets/cert/caa-approved.png', t: 'CAA Approved', s: 'Permission for Commercial Operation', bg: '#1f3d7a' },
+                { src: '/assets/cert/caa-a2.jpg',       t: 'A2 CofC', s: 'Open Category — A2 Sub-category', bg: '#fcd34d' },
+                { src: '/assets/cert/caa-a1-a3.jpg',    t: 'A1 / A3', s: 'Open Category — A1 & A3', bg: '#e63946' },
+                { src: '/assets/cert/coverdrone.webp',  t: 'Coverdrone', s: '£5M Public Liability', bg: RD_PAPER },
+              ].map((c) => (
+                <div key={c.t} style={{ background: RD_PAPER, border: `4px solid ${RD_INK}`, borderRadius: 12, overflow: 'hidden', boxShadow: `6px 6px 0 ${RD_INK}` }}>
+                  <div style={{ background: c.bg, height: 140, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, borderBottom: `4px solid ${RD_INK}` }}>
+                    <img src={c.src} alt={c.t} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                  </div>
+                  <div style={{ padding: '18px 20px' }}>
+                    <h3 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 18, margin: 0, textTransform: 'uppercase' }}>{c.t}</h3>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: RD_INK, opacity: 0.7, margin: '6px 0 0', lineHeight: 1.45 }}>{c.s}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

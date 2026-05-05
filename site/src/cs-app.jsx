@@ -33,8 +33,7 @@ const CSAPP = (() => {
 
     let body;
     if (route === 'services') body = <ServicesPage go={go} />;
-    else if (route === 'contact') body = <ContactPage go={go} />;
-    else if (route === 'about') body = <AboutPage go={go} />;
+    else if (route === 'contact' || route === 'about') body = <ContactPage go={go} />;
     else if (route === 'videos' && VideosPage) body = <VideosPage go={go} />;
     else if (route === 'pricing' && PricingPage) body = <PricingPage go={go} />;
     else if (route && route.indexOf && route.indexOf('case:') === 0 && CaseStudyPage) {

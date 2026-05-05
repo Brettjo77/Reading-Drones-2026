@@ -94,7 +94,7 @@ const SITE = (() => {
     const [open, setOpen] = React.useState(false);
     const links = [
       ['home', 'Home'], ['services', 'Services'], ['portfolio', 'Portfolio'],
-      ['videos', 'Videos'], ['pricing', 'Packages'], ['about', 'Studio'], ['contact', 'Contact'],
+      ['videos', 'Videos'], ['pricing', 'Packages'], ['contact', 'Contact'],
     ];
     const goAndClose = (p) => { setOpen(false); go(p); };
     return (
@@ -173,8 +173,8 @@ const SITE = (() => {
           </div>
           {[
             { h: 'Services', items: [['services','Photography'], ['services','Video'], ['services','FPV Tours'], ['services','Inspections'], ['services','Day Rates']] },
-            { h: 'Studio',  items: [['about','About'], ['portfolio','Portfolio'], ['pricing','Pricing'], ['contact','Contact']] },
-            { h: 'Reach Us',  items: [['contact','contact@readingdrones.co.uk'], ['contact','07801 881403'], ['about','Reading, Berkshire']] },
+            { h: 'Studio',  items: [['contact','About'], ['portfolio','Portfolio'], ['pricing','Packages'], ['videos','Videos']] },
+            { h: 'Reach Us',  items: [['contact','contact@readingdrones.co.uk'], ['contact','07801 881403'], ['contact','Reading, Berkshire']] },
           ].map((col) => (
             <div key={col.h}>
               <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 13, color: 'var(--rd-accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>{col.h}</div>

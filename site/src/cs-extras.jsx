@@ -57,7 +57,7 @@ const CSEXTRAS = (() => {
       { q: 'What about CAA permissions?', a: 'We hold A1/A3 and A2 CofC, and have an Operational Authorisation for restricted airspace. We sort NOTAMs, landowner permissions and risk assessments for every job — included in the quote.' },
       { q: 'Are you insured?', a: 'Yes. £5M public liability through Coverdrone, with a certificate available on request before the shoot.' },
       { q: 'Can I see raw footage?', a: 'Standard and Production Day packages include all raw 4K footage on a hand-off drive. Single Shoot includes edited stills only.' },
-      { q: 'How quickly can you turn things around?', a: 'Single Shoot: 24 hours. Standard: five working days. Production Day: 7–10 days. Rush options available on every package — usually +£100.' },
+      { q: 'How quickly can you turn things around?', a: 'Single Shoot: 24 hours. Standard: five working days. Production Day: 7–10 days. Rush options available on every package — just ask.' },
       { q: 'Do you do indoor / FPV?', a: 'Yes — FPV cinewhoop work with the DJI Avata 2 is a specialism. Common briefs: hospitality, hotel walkthroughs, restaurant fly-throughs and short-form social.' },
       { q: 'What if the weather is rubbish?', a: 'We reschedule for free up to 2pm the day before, and on the day if conditions are unsafe. Most clients get one weather-related reschedule per project at no extra cost.' },
     ];

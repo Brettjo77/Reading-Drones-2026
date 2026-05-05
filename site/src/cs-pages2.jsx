@@ -14,7 +14,7 @@ const CSPAGES2 = (() => {
     { id: 'spiral', cat: 'industrial', t: 'Reading Multi-Storey', sub: 'Architectural · Night Series', y: '2025', img: SPIRAL,
       excerpt: 'A nocturnal study of a brutalist car-park spiral. Two hours, lights at full lume, four delivered hero shots.', tone: 'rooftop' },
     { id: 'caversham', cat: 'property', t: 'Caversham Manor', sub: 'Estate Agent · Stills', y: '2026', tone: 'estate', img: '/assets/photos/traitors-castle.jpg',
-      excerpt: 'Five hero stills for a £4.5M private listing. Same-week turnaround.' },
+      excerpt: 'Five hero stills for a high-end private listing. Same-week turnaround.' },
     { id: 'riverside', cat: 'fpv', t: 'Riverside Hotel', sub: 'FPV Cinematic Tour', y: '2026', tone: 'venue', img: '/assets/photos/blackpool-tower-night.jpg',
       excerpt: 'A single-take FPV walkthrough — from car park to riverside terrace — for the hotel\'s relaunch reel.' },
     { id: 'redingside', cat: 'construction', t: 'Reading West Phase 3', sub: 'Construction · 12-month progress', y: '2025', tone: 'site', img: '/assets/photos/construction-site.jpg',
@@ -388,17 +388,17 @@ const CSPAGES2 = (() => {
   // ── Pricing page — package comparison
   function PricingPage({ go }) {
     const tiers = [
-      { name: 'Single Shoot', tagline: 'For one-off jobs', price: '£150', from: 'from',
+      { name: 'Single Shoot', tagline: 'For one-off jobs',
         desc: 'Property listings, single events, one location. Five edited images delivered.',
         features: ['Up to 5 edited images', '24-hour delivery', '20-mile travel free', 'Same-day rush available'],
         not: ['Video', 'Multiple locations', 'Day-rate flexibility'],
         accent: 'var(--rd-primary)' },
-      { name: 'Standard', tagline: 'Most common', price: '£375', from: 'from', popular: true,
+      { name: 'Standard', tagline: 'Most common', popular: true,
         desc: 'Photography + video, finished cut. Suitable for marketing, listings, social.',
         features: ['Up to 10 edited stills', 'One finished video edit (90s)', 'Music + colour grade', 'Two revisions', 'Travel within 30mi'],
         not: ['Multi-day production'],
         accent: 'var(--rd-accent)' },
-      { name: 'Production Day', tagline: 'For the full reel', price: '£900', from: '',
+      { name: 'Production Day', tagline: 'For the full reel',
         desc: 'A full day of shooting across multiple locations. Best value for big briefs.',
         features: ['8 hours on the ground', 'Multiple locations', 'Unlimited shots', 'All raw footage included', 'Travel & accommodation in scope', 'Two finished cuts'],
         not: [],
@@ -422,12 +422,12 @@ const CSPAGES2 = (() => {
         <section style={{ background: 'var(--rd-primary)', padding: '72px 48px 56px', borderBottom: `4px solid ${RD_INK}`, position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: HALFTONE, opacity: 0.1 }}></div>
           <div style={{ position: 'relative', maxWidth: 1300, margin: '0 auto', textAlign: 'center' }}>
-            <SpeechBadge size={14} color={RD_CREAM} rotate={-3}>● Pricing · Three packages · Bespoke quotes welcome</SpeechBadge>
+            <SpeechBadge size={14} color={RD_CREAM} rotate={-3}>● Three packages · Bespoke quotes welcome</SpeechBadge>
             <h1 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 96, margin: '20px 0 12px', textTransform: 'uppercase', lineHeight: 0.88, letterSpacing: '-0.01em' }}>
-              Simple <span style={{ color: 'var(--rd-accent)', WebkitTextStroke: `4px ${RD_INK}`, paintOrder: 'stroke fill' }}>pricing.</span>
+              Our <span style={{ color: 'var(--rd-accent)', WebkitTextStroke: `4px ${RD_INK}`, paintOrder: 'stroke fill' }}>packages.</span>
             </h1>
             <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 18, lineHeight: 1.55, color: RD_INK, margin: '0 auto', maxWidth: 580 }}>
-              Three packages cover ~85% of jobs. For everything else, send us the brief — we'll quote within a working day.
+              Three shapes cover most jobs. Every brief gets a bespoke quote — send the details and we'll come back within a working day.
             </p>
           </div>
         </section>
@@ -450,11 +450,7 @@ const CSPAGES2 = (() => {
                 )}
                 <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 12, color: RD_INK, opacity: 0.65, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 4 }}>{t.tagline}</div>
                 <h3 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 32, margin: '0 0 12px', textTransform: 'uppercase' }}>{t.name}</h3>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                  {t.from && <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: RD_INK, opacity: 0.65, fontWeight: 600 }}>{t.from}</span>}
-                  <span style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 56, color: RD_INK, lineHeight: 1, letterSpacing: '-0.01em' }}>{t.price}</span>
-                </div>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 14.5, lineHeight: 1.55, color: RD_INK, opacity: 0.85, margin: '16px 0 20px' }}>{t.desc}</p>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 14.5, lineHeight: 1.55, color: RD_INK, opacity: 0.85, margin: '0 0 20px' }}>{t.desc}</p>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {t.features.map((f) => (
                     <li key={f} style={{ display: 'flex', gap: 10, fontFamily: 'Inter, sans-serif', fontSize: 14, color: RD_INK }}>

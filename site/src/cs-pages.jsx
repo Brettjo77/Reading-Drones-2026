@@ -55,7 +55,7 @@ const CSPAGES = (() => {
               <AerialPlaceholder src="/assets/photos/shinfield-aerial.jpg" label="Aerial · Reading" />
             </div>
             <div className="cs-hero-burst" style={{ position: 'absolute', right: -20, bottom: -10 }}>
-              <BurstBadge size={140} rotate={-12}>From<br/>£150!</BurstBadge>
+              <BurstBadge size={140} rotate={-12}>Get a<br/>quote!</BurstBadge>
             </div>
             <div className="cs-hero-mavic" style={{ position: 'absolute', left: -30, top: -10, transform: 'rotate(-12deg)' }}>
               <MavicHero treatment="comic" size={150} />
@@ -92,7 +92,7 @@ const CSPAGES = (() => {
               <CCBButton dark size={16}><Icn d={ICONS.play} size={16} sw={2.5}/> Watch Reel</CCBButton>
             </a>
           </div>
-          <div style={{ position: 'absolute', right: 48, bottom: 80 }}><BurstBadge size={160} rotate={-10}>From<br/>£150!</BurstBadge></div>
+          <div style={{ position: 'absolute', right: 48, bottom: 80 }}><BurstBadge size={160} rotate={-10}>Get a<br/>quote!</BurstBadge></div>
         </div>
       </section>
     );
@@ -148,12 +148,12 @@ const CSPAGES = (() => {
   function HomePage({ go, heroVariant = 'A' }) {
     const Hero = heroVariant === 'B' ? HeroB : (heroVariant === 'C' ? HeroC : HeroA);
     const services = [
-      { i: ICONS.camera, t: 'Aerial Photography', p: '£300', d: 'Up to 10 high-res images, RAW + JPEG.', color: 'var(--rd-primary)', tone: 'fields',  img: '/assets/photos/stonehenge-misty-sunrise.jpg' },
-      { i: ICONS.film,   t: 'Aerial Video',        p: '£375', d: 'Raw 4K + a finished cut, music & colour grade.', color: 'var(--rd-accent)',  tone: 'estate',  img: '/assets/photos/reading-lakes-sunset.jpg' },
-      { i: ICONS.fpv,    t: 'FPV Immersive Tours', p: '£495', d: 'Cinematic fly-throughs with the Avata 2.', color: 'var(--rd-tint)', tone: 'venue',   img: '/assets/photos/manchester-crossroads-night.jpg' },
-      { i: ICONS.roof,   t: 'Roof & Inspections',  p: '£325', d: 'Aerial survey + a detailed photo report.', color: 'var(--rd-primary)', tone: 'rooftop', img: '/assets/photos/ouse-viaduct-arches.jpg' },
-      { i: ICONS.home,   t: 'Residential', p: '£150', d: 'Five edited images. Same kit, same care.', color: 'var(--rd-accent)',  tone: 'estate',  img: '/assets/photos/shinfield-residential-dusk.jpg' },
-      { i: ICONS.clock,  t: 'Day Rates',           p: '£550+', d: 'Half- or full-day. Unlimited shooting.', color: 'var(--rd-tint)', tone: 'site',    img: '/assets/photos/construction-site.jpg' },
+      { i: ICONS.camera, t: 'Aerial Photography', p: 'Quote', d: 'Up to 10 high-res images, RAW + JPEG.', color: 'var(--rd-primary)', tone: 'fields',  img: '/assets/photos/stonehenge-misty-sunrise.jpg' },
+      { i: ICONS.film,   t: 'Aerial Video',        p: 'Quote', d: 'Raw 4K + a finished cut, music & colour grade.', color: 'var(--rd-accent)',  tone: 'estate',  img: '/assets/photos/reading-lakes-sunset.jpg' },
+      { i: ICONS.fpv,    t: 'FPV Immersive Tours', p: 'Quote', d: 'Cinematic fly-throughs with the Avata 2.', color: 'var(--rd-tint)', tone: 'venue',   img: '/assets/photos/manchester-crossroads-night.jpg' },
+      { i: ICONS.roof,   t: 'Roof & Inspections',  p: 'Quote', d: 'Aerial survey + a detailed photo report.', color: 'var(--rd-primary)', tone: 'rooftop', img: '/assets/photos/ouse-viaduct-arches.jpg' },
+      { i: ICONS.home,   t: 'Residential', p: 'Quote', d: 'Five edited images. Same kit, same care.', color: 'var(--rd-accent)',  tone: 'estate',  img: '/assets/photos/shinfield-residential-dusk.jpg' },
+      { i: ICONS.clock,  t: 'Day Rates',           p: 'Quote', d: 'Half- or full-day. Unlimited shooting.', color: 'var(--rd-tint)', tone: 'site',    img: '/assets/photos/construction-site.jpg' },
     ];
     return (
       <div>
@@ -174,7 +174,7 @@ const CSPAGES = (() => {
           </div>
           <div style={{ maxWidth: 1300, margin: '0 auto' }}>
             <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 72, margin: '32px 0 56px', lineHeight: 0.92, textTransform: 'uppercase', textAlign: 'center', letterSpacing: '-0.01em' }}>
-              Services & <span style={{ color: 'var(--rd-accent)', WebkitTextStroke: `2px ${RD_INK}`, paintOrder: 'stroke fill' }}>Pricing!</span>
+              What we <span style={{ color: 'var(--rd-accent)', WebkitTextStroke: `2px ${RD_INK}`, paintOrder: 'stroke fill' }}>shoot.</span>
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
               {services.map((s, i) => (
@@ -233,27 +233,27 @@ const CSPAGES = (() => {
   // ── Services detail page
   function ServicesPage({ go }) {
     const services = [
-      { i: ICONS.camera, t: 'Aerial Photography', p: 'From £300',
+      { i: ICONS.camera, t: 'Aerial Photography', p: 'Bespoke quote',
         bullets: ['Up to 10 high-res images', 'RAW + JPEG delivery', 'Editing + colour grading', 'Travel within 20 miles'],
         copy: "Property, construction progress, events. We shoot until you've got the angle, then deliver edited stills within 7 days.",
         tone: 'fields', img: '/assets/photos/stonehenge-pink-dawn.jpg' },
-      { i: ICONS.film, t: 'Aerial Video', p: 'From £375',
+      { i: ICONS.film, t: 'Aerial Video', p: 'Bespoke quote',
         bullets: ['Raw 4K footage', 'Finished cut with music', 'Colour grade + LUT', 'Subtitles & graphics on request'],
         copy: 'A finished film, not just clips. Suitable for marketing, social, brand reels and case studies.',
         tone: 'estate', img: '/assets/photos/reading-lakes-sunset.jpg' },
-      { i: ICONS.fpv, t: 'FPV Immersive Tours', p: 'From £495',
+      { i: ICONS.fpv, t: 'FPV Immersive Tours', p: 'Bespoke quote',
         bullets: ['Cinematic fly-through', 'Indoor + outdoor capable', 'Avata 2 cinewhoop', 'Edit + soundtrack'],
         copy: 'A first-person camera move that walks viewers through a venue, restaurant or property in one continuous take.',
         tone: 'venue', img: '/assets/photos/blackpool-tower-night.jpg' },
-      { i: ICONS.roof, t: 'Roof & Inspections', p: 'From £325',
+      { i: ICONS.roof, t: 'Roof & Inspections', p: 'Bespoke quote',
         bullets: ['Comprehensive aerial survey', 'Detailed photo report', 'Annotated findings', 'Faster than scaffolding'],
         copy: "Roof, gutters, chimney, structure — high-resolution survey delivered as an actionable photographic report.",
         tone: 'rooftop', img: '/assets/photos/ouse-viaduct-arches.jpg' },
-      { i: ICONS.home, t: 'Residential Property', p: 'From £150',
+      { i: ICONS.home, t: 'Residential Property', p: 'Bespoke quote',
         bullets: ['Five beautifully edited images', 'Same kit as commercial', '24-hour delivery', 'Estate-agent friendly'],
         copy: 'Designed for estate agents and homeowners. Same standards as our commercial work, scoped for a single home.',
         tone: 'estate', img: '/assets/photos/shinfield-residential-dusk.jpg' },
-      { i: ICONS.clock, t: 'Day Rates', p: '£550 / £900',
+      { i: ICONS.clock, t: 'Day Rates', p: 'Bespoke quote',
         bullets: ['Half-day = 4 hours', 'Full-day = 8 hours', 'Unlimited shooting', 'Multiple locations'],
         copy: 'Best value for events, multi-location shoots and full production days. Half- and full-day options.',
         tone: 'site', img: '/assets/photos/construction-site.jpg' },
@@ -266,14 +266,14 @@ const CSPAGES = (() => {
           <div style={{ position: 'absolute', inset: 0, background: HALFTONE, opacity: 0.1 }}></div>
           <div style={{ position: 'relative', maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 40, alignItems: 'end' }}>
             <div>
-              <SpeechBadge size={14} color={RD_CREAM} rotate={-3}>● 01 — Services & pricing</SpeechBadge>
+              <SpeechBadge size={14} color={RD_CREAM} rotate={-3}>● 01 — What we shoot</SpeechBadge>
               <h1 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 88, margin: '20px 0 0', textTransform: 'uppercase', lineHeight: 0.9, letterSpacing: '-0.01em' }}>
                 Six things<br/>we shoot.<br/>
                 <span style={{ color: 'var(--rd-accent)', WebkitTextStroke: `3.5px ${RD_INK}`, paintOrder: 'stroke fill' }}>One studio.</span>
               </h1>
             </div>
             <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, lineHeight: 1.55, color: RD_INK, margin: 0, maxWidth: 380, background: RD_CREAM, padding: 18, border: `3px solid ${RD_INK}`, borderRadius: 8, boxShadow: `5px 5px 0 ${RD_INK}` }}>
-              Every price below includes consultation, planning, flight permissions and travel within 20 miles of Reading. Bespoke quotes on request — just ask.
+              Every quote includes consultation, planning, flight permissions and travel within 20 miles of Reading. Send the brief — we'll come back within a working day.
             </p>
           </div>
         </section>
@@ -285,9 +285,6 @@ const CSPAGES = (() => {
               <div style={{ order: i % 2 === 0 ? 1 : 2 }}>
                 <div style={{ position: 'relative', aspectRatio: '4/3', border: `4px solid ${RD_INK}`, borderRadius: 10, overflow: 'hidden', boxShadow: `10px 10px 0 ${RD_INK}`, transform: i % 2 === 0 ? 'rotate(-1deg)' : 'rotate(1deg)' }}>
                   <AerialPlaceholder src={s.img} tone={s.tone} label={s.t} />
-                  <div style={{ position: 'absolute', top: -22, right: -22 }}>
-                    <BurstBadge size={110} rotate={-10}>{s.p.replace('From ','')}</BurstBadge>
-                  </div>
                 </div>
               </div>
               <div style={{ order: i % 2 === 0 ? 2 : 1 }}>
@@ -298,7 +295,7 @@ const CSPAGES = (() => {
                   <span style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 13, color: RD_INK, opacity: 0.6, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{`Service 0${i+1}`}</span>
                 </div>
                 <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 56, margin: '0 0 12px', textTransform: 'uppercase', lineHeight: 0.92 }}>{s.t}</h2>
-                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 22, color: 'var(--rd-accent)', WebkitTextStroke: `1.5px ${RD_INK}`, paintOrder: 'stroke fill', marginBottom: 18 }}>{s.p}</div>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 22, color: 'var(--rd-accent)', WebkitTextStroke: `1.5px ${RD_INK}`, paintOrder: 'stroke fill', marginBottom: 18 }}>Get a quote →</div>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, lineHeight: 1.6, color: RD_INK, opacity: 0.82, margin: '0 0 24px', maxWidth: 540 }}>{s.copy}</p>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                   {s.bullets.map((b) => (

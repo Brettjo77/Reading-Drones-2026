@@ -2,16 +2,9 @@ import React from 'react'
 // Comic Studio — Homepage with hero variations + inner pages
 
 const CSPAGES = (() => {
-  const { RD_INK, RD_CREAM, RD_PAPER, Icn, ICONS, SpeechBadge, BurstBadge, CCBButton, AerialPlaceholder, MavicHero, HALFTONE } = window;
+  const { RD_INK, RD_CREAM, RD_PAPER, Icn, ICONS, SpeechBadge, BurstBadge, CCBButton, AerialPlaceholder, MavicHero, HALFTONE, SOCIAL, SocialIcon } = window;
   const SunburstRays = window.SunburstRays;
   const { LogoWall, SpecSheet, Storyboard, LocationsMap } = window.CSWIDGETS;
-
-  // Real social URLs the user provided previously
-  const SOCIAL = {
-    youtube:   'https://youtube.com/playlist?list=PLgzYa-pTCKVDYnkFEJiJYzoLVNZUQLP9_&si=pTsdaBcMZViUgKse',
-    instagram: 'https://www.instagram.com/readingdrones/',
-    facebook:  'https://www.facebook.com/readingdrones',
-  };
 
   // ── Hero variations
   function HeroA({ go }) {
@@ -117,7 +110,7 @@ const CSPAGES = (() => {
           </h1>
           <div style={{ display: 'flex', gap: 14, marginTop: 36 }}>
             <CCBButton primary size={16} onClick={() => go('services')}>View Services <Icn d={ICONS.arrow} size={18} /></CCBButton>
-            <a href={SOCIAL.youtube} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+            <a href={SOCIAL.youtube.url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
               <CCBButton dark size={16}><Icn d={ICONS.play} size={16} sw={2.5}/> Watch Reel</CCBButton>
             </a>
           </div>
@@ -268,6 +261,45 @@ const CSPAGES = (() => {
         <SpecSheet />
         {window.CSEXTRAS && <window.CSEXTRAS.Testimonials />}
         <LocationsMap />
+
+        {/* Follow the flying — social band */}
+        <section style={{
+          background: RD_CREAM,
+          padding: '48px 48px',
+          borderTop: `4px solid ${RD_INK}`,
+          borderBottom: `4px solid ${RD_INK}`,
+        }}>
+          <div style={{
+            maxWidth: 1100, margin: '0 auto',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18,
+          }}>
+            <SpeechBadge size={13} color="var(--rd-primary)" rotate={-2}>● Follow the flying</SpeechBadge>
+            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center' }}>
+              {Object.values(SOCIAL).map((s) => (
+                <a
+                  key={s.key}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Follow Reading Drones on ${s.label}`}
+                  title={s.label}
+                  className="rd-social-tile"
+                  style={{
+                    width: 48, height: 48, borderRadius: 12,
+                    border: `2.5px solid ${RD_INK}`,
+                    background: 'var(--rd-primary)',
+                    boxShadow: `4px 4px 0 ${RD_INK}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    textDecoration: 'none', cursor: 'pointer',
+                    transition: 'transform .15s ease, box-shadow .15s ease, background .15s ease',
+                  }}
+                >
+                  <SocialIcon brand={s.key} size={22} fg={RD_INK} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Final CTA */}
         <section style={{ background: RD_INK, color: RD_CREAM, padding: '96px 48px', position: 'relative', overflow: 'hidden' }}>
@@ -518,11 +550,27 @@ const CSPAGES = (() => {
                 </div>
               ))}
               <div style={{ background: RD_INK, color: RD_CREAM, border: `3px solid ${RD_INK}`, borderRadius: 10, padding: 20, boxShadow: `5px 5px 0 var(--rd-accent)` }}>
-                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 12, color: 'var(--rd-primary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8 }}>Follow the flying</div>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 12, color: 'var(--rd-primary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12 }}>Follow the flying</div>
                 <div style={{ display: 'flex', gap: 10 }}>
-                  {[[ICONS.yt, SOCIAL.youtube, 'YouTube'], [ICONS.ig, SOCIAL.instagram, 'Instagram'], [ICONS.fb, SOCIAL.facebook, 'Facebook']].map(([d, href, label]) => (
-                    <a key={label} href={href} target="_blank" rel="noreferrer" title={label} style={{ width: 40, height: 40, borderRadius: 8, border: `2.5px solid ${RD_CREAM}`, background: 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-                      <svg viewBox="0 0 24 24" width={18} height={18} fill="none" stroke={RD_CREAM} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d={d}/></svg>
+                  {Object.values(SOCIAL).map((s) => (
+                    <a
+                      key={s.key}
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Follow Reading Drones on ${s.label}`}
+                      title={s.label}
+                      className="rd-social-tile-dark"
+                      style={{
+                        width: 40, height: 40, borderRadius: 8,
+                        border: `2.5px solid ${RD_CREAM}`,
+                        background: 'transparent',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        textDecoration: 'none', cursor: 'pointer',
+                        transition: 'transform .15s ease, background .15s ease',
+                      }}
+                    >
+                      <SocialIcon brand={s.key} size={18} fg={RD_CREAM} />
                     </a>
                   ))}
                 </div>

@@ -5,7 +5,7 @@ const SITE = (() => {
   const {
     RD_INK, RD_CREAM, RD_PAPER, RD_YELLOW, RD_ORANGE, RD_TINT,
     SpeechBadge, BurstBadge, CCBButton, CompactLockup, Icn, ICONS, HALFTONE,
-    SunburstRays, MavicHero,
+    SunburstRays, MavicHero, SOCIAL, SocialIcon,
     TweaksPanel, useTweaks, TweakSection, TweakRadio, TweakColor, TweakToggle,
   } = window;
 
@@ -162,12 +162,27 @@ const SITE = (() => {
               Aerial photography, video and FPV tours from Reading, Berkshire.
             </p>
             <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
-              {[ICONS.yt, ICONS.ig, ICONS.fb].map((d, i) => (
-                <a key={i} className="cs-social" style={{
-                  width: 40, height: 40, borderRadius: 10, border: `2.5px solid ${RD_INK}`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-                  background: 'var(--rd-primary)', boxShadow: `3px 3px 0 ${RD_INK}`,
-                }}><svg viewBox="0 0 24 24" width={18} height={18} fill="none" stroke={RD_INK} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d={d} /></svg></a>
+              {Object.values(SOCIAL).map((s) => (
+                <a
+                  key={s.key}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Follow Reading Drones on ${s.label}`}
+                  title={s.label}
+                  className="rd-social-tile"
+                  style={{
+                    width: 40, height: 40, borderRadius: 10,
+                    border: `2.5px solid ${RD_INK}`,
+                    background: 'var(--rd-primary)',
+                    boxShadow: `3px 3px 0 ${RD_INK}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    textDecoration: 'none', cursor: 'pointer',
+                    transition: 'transform .15s ease, box-shadow .15s ease, background .15s ease',
+                  }}
+                >
+                  <SocialIcon brand={s.key} size={18} fg={RD_INK} />
+                </a>
               ))}
             </div>
           </div>

@@ -20,6 +20,30 @@
       .cs-navlink:hover { transform: translateY(-2px); }
       .cs-social { transition: transform .15s ease; }
       .cs-social:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #0d0d10 !important; }
+
+      /* Social tiles — yellow variant (footer + homepage band) */
+      .rd-social-tile:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 #0d0d10 !important;
+      }
+      .rd-social-tile:active {
+        transform: translate(1px, 1px);
+        box-shadow: 2px 2px 0 #0d0d10 !important;
+      }
+      .rd-social-tile:focus-visible {
+        outline: 3px solid #ef5a24;
+        outline-offset: 3px;
+      }
+      /* Social tiles — dark variant (Contact sidebar) */
+      .rd-social-tile-dark:hover {
+        background: rgba(252, 211, 77, 0.15) !important;
+        transform: translate(-1px, -1px);
+      }
+      .rd-social-tile-dark:focus-visible {
+        outline: 2px solid #fcd34d;
+        outline-offset: 2px;
+      }
+
       img { max-width: 100%; }
 
       /* ======================================================

@@ -1,4 +1,5 @@
 import React from 'react'
+import { siYoutube, siInstagram, siFacebook } from 'simple-icons'
 // Shared bits used by desktop + mobile mocks
 const RD_INK    = '#0d0d10';
 const RD_CREAM  = '#f4ede1';
@@ -47,6 +48,23 @@ const ICONS = {
   play:   'M8 5l12 7-12 7z',
   edit:   'M4 20h16 M14 4l6 6L8 22H2v-6z',
   group:  'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M2 21a7 7 0 0 1 14 0 M17 11a3 3 0 1 0 0-6 M17 21a5 5 0 0 1 6-5',
+};
+
+// Inline LinkedIn glyph — simple-icons removed LinkedIn from its set, so
+// we ship the official mark inline. Same 24x24 viewBox + filled-path shape
+// as the other simple-icons exports, so SocialIcon treats them uniformly.
+const siLinkedin = {
+  title: 'LinkedIn',
+  hex: '0A66C2',
+  path: 'M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.22 0z',
+};
+
+// Social URLs and brand-icon data, single source of truth.
+const SOCIAL = {
+  youtube:   { url: 'https://youtube.com/playlist?list=PLgzYa-pTCKVDYnkFEJiJYzoLVNZUQLP9_&si=pTsdaBcMZViUgKse', label: 'YouTube',   icon: siYoutube,   key: 'youtube' },
+  instagram: { url: 'https://www.instagram.com/readingdrones/',                                                  label: 'Instagram', icon: siInstagram, key: 'instagram' },
+  facebook:  { url: 'https://www.facebook.com/readingdrones',                                                    label: 'Facebook',  icon: siFacebook,  key: 'facebook' },
+  linkedin:  { url: 'https://www.linkedin.com/company/105997088/',                                               label: 'LinkedIn',  icon: siLinkedin,  key: 'linkedin' },
 };
 
 // Speech-bubble badge — comic-styled callout
@@ -207,7 +225,30 @@ function CompactLockup({ size = 22, ink = RD_INK }) {
   );
 }
 
+// Brand-glyph icon for social links. Renders the official path data
+// from simple-icons (or the inline LinkedIn fallback) with the parent's
+// fg color. Always set aria-hidden on the SVG; the wrapping <a> carries
+// the accessible label.
+function SocialIcon({ brand, size = 18, fg = RD_CREAM }) {
+  const entry = SOCIAL[brand];
+  if (!entry) return null;
+  return (
+    <svg
+      role="img"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      style={{ display: 'block' }}
+      aria-hidden="true"
+    >
+      <title>{entry.label}</title>
+      <path fill={fg} d={entry.icon.path} />
+    </svg>
+  );
+}
+
 Object.assign(window, {
   RD_INK, RD_CREAM, RD_PAPER, RD_YELLOW, RD_ORANGE, RD_TINT, RD_LED, RD_NAVY,
   HALFTONE, Icn, ICONS, SpeechBadge, BurstBadge, CCBButton, AerialPlaceholder, CompactLockup,
+  SOCIAL, SocialIcon,
 });

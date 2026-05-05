@@ -158,10 +158,37 @@ const CSPAGES = (() => {
     return (
       <div>
         <Hero go={go} />
-        {/* trust strip */}
-        <div style={{ background: RD_INK, color: RD_CREAM, padding: '14px 48px', borderTop: `3px solid ${RD_INK}` }}>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 48, flexWrap: 'wrap', fontFamily: '"Archivo Black", sans-serif', fontSize: 13, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            <span>★ CAA A2 Certified</span><span>★ £5M Coverdrone Insured</span><span>★ 8+ Yrs Pro</span><span>★ DJI Pro Fleet</span><span>★ Free Travel · 20mi</span>
+        {/* contact strip */}
+        <div style={{ background: RD_CREAM, padding: '24px 48px', borderTop: `4px solid ${RD_INK}`, borderBottom: `4px solid ${RD_INK}` }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
+            <a href="mailto:contact@readingdrones.co.uk" style={{
+              display: 'flex', alignItems: 'center', gap: 16,
+              background: RD_PAPER, border: `3px solid ${RD_INK}`, borderRadius: 12,
+              padding: '14px 18px', boxShadow: `5px 5px 0 ${RD_INK}`,
+              textDecoration: 'none', color: RD_INK,
+            }}>
+              <div style={{ background: 'var(--rd-primary)', border: `2.5px solid ${RD_INK}`, borderRadius: 8, padding: 10, boxShadow: `2px 2px 0 ${RD_INK}`, flexShrink: 0 }}>
+                <Icn d={ICONS.mail} size={22} sw={2.2} />
+              </div>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.55 }}>Email</div>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 18, marginTop: 2, wordBreak: 'break-all' }}>contact@readingdrones.co.uk</div>
+              </div>
+            </a>
+            <a href="tel:07801881403" style={{
+              display: 'flex', alignItems: 'center', gap: 16,
+              background: RD_PAPER, border: `3px solid ${RD_INK}`, borderRadius: 12,
+              padding: '14px 18px', boxShadow: `5px 5px 0 ${RD_INK}`,
+              textDecoration: 'none', color: RD_INK,
+            }}>
+              <div style={{ background: 'var(--rd-primary)', border: `2.5px solid ${RD_INK}`, borderRadius: 8, padding: 10, boxShadow: `2px 2px 0 ${RD_INK}`, flexShrink: 0 }}>
+                <Icn d={ICONS.phone} size={22} sw={2.2} />
+              </div>
+              <div>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.55 }}>Phone</div>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 20, marginTop: 2 }}>07801 881403</div>
+              </div>
+            </a>
           </div>
         </div>
 

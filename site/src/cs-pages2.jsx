@@ -9,9 +9,9 @@ const CSPAGES2 = (() => {
   const SPIRAL = '/assets/photos/spiral-night-web.jpg';
 
   const PROJECTS = [
-    { id: 'stonehenge', cat: 'aerial', t: 'Stonehenge — Solstice Series', sub: 'Editorial · Stills + 4K Video', y: '2026', img: STONEHENGE,
+    { id: 'stonehenge', cat: 'aerial', t: 'Stonehenge — Solstice Series', sub: 'Editorial · Stills + 4K Video', y: '2026', img: STONEHENGE, caseStudy: true,
       excerpt: 'Pre-dawn flight permissions, golden-hour timing and a tight 90-minute window over a UNESCO site.', tone: 'fields' },
-    { id: 'spiral', cat: 'industrial', t: 'Reading Multi-Storey', sub: 'Architectural · Night Series', y: '2025', img: SPIRAL,
+    { id: 'spiral', cat: 'industrial', t: 'Reading Multi-Storey', sub: 'Architectural · Night Series', y: '2025', img: SPIRAL, caseStudy: true,
       excerpt: 'A nocturnal study of a brutalist car-park spiral. Two hours, lights at full lume, four delivered hero shots.', tone: 'rooftop' },
     { id: 'caversham', cat: 'property', t: 'Caversham Manor', sub: 'Estate Agent · Stills', y: '2026', tone: 'estate', img: '/assets/photos/traitors-castle.jpg',
       excerpt: 'Five hero stills for a high-end private listing. Same-week turnaround.' },
@@ -33,6 +33,58 @@ const CSPAGES2 = (() => {
       excerpt: 'Tower Bridge and the Shard from above the Thames at twilight. Single hand-held flight, blue-hour timing.' },
     { id: 'manchester-skyline', cat: 'aerial', t: 'Manchester — Night Aerial', sub: 'Editorial · Cityscape', y: '2024', tone: 'night', img: '/assets/photos/manchester-night-aerial.jpg',
       excerpt: 'Long-exposure night cityscape over central Manchester for a property developer\'s investor brochure.' },
+
+    // ── New entries: real local Reading aerials
+    { id: 'shinfield-town', cat: 'aerial', t: 'Shinfield — Village Aerial', sub: 'Local · Wide-format still', y: '2025',
+      tone: 'fields', img: '/assets/photos/shinfield-aerial.jpg',
+      excerpt: 'A wide aerial sweep over Shinfield village for a local community brochure. Clear-day, mid-altitude, single hand-held flight.' },
+    { id: 'shinfield-dusk', cat: 'aerial', t: 'Shinfield — Dusk Skyline', sub: 'Local · Twilight series', y: '2025',
+      tone: 'night', img: '/assets/photos/shinfield-dusk-skyline.jpg',
+      excerpt: 'Sunset over Shinfield rooftops. Shot in the seven-minute window between civil and nautical twilight.' },
+    { id: 'shinfield-residential', cat: 'property', t: 'Shinfield — Residential Streets', sub: 'Property · Locality context', y: '2025',
+      tone: 'estate', img: '/assets/photos/shinfield-residential-dusk.jpg',
+      excerpt: 'Contextual street-level aerial used by an estate agent to show neighbourhood layout and connectivity.' },
+    { id: 'shinfield-tennis', cat: 'event', t: 'Shinfield Tennis Courts', sub: 'Sports facility · Top-down', y: '2025',
+      tone: 'sport', img: '/assets/photos/shinfield-tennis-courts.jpg',
+      excerpt: 'Top-down survey-style capture of a community tennis facility, supplied for a club marketing pack.' },
+
+    // ── Reading station / infrastructure
+    { id: 'reading-station', cat: 'aerial', t: 'Reading Station — Apex Plaza', sub: 'Cityscape · Night still', y: '2025',
+      tone: 'night', img: '/assets/photos/reading-station-night.jpg',
+      excerpt: 'Reading Station and Apex Plaza after dark. Long-exposure work; departures and arrivals lit from the platform canopy.' },
+    { id: 'reading-multistorey-topdown', cat: 'industrial', t: 'Reading Multi-Storey — Top Down', sub: 'Architectural · Companion piece', y: '2025',
+      tone: 'rooftop', img: '/assets/photos/reading-station-multistorey.jpg',
+      excerpt: 'Companion frame to the After Hours brutalist series — same building, vertical orthographic look, daylight pass.' },
+
+    // ── Real construction
+    { id: 'm4-junction', cat: 'construction', t: 'M4 Junction Signage', sub: 'Infrastructure · Night top-down', y: '2025',
+      tone: 'site', img: '/assets/photos/m4-junction-night.jpg',
+      excerpt: 'Top-down night capture of a refurbished M4 junction sign for a highways contractor handover pack.' },
+    { id: 'newbuild-handover', cat: 'construction', t: 'New-Build Handover', sub: 'Construction · Completion still', y: '2025',
+      tone: 'site', img: '/assets/photos/construction-handover.jpg',
+      excerpt: 'Final progress capture on a residential new-build — diggers off-site, tarmac fresh, plot ready for handover.' },
+    { id: 'extraction-site', cat: 'industrial', t: 'Extraction Site Survey', sub: 'Industrial · Survey still', y: '2025',
+      tone: 'site', img: '/assets/photos/construction-site.jpg',
+      excerpt: 'Mid-altitude survey of an active extraction site for an operator\'s safety-and-progress review.' },
+    { id: 'high-copse', cat: 'event', t: 'High Copse Pitch Handover', sub: 'Sports facility · Aerial', y: '2024',
+      tone: 'sport', img: '/assets/photos/high-copse-pitch.jpg',
+      excerpt: 'Aerial coverage of a sports-pitch handover, including a cooperative shot with the visiting helicopter.' },
+
+    // ── Heritage / structural
+    { id: 'ouse-viaduct', cat: 'aerial', t: 'Ouse Valley Viaduct', sub: 'Heritage · Structural study', y: 'editorial',
+      tone: 'fields', img: '/assets/photos/ouse-viaduct-wide.jpg',
+      excerpt: 'A wide capture of the Ouse Valley Viaduct\'s 37 arches — personal editorial work on Victorian engineering.' },
+
+    // ── Editorial / location work — honestly labelled, no fake clients
+    { id: 'cyprus-shipwreck', cat: 'editorial', t: 'Cyprus — Edro III', sub: 'Editorial · Travel', y: 'editorial',
+      tone: 'night', img: '/assets/photos/cyprus-shipwreck.jpg',
+      excerpt: 'The Edro III freighter at sunset off the Akamas coast. Personal editorial piece — composition over commission.' },
+    { id: 'scotland-rainbow', cat: 'editorial', t: 'Scotland — NC500 Rainbow', sub: 'Editorial · Travel', y: 'editorial',
+      tone: 'fields', img: '/assets/photos/scotland-nc500-rainbow.jpg',
+      excerpt: 'Scourie on the NC500 with a rainbow break in the weather. Personal travel editorial from a North Coast 500 trip.' },
+    { id: 'isle-of-wight', cat: 'editorial', t: 'The Needles — Isle of Wight', sub: 'Editorial · Coastal', y: 'editorial',
+      tone: 'fields', img: '/assets/photos/needles-isle-of-wight.jpg',
+      excerpt: 'Chalk stacks and the Needles lighthouse in late light. Personal coastal editorial on a calm-sea day.' },
   ];
 
   const CATS = [
@@ -44,13 +96,15 @@ const CSPAGES2 = (() => {
     { k: 'inspection', l: 'Inspections' },
     { k: 'industrial', l: 'Industrial' },
     { k: 'event', l: 'Events' },
+    { k: 'editorial', l: 'Editorial' },
   ];
 
   function ProjectCard({ p, i, onOpen }) {
+    const clickable = !!p.caseStudy;
     return (
-      <div onClick={() => onOpen(p.id)} style={{
+      <div onClick={clickable ? () => onOpen(p.id) : undefined} style={{
         background: RD_PAPER, border: `4px solid ${RD_INK}`, borderRadius: 14,
-        overflow: 'hidden', boxShadow: `8px 8px 0 ${RD_INK}`, cursor: 'pointer',
+        overflow: 'hidden', boxShadow: `8px 8px 0 ${RD_INK}`, cursor: clickable ? 'pointer' : 'default',
         transform: `rotate(${(i % 2 === 0 ? -0.5 : 0.5)}deg)`,
         transition: 'transform .2s ease, box-shadow .2s ease',
       }}
@@ -59,7 +113,7 @@ const CSPAGES2 = (() => {
       >
         <div style={{ aspectRatio: '4/3', borderBottom: `4px solid ${RD_INK}`, position: 'relative', overflow: 'hidden' }}>
           {p.img ? (
-            <img src={p.img} alt={p.t} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src={p.img} alt={p.t} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           ) : (
             <AerialPlaceholder tone={p.tone} label={p.t} />
           )}
@@ -72,7 +126,7 @@ const CSPAGES2 = (() => {
           <h3 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 20, margin: 0, textTransform: 'uppercase', lineHeight: 1.05 }}>{p.t}</h3>
           <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: RD_INK, opacity: 0.65, marginTop: 4 }}>{p.sub}</div>
           <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 13.5, lineHeight: 1.55, color: RD_INK, opacity: 0.82, margin: '12px 0 0' }}>{p.excerpt}</p>
-          {(p.id === 'stonehenge' || p.id === 'spiral') && (
+          {p.caseStudy && (
             <div style={{ marginTop: 14, fontFamily: '"Archivo Black", sans-serif', fontSize: 11, color: 'var(--rd-accent)', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: 6 }}>
               Read case study <Icn d={ICONS.arrow} size={13} sw={2.5} />
             </div>
@@ -100,13 +154,13 @@ const CSPAGES2 = (() => {
               </h1>
             </div>
             <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, lineHeight: 1.55, color: RD_INK, margin: 0, maxWidth: 380, background: RD_CREAM, padding: 18, border: `3px solid ${RD_INK}`, borderRadius: 8, boxShadow: `5px 5px 0 ${RD_INK}` }}>
-              Nine of the projects we've enjoyed most. Filter by category, or hit a thumbnail with a <strong>"Read case study"</strong> tag for the full story.
+              A working sample of recent commissions and editorial work — drone stills from across Reading, the UK and further afield. Filter by category, or open a thumbnail tagged <strong>"Read case study"</strong> for the full story.
             </p>
           </div>
         </section>
 
         {/* Filter chips */}
-        <section style={{ background: RD_CREAM, padding: '28px 48px', borderBottom: `2px solid ${RD_INK}22`, position: 'sticky', top: 0, zIndex: 5 }}>
+        <section style={{ background: RD_CREAM, padding: '28px 48px', borderBottom: `2px solid ${RD_INK}22`, position: 'sticky', top: 76, zIndex: 5 }}>
           <div style={{ maxWidth: 1300, margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: 10 }}>
             {CATS.map((c) => {
               const on = c.k === cat;

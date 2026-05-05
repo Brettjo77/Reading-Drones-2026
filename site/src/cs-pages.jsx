@@ -54,8 +54,37 @@ const CSPAGES = (() => {
             <div className="cs-hero-card cs-hero-card-2" style={{ position: 'absolute', left: 0, bottom: 30, width: 320, height: 220, border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(-4deg)' }}>
               <AerialPlaceholder src="/assets/photos/shinfield-aerial.jpg" label="Aerial · Reading" />
             </div>
-            <div className="cs-hero-burst" style={{ position: 'absolute', right: -20, bottom: -10 }}>
-              <BurstBadge size={140} rotate={-12}>Get a<br/>quote!</BurstBadge>
+            <div className="cs-hero-burst" style={{ position: 'absolute', right: -10, bottom: -10, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <a href="mailto:contact@readingdrones.co.uk" style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                background: RD_CREAM, border: `3px solid ${RD_INK}`, borderRadius: 10,
+                padding: '10px 14px', boxShadow: `5px 5px 0 ${RD_INK}`,
+                textDecoration: 'none', color: RD_INK,
+                transform: 'rotate(-2deg)',
+              }}>
+                <div style={{ background: 'var(--rd-primary)', border: `2px solid ${RD_INK}`, borderRadius: 6, padding: 6, boxShadow: `2px 2px 0 ${RD_INK}`, flexShrink: 0 }}>
+                  <Icn d={ICONS.mail} size={16} sw={2.4} />
+                </div>
+                <div>
+                  <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.55 }}>Email</div>
+                  <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 13 }}>contact@readingdrones.co.uk</div>
+                </div>
+              </a>
+              <a href="tel:07801881403" style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                background: RD_CREAM, border: `3px solid ${RD_INK}`, borderRadius: 10,
+                padding: '10px 14px', boxShadow: `5px 5px 0 ${RD_INK}`,
+                textDecoration: 'none', color: RD_INK,
+                transform: 'rotate(2deg)',
+              }}>
+                <div style={{ background: 'var(--rd-primary)', border: `2px solid ${RD_INK}`, borderRadius: 6, padding: 6, boxShadow: `2px 2px 0 ${RD_INK}`, flexShrink: 0 }}>
+                  <Icn d={ICONS.phone} size={16} sw={2.4} />
+                </div>
+                <div>
+                  <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.55 }}>Phone</div>
+                  <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 15 }}>07801 881403</div>
+                </div>
+              </a>
             </div>
             <div className="cs-hero-mavic" style={{ position: 'absolute', left: -30, top: -10, transform: 'rotate(-12deg)' }}>
               <MavicHero treatment="comic" size={150} />
@@ -92,7 +121,38 @@ const CSPAGES = (() => {
               <CCBButton dark size={16}><Icn d={ICONS.play} size={16} sw={2.5}/> Watch Reel</CCBButton>
             </a>
           </div>
-          <div style={{ position: 'absolute', right: 48, bottom: 80 }}><BurstBadge size={160} rotate={-10}>Get a<br/>quote!</BurstBadge></div>
+          <div style={{ position: 'absolute', right: 48, bottom: 80, display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <a href="mailto:contact@readingdrones.co.uk" style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              background: RD_CREAM, border: `3px solid ${RD_INK}`, borderRadius: 10,
+              padding: '12px 16px', boxShadow: `5px 5px 0 ${RD_INK}`,
+              textDecoration: 'none', color: RD_INK,
+              transform: 'rotate(-2deg)',
+            }}>
+              <div style={{ background: 'var(--rd-primary)', border: `2px solid ${RD_INK}`, borderRadius: 6, padding: 7, boxShadow: `2px 2px 0 ${RD_INK}`, flexShrink: 0 }}>
+                <Icn d={ICONS.mail} size={18} sw={2.4} />
+              </div>
+              <div>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.55 }}>Email</div>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 14 }}>contact@readingdrones.co.uk</div>
+              </div>
+            </a>
+            <a href="tel:07801881403" style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              background: RD_CREAM, border: `3px solid ${RD_INK}`, borderRadius: 10,
+              padding: '12px 16px', boxShadow: `5px 5px 0 ${RD_INK}`,
+              textDecoration: 'none', color: RD_INK,
+              transform: 'rotate(2deg)',
+            }}>
+              <div style={{ background: 'var(--rd-primary)', border: `2px solid ${RD_INK}`, borderRadius: 6, padding: 7, boxShadow: `2px 2px 0 ${RD_INK}`, flexShrink: 0 }}>
+                <Icn d={ICONS.phone} size={18} sw={2.4} />
+              </div>
+              <div>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.55 }}>Phone</div>
+                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 16 }}>07801 881403</div>
+              </div>
+            </a>
+          </div>
         </div>
       </section>
     );
@@ -158,37 +218,10 @@ const CSPAGES = (() => {
     return (
       <div>
         <Hero go={go} />
-        {/* contact strip */}
-        <div style={{ background: RD_CREAM, padding: '24px 48px', borderTop: `4px solid ${RD_INK}`, borderBottom: `4px solid ${RD_INK}` }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
-            <a href="mailto:contact@readingdrones.co.uk" style={{
-              display: 'flex', alignItems: 'center', gap: 16,
-              background: RD_PAPER, border: `3px solid ${RD_INK}`, borderRadius: 12,
-              padding: '14px 18px', boxShadow: `5px 5px 0 ${RD_INK}`,
-              textDecoration: 'none', color: RD_INK,
-            }}>
-              <div style={{ background: 'var(--rd-primary)', border: `2.5px solid ${RD_INK}`, borderRadius: 8, padding: 10, boxShadow: `2px 2px 0 ${RD_INK}`, flexShrink: 0 }}>
-                <Icn d={ICONS.mail} size={22} sw={2.2} />
-              </div>
-              <div style={{ minWidth: 0 }}>
-                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.55 }}>Email</div>
-                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 18, marginTop: 2, wordBreak: 'break-all' }}>contact@readingdrones.co.uk</div>
-              </div>
-            </a>
-            <a href="tel:07801881403" style={{
-              display: 'flex', alignItems: 'center', gap: 16,
-              background: RD_PAPER, border: `3px solid ${RD_INK}`, borderRadius: 12,
-              padding: '14px 18px', boxShadow: `5px 5px 0 ${RD_INK}`,
-              textDecoration: 'none', color: RD_INK,
-            }}>
-              <div style={{ background: 'var(--rd-primary)', border: `2.5px solid ${RD_INK}`, borderRadius: 8, padding: 10, boxShadow: `2px 2px 0 ${RD_INK}`, flexShrink: 0 }}>
-                <Icn d={ICONS.phone} size={22} sw={2.2} />
-              </div>
-              <div>
-                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.55 }}>Phone</div>
-                <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 20, marginTop: 2 }}>07801 881403</div>
-              </div>
-            </a>
+        {/* trust strip */}
+        <div style={{ background: RD_INK, color: RD_CREAM, padding: '14px 48px', borderTop: `3px solid ${RD_INK}` }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 48, flexWrap: 'wrap', fontFamily: '"Archivo Black", sans-serif', fontSize: 13, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+            <span>★ CAA A2 Certified</span><span>★ £5M Coverdrone Insured</span><span>★ 8+ Yrs Pro</span><span>★ DJI Pro Fleet</span><span>★ Free Travel · 20mi</span>
           </div>
         </div>
 

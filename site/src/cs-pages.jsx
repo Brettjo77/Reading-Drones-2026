@@ -210,10 +210,10 @@ const CSPAGES = (() => {
     const services = [
       { i: ICONS.camera, t: 'Aerial Photography', p: 'Quote', d: 'Up to 10 high-res images, RAW + JPEG.', color: 'var(--rd-primary)', tone: 'fields',  img: '/assets/photos/stonehenge-misty-sunrise.jpg' },
       { i: ICONS.film,   t: 'Aerial Video',        p: 'Quote', d: 'Raw 4K + a finished cut, music & colour grade.', color: 'var(--rd-accent)',  tone: 'estate',  img: '/assets/photos/reading-lakes-sunset.jpg' },
-      { i: ICONS.fpv,    t: 'FPV Immersive Tours', p: 'Quote', d: 'Cinematic fly-throughs with the Avata 2.', color: 'var(--rd-tint)', tone: 'venue',   img: '/assets/photos/manchester-crossroads-night.jpg' },
-      { i: ICONS.roof,   t: 'Roof & Inspections',  p: 'Quote', d: 'Aerial survey + a detailed photo report.', color: 'var(--rd-primary)', tone: 'rooftop', img: '/assets/photos/ouse-viaduct-arches.jpg' },
+      { i: ICONS.fpv,    t: 'FPV Immersive Tours', p: 'Quote', d: 'Cinematic fly-throughs with the Avata 2.', color: 'var(--rd-tint)', tone: 'venue',   img: '/assets/photos/london-tower-bridge.jpg' },
+      { i: ICONS.roof,   t: 'Roof & Inspections',  p: 'Quote', d: 'Aerial survey + a detailed photo report.', color: 'var(--rd-primary)', tone: 'rooftop', img: '/assets/photos/roof-inspection.jpg' },
       { i: ICONS.home,   t: 'Residential', p: 'Quote', d: 'Five edited images. Same kit, same care.', color: 'var(--rd-accent)',  tone: 'estate',  img: '/assets/photos/shinfield-residential-dusk.jpg' },
-      { i: ICONS.clock,  t: 'Day Rates',           p: 'Quote', d: 'Half- or full-day. Unlimited shooting.', color: 'var(--rd-tint)', tone: 'site',    img: '/assets/photos/construction-site.jpg' },
+      { i: ICONS.clock,  t: 'Day Rates',           p: 'Quote', d: 'Half- or full-day. Unlimited shooting.', color: 'var(--rd-tint)', tone: 'site',    img: '/assets/photos/m4-resurfacing-night.jpg' },
     ];
     return (
       <div>
@@ -304,11 +304,11 @@ const CSPAGES = (() => {
       { i: ICONS.fpv, t: 'FPV Immersive Tours', p: 'Bespoke quote',
         bullets: ['Cinematic fly-through', 'Indoor + outdoor capable', 'Avata 2 cinewhoop', 'Edit + soundtrack'],
         copy: 'A first-person camera move that walks viewers through a venue, restaurant or property in one continuous take.',
-        tone: 'venue', img: '/assets/photos/blackpool-tower-night.jpg' },
+        tone: 'venue', img: '/assets/photos/london-tower-bridge.jpg' },
       { i: ICONS.roof, t: 'Roof & Inspections', p: 'Bespoke quote',
         bullets: ['Comprehensive aerial survey', 'Detailed photo report', 'Annotated findings', 'Faster than scaffolding'],
         copy: "Roof, gutters, chimney, structure — high-resolution survey delivered as an actionable photographic report.",
-        tone: 'rooftop', img: '/assets/photos/ouse-viaduct-arches.jpg' },
+        tone: 'rooftop', img: '/assets/photos/roof-inspection.jpg' },
       { i: ICONS.home, t: 'Residential Property', p: 'Bespoke quote',
         bullets: ['Five beautifully edited images', 'Same kit as commercial', '24-hour delivery', 'Estate-agent friendly'],
         copy: 'Designed for estate agents and homeowners. Same standards as our commercial work, scoped for a single home.',
@@ -316,7 +316,7 @@ const CSPAGES = (() => {
       { i: ICONS.clock, t: 'Day Rates', p: 'Bespoke quote',
         bullets: ['Half-day = 4 hours', 'Full-day = 8 hours', 'Unlimited shooting', 'Multiple locations'],
         copy: 'Best value for events, multi-location shoots and full production days. Half- and full-day options.',
-        tone: 'site', img: '/assets/photos/construction-site.jpg' },
+        tone: 'site', img: '/assets/photos/m4-resurfacing-night.jpg' },
     ];
 
     return (

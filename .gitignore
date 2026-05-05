@@ -18,3 +18,6 @@ site/dist/
 
 # Designer hand-off bundle — kept locally as source-of-truth, not in repo
 New Website May 2026/
+
+# Raw drone photos (full-resolution originals, kept locally for re-processing)
+photo-source-library/

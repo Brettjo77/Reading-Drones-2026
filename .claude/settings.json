@@ -10,7 +10,12 @@
       "Read(//tmp/**)",
       "Read(//tmp/rd-bundle/**)",
       "Read(//private/tmp/rd-bundle/src/**)",
-      "Read(//private/tmp/rd-bundle/**)"
+      "Read(//private/tmp/rd-bundle/**)",
+      "Bash(grep -n \"function HomePage\\\\|function Hero\\\\|function ContactPage\\\\|^  function \\\\|return.*<>$\\\\|<HomePage\\\\|HomePage\\(\" \"/Users/brettjohnson/Documents/Brettjo77GitHub/Reading Drones/site/src/cs-pages.jsx\")",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm install *)",
+      "Bash(node -e \"import\\('simple-icons'\\).then\\(m => { console.log\\('keys:', Object.keys\\(m\\).filter\\(k => /^si\\(Youtube|Instagram|Facebook|Linkedin\\)$/i.test\\(k\\)\\)\\); console.log\\('siYoutube sample:', { title: m.siYoutube.title, hex: m.siYoutube.hex, pathLen: m.siYoutube.path.length }\\); }\\)\")"
     ]
   }
 }

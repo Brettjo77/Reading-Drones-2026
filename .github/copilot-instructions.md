@@ -1,106 +1,73 @@
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
-- [x] Verify that the copilot-instructions.md file in the .github directory is created.
+# Reading Drones — Agent Instructions
 
-- [x] Clarify Project Requirements
-	<!-- Ask for project type, language, and frameworks if not specified. Skip if already provided. -->
+Marketing site for Reading Drones (Berkshire). React 18 + JSX, bundled with Vite, deployed to GitHub Pages on push to `main`. See [README.md](../README.md) for the public-facing overview.
 
-- [x] Scaffold the Project
-	<!--
-	Ensure that the previous step has been marked as completed.
-	Call project setup tool with projectType parameter.
-	Run scaffolding command to create project files and folders.
-	Use '.' as the working directory.
-	If no appropriate projectType is available, search documentation using available tools.
-	Otherwise, create the project structure manually using available file creation tools.
-	-->
+## Where the code lives
 
-- [x] Customize the Project
-	<!--
-	Verify that all previous steps have been completed successfully and you have marked the step as completed.
-	Develop a plan to modify codebase according to user requirements.
-	Apply modifications using appropriate tools and user-provided references.
-	Skip this step for "Hello World" projects.
-	-->
+The active site is `site/` only. Anything outside it is reference / staging:
 
-- [x] Install Required Extensions
-	<!-- ONLY install extensions provided mentioned in the get_project_setup_info. Skip this step otherwise and mark as completed. -->
+- [site/](../site/) — the live Vite app (edit here)
+- [archive/old-site-2022/](../archive/old-site-2022/) — previous static site, **read-only reference**
+- [New Website May 2026/](../New%20Website%20May%202026/) — original Claude designer mock + SEO drop staging; superseded by `site/src/`. Do not edit unless explicitly asked.
+- [photo-source-library/](../photo-source-library/) — large source images, not shipped. Optimised exports go to [site/public/assets/photos/](../site/public/assets/photos/).
 
-- [x] Compile the Project
-	<!--
-	Verify that all previous steps have been completed.
-	Install any missing dependencies.
-	Run diagnostics and resolve any issues.
-	Check for markdown files in project folder for relevant instructions on how to do this.
-	-->
+## Architecture (non-obvious)
 
-- [x] Create and Run Task
-	<!--
-	Verify that all previous steps have been completed.
-	Check https://code.visualstudio.com/docs/debugtest/tasks to determine if the project needs a task. If so, use the create_and_run_task to create and launch a task based on package.json, README.md, and project structure.
-	Skip this step otherwise.
-	 -->
+The app is the **Comic Studio designer bundle**, ported almost verbatim from a JSX mock. It does not use ES module exports between components — instead each `site/src/*.jsx` file runs as a side-effect import that **attaches its API to `window.*`**. This is intentional, not a smell. Don't refactor it to ESM imports.
 
-- [x] Launch the Project
-	<!--
-	Verify that all previous steps have been completed.
-	Prompt user for debug mode, launch only if confirmed.
-	 -->
+Load order is fixed in [site/src/main.jsx](../site/src/main.jsx):
 
-- [ ] Ensure Documentation is Complete
-	<!--
-	Verify that all previous steps have been completed.
-	Verify that README.md and the copilot-instructions.md file in the .github directory exists and contains current project information.
-	Clean up the copilot-instructions.md file in the .github directory by removing all HTML comments.
-	 -->
+```
+site-shared.jsx   → window.* (RD_INK, ICONS, SpeechBadge, SOCIAL, …)
+ccb-logo.jsx      → window.CCBLogo / window.CompactLockup
+mavic-icon.jsx    → window.MavicHero
+cs-widgets.jsx    → window.CSWIDGETS  (LogoWall, SpecSheet, Storyboard, LocationsMap)
+cs-extras.jsx     → window.SunburstRays, etc.
+site-frame.jsx    → window.SITE       (CSNav, CSFooter, useRoute, applyPalette, TWEAK_DEFAULTS, ScrollDrone)
+cs-pages.jsx      → window.CSPAGES    (HomePage, ServicesPage, ContactPage, AboutPage, PortfolioPage)
+cs-pages2.jsx     → window.CSPAGES2   (PortfolioPage, PricingPage, CaseStudyPage, VideosPage)
+cs-app.jsx        → window.CSAPP.Site (composes everything)
+```
 
-<!--
-## Execution Guidelines
-PROGRESS TRACKING:
-- If any tools are available to manage the above todo list, use it to track progress through this checklist.
-- After completing each step, mark it complete and add a summary.
-- Read current todo list status before starting each new step.
+When adding a new page or widget: add the file, append it to `main.jsx` in the right slot, and consume its globals from `window.*` inside `cs-app.jsx` or a page.
 
-COMMUNICATION RULES:
-- Avoid verbose explanations or printing full command outputs.
-- If a step is skipped, state that briefly (e.g. "No extensions needed").
-- Do not explain project structure unless asked.
-- Keep explanations concise and focused.
+## Routing
 
-DEVELOPMENT RULES:
-- Use '.' as the working directory unless user specifies otherwise.
-- Avoid adding media or external links unless explicitly requested.
-- Use placeholders only with a note that they should be replaced.
-- Use VS Code API tool only for VS Code extension projects.
-- Once the project is created, it is already opened in Visual Studio Code—do not suggest commands to open this project in Visual Studio again.
-- If the project setup information has additional rules, follow them strictly.
+Tiny custom router in `useRoute()` ([site-frame.jsx](../site/src/site-frame.jsx)) — uses `?p=services` query strings, **not** path-style URLs and not React Router. Supports a `case:<id>` prefix for case-study pages. Add new routes in the `if/else` chain inside `cs-app.jsx`'s `Site()`.
 
-FOLDER CREATION RULES:
-- Always use the current directory as the project root.
-- If you are running any terminal commands, use the '.' argument to ensure that the current working directory is used ALWAYS.
-- Do not create a new folder unless the user explicitly requests it besides a .vscode folder for a tasks.json file.
-- If any of the scaffolding commands mention that the folder name is not correct, let the user know to create a new folder with the correct name and then reopen it again in vscode.
+Implication for SEO: every route serves the same `index.html`. The sitemap therefore lists only `/`. Prerendering each route (see `New Website May 2026/SEO Files/files/SEO-AUDIT.md` "Tier 2") is needed before listing per-route URLs.
 
-EXTENSION INSTALLATION RULES:
-- Only install extension specified by the get_project_setup_info tool. DO NOT INSTALL any other extensions.
+## Styling
 
-PROJECT CONTENT RULES:
-- If the user has not specified project details, assume they want a "Hello World" project as a starting point.
-- Avoid adding links of any type (URLs, files, folders, etc.) or integrations that are not explicitly required.
-- Avoid generating images, videos, or any other media files unless explicitly requested.
-- If you need to use any media assets as placeholders, let the user know that these are placeholders and should be replaced with the actual assets later.
-- Ensure all generated components serve a clear purpose within the user's requested workflow.
-- If a feature is assumed but not confirmed, prompt the user for clarification before including it.
-- If you are working on a VS Code extension, use the VS Code API tool with a query to find relevant VS Code API references and samples related to that query.
+- All styling is **inline `style={{}}` props**. There is no CSS Modules / Tailwind / styled-components.
+- Global CSS lives only in [site/index.html](../site/index.html) inside a `<style>` block.
+- Mobile responsiveness is implemented via attribute-selector overrides in that `<style>` block (e.g. `[style*="grid-template-columns"][style*="repeat(3"]`) plus `!important`. This is the only practical way to override inline styles in bulk — keep that pattern when adjusting mobile layout.
+- Palette comes from CSS variables `--rd-primary`, `--rd-accent`, `--rd-tint`, set by `applyPalette()`. Use `var(--rd-primary)` etc. in JSX rather than hard-coding the hex.
+- Brand ink is `RD_INK = '#0d0d10'`. Comic-style 4px ink borders + offset hard shadows (`box-shadow: NpxNpx 0 #0d0d10`) are the visual signature — preserve them.
 
-TASK COMPLETION RULES:
-- Your task is complete when:
-  - Project is successfully scaffolded and compiled without errors
-  - copilot-instructions.md file in the .github directory exists in the project
-  - README.md file exists and is up to date
-  - User is provided with clear instructions to debug/launch the project
+## Build, dev, deploy
 
-Before starting a new task in the above plan, update progress in the plan.
--->
-- Work through each checklist item systematically.
-- Keep communication concise and focused.
-- Follow development best practices.
+```bash
+cd site
+npm install
+npm run dev       # http://localhost:5173
+npm run build     # → site/dist/
+npm run preview
+```
+
+Always run npm commands from `site/`, never the repo root.
+
+Deploy: pushing to `main` runs [.github/workflows/deploy.yml](workflows/deploy.yml), which builds `site/` and publishes `site/dist/` to GitHub Pages. The custom domain `readingdrones.co.uk` (apex, no `www`) is pinned by [site/public/CNAME](../site/public/CNAME). All canonical URLs, OG tags, and JSON-LD must use the apex host.
+
+## Conventions
+
+- React 18, function components only, JSX (not TSX).
+- No new top-level dependencies without a reason — current deps are React, ReactDOM, `simple-icons`, Vite, `@vitejs/plugin-react`. Keep it that way.
+- Icons: line-art icons via the `Icn` helper + `ICONS` map in [site-shared.jsx](../site/src/site-shared.jsx); brand glyphs via `simple-icons` (LinkedIn is shipped inline because simple-icons removed it).
+- Photos: drop optimised JPGs into [site/public/assets/photos/](../site/public/assets/photos/) and reference as `/assets/photos/<name>.jpg`. Large source files belong in `photo-source-library/` and stay out of the bundle.
+- SEO assets in [site/index.html](../site/index.html) reference `/favicon.ico`, `/icon.svg`, `/apple-touch-icon.png`, `/site.webmanifest`, `/og-cover.jpg`, `/logo.png` at the root of `site/public/`. Drop real files in or expect 404s in DevTools.
+- Don't edit anything in `New Website May 2026/` or `archive/`. If a change is needed there, ask first.
+
+## Known follow-ups (from README)
+
+Contact form endpoint, self-hosted fonts, real testimonials, real client logos, favicon + PWA assets, prerendering pipeline. See [README.md](../README.md#known-follow-ups) and `New Website May 2026/SEO Files/files/SEO-AUDIT.md`.

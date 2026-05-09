@@ -1,4 +1,17 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.readingdrones.co.uk/sitemap.xml
+# AI / LLM crawlers (let them in so the site shows up in AI search results)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://readingdrones.co.uk/sitemap.xml

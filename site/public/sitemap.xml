@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Single-entry sitemap.
+
+  The site is a SPA: every client-side route (services, portfolio, pricing, etc.)
+  is served by the same /index.html, so listing them as separate URLs would
+  expose Google to duplicate content. Once per-route prerendering is added
+  (see SEO-AUDIT.md "Tier 2"), expand this file to list each prerendered page.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://readingdrones.co.uk/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

@@ -99,42 +99,44 @@ const SITE = (() => {
     const goAndClose = (p) => { setOpen(false); go(p); };
     return (
       <header style={{
-        display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center',
+        display: 'flex', alignItems: 'center',
         padding: '18px 48px', background: RD_CREAM,
         borderBottom: `4px solid ${RD_INK}`,
         position: 'sticky', top: 0, zIndex: 30,
       }} className="cs-nav-header">
-        {/* col 1: logo (left-aligned) */}
-        <div className="cs-nav-left" style={{ justifySelf: 'start', display: 'flex', alignItems: 'center', gap: 18 }}>
+        {/* logo (left) */}
+        <div className="cs-nav-left" style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
           <a onClick={() => goAndClose('home')} style={{ cursor: 'pointer' }}><CompactLockup size={22} /></a>
         </div>
-        {/* col 2: socials — true centering between logo and nav */}
-        <div className="cs-nav-socials" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          {Object.values(SOCIAL).map((s) => (
-            <a
-              key={s.key}
-              href={s.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Follow Reading Drones on ${s.label}`}
-              title={s.label}
-              className="rd-social-tile"
-              style={{
-                width: 32, height: 32, borderRadius: 8,
-                border: `2px solid ${RD_INK}`,
-                background: 'var(--rd-primary)',
-                boxShadow: `2px 2px 0 ${RD_INK}`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                textDecoration: 'none', cursor: 'pointer',
-                transition: 'transform .15s ease, box-shadow .15s ease, background .15s ease',
-              }}
-            >
-              <SocialIcon brand={s.key} size={16} fg={RD_INK} />
-            </a>
-          ))}
+        {/* socials — flex:1 wrapper centers them in the gap between logo and nav */}
+        <div className="cs-nav-socials-wrap" style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+          <div className="cs-nav-socials" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            {Object.values(SOCIAL).map((s) => (
+              <a
+                key={s.key}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Follow Reading Drones on ${s.label}`}
+                title={s.label}
+                className="rd-social-tile"
+                style={{
+                  width: 32, height: 32, borderRadius: 8,
+                  border: `2px solid ${RD_INK}`,
+                  background: 'var(--rd-primary)',
+                  boxShadow: `2px 2px 0 ${RD_INK}`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  textDecoration: 'none', cursor: 'pointer',
+                  transition: 'transform .15s ease, box-shadow .15s ease, background .15s ease',
+                }}
+              >
+                <SocialIcon brand={s.key} size={16} fg={RD_INK} />
+              </a>
+            ))}
+          </div>
         </div>
-        {/* col 3: nav (right-aligned) */}
-        <nav className={`cs-nav ${open ? 'cs-nav-open' : ''}`} style={{ gridColumn: 3, justifySelf: 'end', display: 'flex', gap: 6, alignItems: 'center' }}>
+        {/* nav (right) */}
+        <nav className={`cs-nav ${open ? 'cs-nav-open' : ''}`} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
           {links.map(([p, l]) => {
             const on = route === p || (p === 'portfolio' && typeof route === 'string' && route.indexOf('case:') === 0);
             return (
@@ -166,7 +168,6 @@ const SITE = (() => {
           className="cs-nav-burger"
           style={{
             display: 'none',
-            gridColumn: 3, justifySelf: 'end',
             background: open ? 'var(--rd-accent)' : RD_CREAM,
             border: `2.5px solid ${RD_INK}`, borderRadius: 8,
             width: 44, height: 44, cursor: 'pointer', padding: 0,

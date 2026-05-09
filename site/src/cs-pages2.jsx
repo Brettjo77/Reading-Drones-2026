@@ -592,9 +592,9 @@ const CSPAGES2 = (() => {
         accent: 'var(--rd-accent)',
         blurb: 'Long-form cinematic work — the pieces we are most proud of. Best watched full-screen.',
         videos: [
-          { id: 'thvwXQ9eoKY', t: 'Saltash · I' },
-          { id: 'vJJRWkx4cFw', t: 'Saltash · II' },
-          { id: 'k2ckxMDVvvk', t: 'Saltash · III' },
+          { id: 'thvwXQ9eoKY', t: 'Tamar Bridge' },
+          { id: 'vJJRWkx4cFw', t: 'Cyprus Shipwreck' },
+          { id: 'k2ckxMDVvvk', t: 'Spooky Hotel' },
         ],
       },
       {

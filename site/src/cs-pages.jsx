@@ -224,6 +224,35 @@ const CSPAGES = (() => {
           </div>
         </div>
 
+        {/* Credentials — moved here from the Contact page so the proof sits
+            immediately under the trust strip's headline tease. */}
+        <section style={{ background: RD_CREAM, padding: '64px 48px', borderBottom: `4px solid ${RD_INK}` }}>
+          <div style={{ maxWidth: 1300, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+              <SpeechBadge size={12} color="var(--rd-accent)" rotate={-2}>★ Licensed & insured ★</SpeechBadge>
+              <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 48, margin: '16px 0 0', textTransform: 'uppercase', lineHeight: 0.95 }}>Credentials.</h2>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
+              {[
+                { src: '/assets/cert/caa-approved.png', t: 'CAA Approved', s: 'Permission for Commercial Operation', bg: '#1f3d7a' },
+                { src: '/assets/cert/caa-a2.jpg',       t: 'A2 CofC', s: 'Open Category — A2 Sub-category', bg: '#fcd34d' },
+                { src: '/assets/cert/caa-a1-a3.jpg',    t: 'A1 / A3', s: 'Open Category — A1 & A3', bg: '#e63946' },
+                { src: '/assets/cert/coverdrone.webp',  t: 'Coverdrone', s: '£5M Public Liability', bg: RD_PAPER },
+              ].map((c) => (
+                <div key={c.t} style={{ background: RD_PAPER, border: `4px solid ${RD_INK}`, borderRadius: 12, overflow: 'hidden', boxShadow: `6px 6px 0 ${RD_INK}` }}>
+                  <div style={{ background: c.bg, height: 140, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, borderBottom: `4px solid ${RD_INK}` }}>
+                    <img src={c.src} alt={c.t} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                  </div>
+                  <div style={{ padding: '18px 20px' }}>
+                    <h3 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 18, margin: 0, textTransform: 'uppercase' }}>{c.t}</h3>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: RD_INK, opacity: 0.7, margin: '6px 0 0', lineHeight: 1.45 }}>{c.s}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <LogoWall />
 
         {/* services */}
@@ -619,33 +648,7 @@ const CSPAGES = (() => {
           </div>
         </section>
 
-        {/* Credentials */}
-        <section style={{ background: RD_CREAM, padding: '80px 48px' }}>
-          <div style={{ maxWidth: 1300, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 40 }}>
-              <SpeechBadge size={12} color="var(--rd-accent)" rotate={-2}>★ Licensed & insured ★</SpeechBadge>
-              <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 48, margin: '16px 0 0', textTransform: 'uppercase', lineHeight: 0.95 }}>Credentials.</h2>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
-              {[
-                { src: '/assets/cert/caa-approved.png', t: 'CAA Approved', s: 'Permission for Commercial Operation', bg: '#1f3d7a' },
-                { src: '/assets/cert/caa-a2.jpg',       t: 'A2 CofC', s: 'Open Category — A2 Sub-category', bg: '#fcd34d' },
-                { src: '/assets/cert/caa-a1-a3.jpg',    t: 'A1 / A3', s: 'Open Category — A1 & A3', bg: '#e63946' },
-                { src: '/assets/cert/coverdrone.webp',  t: 'Coverdrone', s: '£5M Public Liability', bg: RD_PAPER },
-              ].map((c) => (
-                <div key={c.t} style={{ background: RD_PAPER, border: `4px solid ${RD_INK}`, borderRadius: 12, overflow: 'hidden', boxShadow: `6px 6px 0 ${RD_INK}` }}>
-                  <div style={{ background: c.bg, height: 140, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, borderBottom: `4px solid ${RD_INK}` }}>
-                    <img src={c.src} alt={c.t} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
-                  </div>
-                  <div style={{ padding: '18px 20px' }}>
-                    <h3 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 18, margin: 0, textTransform: 'uppercase' }}>{c.t}</h3>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: RD_INK, opacity: 0.7, margin: '6px 0 0', lineHeight: 1.45 }}>{c.s}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Credentials block was here — moved to HomePage (under trust strip). */}
       </div>
     );
   }

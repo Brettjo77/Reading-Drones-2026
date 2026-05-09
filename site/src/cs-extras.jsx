@@ -7,10 +7,10 @@ const CSEXTRAS = (() => {
   // ── Process — four-step strip for the home page
   function ProcessSection() {
     const steps = [
-      { n: '01', t: 'Brief',      d: 'You send us the brief — we send back a quote within a working day.', ic: ICONS.mail },
-      { n: '02', t: 'Plan',       d: 'CAA permissions, NOTAMs, weather, site visits — we sort the lot.',    ic: ICONS.cog  },
-      { n: '03', t: 'Fly',        d: 'On the day: stress-free shoot. We bring backup kit, you bring the kettle.', ic: ICONS.drone },
-      { n: '04', t: 'Deliver',    d: 'Edited stills + finished video, on time, with two free revisions.',     ic: ICONS.check },
+      { n: '01', t: 'Brief',   d: "You tell us what you're shooting — we send a quote within one working day.", ic: ICONS.mail },
+      { n: '02', t: 'Recce',   d: 'CAA permissions, NOTAMs, weather, site visits — we sort the lot.', ic: ICONS.cog  },
+      { n: '03', t: 'Fly',     d: 'Pre-flight checks, weather window, and we shoot for as long as it takes.', ic: ICONS.drone },
+      { n: '04', t: 'Deliver', d: 'Colour-graded stills and a finished cut within 7 days. Two free revisions.', ic: ICONS.check },
     ];
     return (
       <section style={{ background: RD_CREAM, padding: '96px 48px', borderTop: `4px solid ${RD_INK}`, borderBottom: `4px solid ${RD_INK}`, position: 'relative', overflow: 'hidden' }}>

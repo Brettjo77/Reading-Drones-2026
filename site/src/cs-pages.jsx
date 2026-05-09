@@ -291,7 +291,8 @@ const CSPAGES = (() => {
           </div>
         </section>
 
-        <Storyboard />
+        {/* Process — single section. The old Storyboard ("From brief to delivery")
+            duplicated this; collapsed into ProcessSection with richer copy. */}
         {window.CSEXTRAS && <window.CSEXTRAS.ProcessSection />}
         <SpecSheet />
         {window.CSEXTRAS && <window.CSEXTRAS.Testimonials />}

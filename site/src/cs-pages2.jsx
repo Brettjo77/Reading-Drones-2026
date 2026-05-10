@@ -592,8 +592,8 @@ const CSPAGES2 = (() => {
         accent: 'var(--rd-accent)',
         blurb: 'Long-form cinematic work — the pieces we are most proud of. Best watched full-screen.',
         videos: [
-          // TODO: replace ID with real upload for "Shinfield Cinema"
-          { id: 'thvwXQ9eoKY', t: 'Shinfield Cinema' },
+          // TODO: replace ID with real upload for "Tamar Bridge"
+          { id: 'thvwXQ9eoKY', t: 'Tamar Bridge' },
           { id: 'vJJRWkx4cFw', t: 'Cyprus Shipwreck' },
           { id: 'k2ckxMDVvvk', t: 'Spooky Hotel' },
         ],
@@ -606,10 +606,7 @@ const CSPAGES2 = (() => {
         videos: [
           // TODO: replace ID with real upload for "Associated Asphalt"
           { id: 't5ItrbnOego', t: 'Associated Asphalt' },
-          // Re-using the Cyprus Shipwreck upload (also featured in the cinematic section)
-          { id: 'vJJRWkx4cFw', t: 'Cyprus Shipwreck' },
-          // TODO: replace ID with real upload for "New Look Renovations"
-          { id: 'hM9Rv7eaxdI', t: 'New Look Renovations' },
+          { id: 'qJa9VMgZELs', t: 'New Look Renovations' },
         ],
       },
       {
@@ -678,7 +675,7 @@ const CSPAGES2 = (() => {
                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 16, lineHeight: 1.55, color: RD_INK, opacity: 0.8, margin: 0, maxWidth: 640 }}>{g.blurb}</p>
                 </div>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.min(3, g.videos.length)}, 1fr)`, gap: 24 }}>
                 {g.videos.map((v, i) => <VideoCard key={v.id} v={v} i={i} />)}
               </div>
             </div>

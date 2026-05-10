@@ -27,7 +27,10 @@ const CSLOGOS = (() => {
     { name: 'Shinfield Baptist Church',           short: 'Shinfield Baptist', file: '/assets/clients/shinfield-baptist-church.png',  sector: 'Education & faith' },
   ];
 
-  // Tile renderer — tries the logo file, falls back to a wordmark if missing.
+  // Tile renderer — every tile is the same aspect ratio, and the logo inside
+  // is constrained to a uniform inner box so visual mass is consistent across
+  // wide / tall / square marks. `showCaption` is accepted for back-compat but
+  // captions are no longer rendered (logos already speak; captions added noise).
   function LogoTile({ c, showCaption = true, height = 84 }) {
     const [broken, setBroken] = React.useState(false);
     // Some logos are white-on-transparent; honour a per-client background override.
@@ -39,44 +42,28 @@ const CSLOGOS = (() => {
         border: `3px solid ${RD_INK}`,
         borderRadius: 10,
         boxShadow: `5px 5px 0 ${RD_INK}`,
-        padding: '18px 14px',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        gap: 10, minHeight: height + 50,
-      }}>
-        <div className="rd-logo-mark" style={{
-          height, width: '100%',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          {broken ? (
-            <div style={{
-              fontFamily: '"Archivo Black", sans-serif',
-              fontSize: c.short.length > 12 ? 16 : 22,
-              textTransform: 'uppercase',
-              textAlign: 'center',
-              letterSpacing: '-0.01em',
-              lineHeight: 1.05,
-              color: captionLight ? RD_CREAM : RD_INK,
-            }}>{c.short}</div>
-          ) : (
-            <img
-              src={c.file}
-              alt={c.name}
-              loading="lazy"
-              onError={() => setBroken(true)}
-              style={{ display: 'block', maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', margin: '0 auto' }}
-            />
-          )}
-        </div>
-        {showCaption && (
+        aspectRatio: '5 / 3',
+        padding: '14px 18px', boxSizing: 'border-box',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }} title={c.name}>
+        {broken ? (
           <div style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: 11,
-            letterSpacing: '0.06em',
+            fontFamily: '"Archivo Black", sans-serif',
+            fontSize: c.short.length > 12 ? 15 : 20,
             textTransform: 'uppercase',
-            color: captionLight ? RD_CREAM : RD_INK,
-            opacity: captionLight ? 0.75 : 0.6,
             textAlign: 'center',
-          }}>{c.note ? `${c.note} \u00b7 ` : ''}{c.name}</div>
+            letterSpacing: '-0.01em',
+            lineHeight: 1.05,
+            color: captionLight ? RD_CREAM : RD_INK,
+          }}>{c.short}</div>
+        ) : (
+          <img
+            src={c.file}
+            alt={c.name}
+            loading="lazy"
+            onError={() => setBroken(true)}
+            style={{ display: 'block', maxHeight: '70%', maxWidth: '88%', width: 'auto', height: 'auto', objectFit: 'contain' }}
+          />
         )}
       </div>
     );
@@ -102,14 +89,7 @@ const CSLOGOS = (() => {
             gridTemplateColumns: 'repeat(5, 1fr)',
             gap: 18,
           }}>
-            {items.map((c) => <LogoTile key={c.name} c={c} showCaption />)}
-            {/* fill the trailing 2 cells (13 items in a 5-col grid) */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <BurstBadge size={120} rotate={-6}>8+ years</BurstBadge>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <SpeechBadge size={14} color="var(--rd-accent)" rotate={4}>● Berkshire &amp; beyond</SpeechBadge>
-            </div>
+            {items.map((c) => <LogoTile key={c.name} c={c} />)}
           </div>
         </div>
       </section>

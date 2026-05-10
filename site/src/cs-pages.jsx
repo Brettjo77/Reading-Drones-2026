@@ -281,7 +281,7 @@ const CSPAGES = (() => {
                   transform: i % 2 === 0 ? 'rotate(-0.5deg)' : 'rotate(0.5deg)',
                   transition: 'transform .2s, box-shadow .2s',
                 }}>
-                  <div style={{ height: 140, position: 'relative', borderBottom: `4px solid ${RD_INK}` }}>
+                  <div style={{ aspectRatio: '4/3', position: 'relative', borderBottom: `4px solid ${RD_INK}` }}>
                     <AerialPlaceholder src={s.img} tone={s.tone} label={s.t} />
                   </div>
                   <div style={{ padding: '20px 22px 22px', display: 'flex', flexDirection: 'column', gap: 8 }}>

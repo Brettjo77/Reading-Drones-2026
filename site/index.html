@@ -161,7 +161,10 @@
     </script>
 
     <style>
-      html, body { margin: 0; padding: 0; background: #faf6ec; font-family: Inter, system-ui, sans-serif; overflow-x: hidden; }
+      html, body { margin: 0; padding: 0; background: #faf6ec; font-family: Inter, system-ui, sans-serif; overflow-x: hidden; max-width: 100%; }
+      html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+      /* Belt-and-braces: nothing in the doc tree should be wider than the viewport. */
+      #root, #cs-scroller { max-width: 100vw; overflow-x: hidden; }
       :root { --rd-primary: #fcd34d; --rd-accent: #ef5a24; --rd-tint: #2aa7c8; --rd-nav-h: 76px; }
       @media (max-width: 768px) { :root { --rd-nav-h: 64px; } }
       #root { min-height: 100vh; }
@@ -244,8 +247,13 @@
          required because the JSX uses inline styles.
          ====================================================== */
       @media (max-width: 768px) {
-        /* Section padding — kill horizontal padding to give content room */
-        section { padding-left: 20px !important; padding-right: 20px !important; }
+        /* Section padding — kill horizontal padding to give content room.
+           Apply to <footer> and the homepage trust strip too: those aren't
+           <section>s but they carry the same 48px horizontal padding. */
+        section, footer { padding-left: 20px !important; padding-right: 20px !important; box-sizing: border-box; }
+        /* Trust strip + any inline-styled <div> using the same 48px gutter pattern. */
+        div[style*="padding: 14px 48px"],
+        div[style*="padding: '14px 48px'"] { padding-left: 20px !important; padding-right: 20px !important; box-sizing: border-box; }
         /* Reduce vertical padding too */
         section[style*="96px 48px"] { padding-top: 56px !important; padding-bottom: 56px !important; }
         section[style*="80px 48px"] { padding-top: 48px !important; padding-bottom: 48px !important; }

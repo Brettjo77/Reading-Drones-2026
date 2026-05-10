@@ -48,7 +48,7 @@ const CSPAGES = (() => {
                 <AerialPlaceholder src="/assets/photos/london-tower-bridge.jpg" label="Tower Bridge · London" />
               </div>
             </div>
-            <div className="cs-hero-card cs-hero-card-2" style={{ position: 'absolute', left: 0, bottom: 30, width: 520, height: 360, background: '#fff', padding: 12, boxSizing: 'border-box', border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(-4deg)' }}>
+            <div className="cs-hero-card cs-hero-card-2" style={{ position: 'absolute', left: -40, bottom: 30, width: 520, height: 360, background: '#fff', padding: 12, boxSizing: 'border-box', border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(-4deg)' }}>
               <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', filter: 'grayscale(1) contrast(1.05)' }}>
                 <AerialPlaceholder src="/assets/photos/stonehenge-misty-sunrise.jpg" label="Stonehenge · Wiltshire" />
               </div>

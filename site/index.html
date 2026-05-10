@@ -359,10 +359,15 @@
           transform: none !important;
         }
 
-        /* Absolutely positioned hero badges that hang off edges — bring back inside */
-        [style*="right: -16"], [style*="right: -18"], [style*="right: -20"], [style*="right: -22"], [style*="right: -28"] { right: 0 !important; }
-        [style*="left: -10"], [style*="left: -12"], [style*="left: -16"], [style*="left: -30"] { left: 0 !important; }
-        [style*="bottom: -8"], [style*="bottom: -10"], [style*="top: -10"], [style*="top: -16"], [style*="top: -36"] { bottom: auto !important; top: auto !important; }
+        /* Absolutely positioned hero badges that hang off section edges —
+           bring them back inside. ONLY include offsets that genuinely cause
+           overflow when applied at the section edge; small decorative offsets
+           like -10/-16 on corner-pinned badges (Process step numbers, story-
+           board badges) are kept because their parent card is well inset and
+           clipping them visually breaks the design. */
+        [style*="right: -22"], [style*="right: -28"] { right: 0 !important; }
+        [style*="left: -30"] { left: 0 !important; }
+        [style*="top: -36"] { top: 0 !important; }
 
         /* Force any min-width on tables back to fluid — pricing table etc. */
         table[style*="min-width"], table[style*="minWidth"] { min-width: 0 !important; }
@@ -403,15 +408,16 @@
       }
       @media (max-width: 768px) {
         .cs-scroll-drone {
-          /* Anchor to bottom-right; sweep horizontally from right:8px at the
-             top of the page to right:~60vw at the bottom, driven by the JS-
-             updated --rd-scroll-p custom prop (0 → 1). The smooth transition
-             keeps motion fluid even though scroll events are throttled. */
+          /* Stay pinned to the bottom-right corner so it never crosses the
+             content. Scroll progress drives a small vertical lift only —
+             the drone "rises" as you scroll deeper into the page. Earlier
+             versions swept it across the viewport, which had it flying
+             through paragraphs of body copy. */
           left: auto !important;
           top: auto !important;
-          right: calc(8px + (var(--rd-scroll-p, 0) * 60vw)) !important;
-          bottom: clamp(40px, 14vh, 120px) !important;
-          transition: right .25s ease-out !important;
+          right: clamp(8px, 4vw, 24px) !important;
+          bottom: calc(clamp(36px, 12vh, 96px) + (var(--rd-scroll-p, 0) * 60px)) !important;
+          transition: bottom .25s ease-out !important;
         }
         .cs-scroll-drone-inner {
           transform: none !important;

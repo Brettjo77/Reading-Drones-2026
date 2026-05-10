@@ -85,7 +85,7 @@ const CSPAGES = (() => {
                 </div>
               </a>
             </div>
-            <div className="cs-hero-mavic" style={{ position: 'absolute', left: -150, top: -60, transform: 'rotate(-12deg)' }}>
+            <div className="cs-hero-mavic" style={{ position: 'absolute', left: -150, top: 30, transform: 'rotate(-12deg)' }}>
               <MavicHero treatment="comic" size={150} />
             </div>
           </div>

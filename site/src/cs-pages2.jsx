@@ -604,10 +604,12 @@ const CSPAGES2 = (() => {
         accent: 'var(--rd-primary)',
         blurb: 'Infrastructure, sites, progress timelapses. Aerial captures from active sites and finished hand-overs.',
         videos: [
-          // TODO: replace ID with real upload for "Berkshire Tile Company"
-          { id: 't5ItrbnOego', t: 'Berkshire Tile Company' },
-          { id: 'hM9Rv7eaxdI', t: 'Construction · II' },
-          { id: 'HFp3yQMKqlU', t: 'Construction · III' },
+          // TODO: replace ID with real upload for "Associated Asphalt"
+          { id: 't5ItrbnOego', t: 'Associated Asphalt' },
+          // Re-using the Cyprus Shipwreck upload (also featured in the cinematic section)
+          { id: 'vJJRWkx4cFw', t: 'Cyprus Shipwreck' },
+          // TODO: replace ID with real upload for "New Look Renovations"
+          { id: 'hM9Rv7eaxdI', t: 'New Look Renovations' },
         ],
       },
       {

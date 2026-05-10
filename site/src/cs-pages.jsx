@@ -4,7 +4,8 @@ import React from 'react'
 const CSPAGES = (() => {
   const { RD_INK, RD_CREAM, RD_PAPER, Icn, ICONS, SpeechBadge, BurstBadge, CCBButton, AerialPlaceholder, MavicHero, HALFTONE, SOCIAL, SocialIcon } = window;
   const SunburstRays = window.SunburstRays;
-  const { LogoWall, SpecSheet, Storyboard, LocationsMap } = window.CSWIDGETS;
+  const { SpecSheet, Storyboard, LocationsMap } = window.CSWIDGETS;
+  const LogoWall = (window.CSLOGOS && window.CSLOGOS.LogoWallA) || window.CSWIDGETS.LogoWall;
 
   // ── Hero variations
   function HeroA({ go }) {

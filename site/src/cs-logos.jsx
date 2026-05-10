@@ -19,12 +19,12 @@ const CSLOGOS = (() => {
     { name: 'Bellway',                            short: 'Bellway',           file: '/assets/clients/bellway.svg',                   sector: 'Property' },
     { name: 'Savills Estate Agents',              short: 'Savills',           file: '/assets/clients/savills.svg',                   sector: 'Property' },
     { name: 'Avocado Estate Agents',              short: 'Avocado',           file: '/assets/clients/avocado-estate-agents.svg',     sector: 'Property' },
-    { name: 'Inara Home Imagery',                 short: 'Inara',             file: '/assets/clients/inara-home-imagery.svg',        sector: 'Property' },
-    { name: 'Wall 2 Wall Construction',           short: 'Wall 2 Wall',       file: '/assets/clients/wall-2-wall-construction.svg',  sector: 'Construction' },
+    { name: 'Inara Home Imagery',                 short: 'Inara',             file: '/assets/clients/inara-home-imagery.jpg',        sector: 'Property' },
+    { name: 'Wall 2 Wall Construction',           short: 'Wall 2 Wall',       file: '/assets/clients/wall-2-wall-construction.png',  sector: 'Construction' },
     { name: 'Associated Asphalt',                 short: 'Assoc. Asphalt',    file: '/assets/clients/associated-asphalt.svg',        sector: 'Construction' },
     { name: 'The Emmbrook School',                short: 'Emmbrook',          file: '/assets/clients/emmbrook-school.svg',           sector: 'Education & faith' },
     { name: "Shinfield St Mary's Junior School",  short: 'St Mary\u2019s',    file: '/assets/clients/shinfield-st-marys.svg',        sector: 'Education & faith' },
-    { name: 'Shinfield Baptist Church',           short: 'Shinfield Baptist', file: '/assets/clients/shinfield-baptist-church.svg',  sector: 'Education & faith' },
+    { name: 'Shinfield Baptist Church',           short: 'Shinfield Baptist', file: '/assets/clients/shinfield-baptist-church.png',  sector: 'Education & faith' },
   ];
 
   // Tile renderer — tries the SVG file, falls back to a wordmark if missing.

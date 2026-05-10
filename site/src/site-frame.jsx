@@ -360,10 +360,13 @@ const SITE = (() => {
       // owns the rotation/tilt + any CSS-driven hover animation. Splitting
       // them lets the mobile CSS animate `transform` on the inner without
       // fighting the inline left/top updates from scroll.
+      // --rd-scroll-p (0..1) is exposed so mobile CSS can react to scroll
+      // progress without needing the desktop left/top values.
       <div className="cs-scroll-drone" style={{
         position: 'fixed', left: `${x}%`, top: `${y}%`,
         pointerEvents: 'none', zIndex: 25,
         transition: 'left .12s linear, top .12s linear',
+        ['--rd-scroll-p']: progress.toFixed(3),
       }}>
         <div className="cs-scroll-drone-inner" style={{
           transform: `translate(-50%, -50%) rotate(${tilt}deg)`,

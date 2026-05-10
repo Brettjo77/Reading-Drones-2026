@@ -403,12 +403,15 @@
       }
       @media (max-width: 768px) {
         .cs-scroll-drone {
-          /* anchor to bottom-right corner; ignore JS-driven left/top */
+          /* Anchor to bottom-right; sweep horizontally from right:8px at the
+             top of the page to right:~60vw at the bottom, driven by the JS-
+             updated --rd-scroll-p custom prop (0 → 1). The smooth transition
+             keeps motion fluid even though scroll events are throttled. */
           left: auto !important;
           top: auto !important;
-          right: clamp(8px, 6vw, 36px) !important;
+          right: calc(8px + (var(--rd-scroll-p, 0) * 60vw)) !important;
           bottom: clamp(40px, 14vh, 120px) !important;
-          transition: none !important;
+          transition: right .25s ease-out !important;
         }
         .cs-scroll-drone-inner {
           transform: none !important;

@@ -174,18 +174,30 @@
       .cs-svc:hover { transform: rotate(0deg) translateY(-4px) !important; box-shadow: 12px 12px 0 #0d0d10 !important; }
       .cs-svc:focus-visible { outline: 3px solid #ef5a24; outline-offset: 4px; }
 
+      /* Logo wall: inner mark height scales up at wider viewports so logos
+         feel substantial on tablet/desktop while staying uniform on phones. */
+      @media (min-width: 600px) { .rd-logo-mark { height: 64px !important; } }
+      @media (min-width: 900px) { .rd-logo-mark { height: 76px !important; } }
+
       /* Pricing comparison: swap from desktop table to per-tier cards on phones. */
       @media (max-width: 768px) {
         .rd-pricing-table { display: none !important; }
         .rd-pricing-cards { display: flex !important; }
       }
 
-      /* Logo-wall tiles — display real client colours, no hover transform */
+      /* Logo-wall tiles — display real client colours, no hover transform.
+         The grid + tile child both need min-width:0 — without it grid items
+         default to min-width:auto and refuse to shrink below their intrinsic
+         content size, which is what causes the right column to bleed past
+         the viewport on phones. */
+      .rd-logowall-grid { min-width: 0; }
+      .rd-logowall-grid > * { min-width: 0; }
       @media (max-width: 1100px) {
         .rd-logowall-grid { grid-template-columns: repeat(3, 1fr) !important; }
       }
       @media (max-width: 640px) {
-        .rd-logowall-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        .rd-logowall-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 14px !important; }
+        .rd-logo-tile { box-shadow: 3px 3px 0 #0d0d10 !important; }
       }
       .cs-navlink { transition: background .15s ease, transform .15s ease; }
       .cs-navlink:hover { transform: translateY(-2px); }
@@ -347,6 +359,12 @@
       /* Hide nav social tiles on narrow viewports — already shown in homepage band, footer, and Contact sidebar */
       @media (max-width: 900px) {
         .cs-nav-socials { display: none !important; }
+      }
+
+      /* Hide the scroll-flying drone on phones — it covered the leftmost
+         content (logos, hero card) on narrow viewports. */
+      @media (max-width: 768px) {
+        .cs-scroll-drone { display: none !important; }
       }
 
       /* Mobile nav: hamburger drawer */

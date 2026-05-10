@@ -41,15 +41,16 @@ const CSLOGOS = (() => {
         background: tileBg,
         border: `3px solid ${RD_INK}`,
         borderRadius: 10,
-        boxShadow: `5px 5px 0 ${RD_INK}`,
+        boxShadow: `4px 4px 0 ${RD_INK}`,
         aspectRatio: '5 / 3',
-        padding: '14px 18px', boxSizing: 'border-box',
+        padding: 12, boxSizing: 'border-box',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
+        overflow: 'hidden',
       }} title={c.name}>
         {broken ? (
           <div style={{
             fontFamily: '"Archivo Black", sans-serif',
-            fontSize: c.short.length > 12 ? 15 : 20,
+            fontSize: c.short.length > 12 ? 14 : 18,
             textTransform: 'uppercase',
             textAlign: 'center',
             letterSpacing: '-0.01em',
@@ -57,13 +58,23 @@ const CSLOGOS = (() => {
             color: captionLight ? RD_CREAM : RD_INK,
           }}>{c.short}</div>
         ) : (
-          <img
-            src={c.file}
-            alt={c.name}
-            loading="lazy"
-            onError={() => setBroken(true)}
-            style={{ display: 'block', maxHeight: '70%', maxWidth: '88%', width: 'auto', height: 'auto', objectFit: 'contain' }}
-          />
+          // Fixed-height inner box: every logo is forced to fit a 52px-tall
+          // area regardless of the tile's actual height. That gives uniform
+          // visual mass — wide marks (ITN) and crests (Emmbrook) end up the
+          // same height. The CSS class on the inner div lets us bump the
+          // height responsively at wider breakpoints.
+          <div className="rd-logo-mark" style={{
+            height: 52, maxWidth: '90%',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <img
+              src={c.file}
+              alt={c.name}
+              loading="lazy"
+              onError={() => setBroken(true)}
+              style={{ display: 'block', maxHeight: '100%', maxWidth: '100%', width: 'auto', height: 'auto', objectFit: 'contain' }}
+            />
+          </div>
         )}
       </div>
     );

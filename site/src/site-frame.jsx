@@ -356,7 +356,7 @@ const SITE = (() => {
     const y = 22 + Math.sin(progress * Math.PI * 2) * 10; // bob
     const tilt = -8 + Math.sin(progress * Math.PI * 3) * 14;
     return (
-      <div style={{
+      <div className="cs-scroll-drone" style={{
         position: 'fixed', left: `${x}%`, top: `${y}%`,
         transform: `translate(-50%, -50%) rotate(${tilt}deg)`,
         pointerEvents: 'none', zIndex: 25, transition: 'left .12s linear, top .12s linear, transform .12s linear',

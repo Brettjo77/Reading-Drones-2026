@@ -18,7 +18,7 @@ const CSLOGOS = (() => {
     { name: 'Reading Football Club',              short: 'Reading FC',        file: '/assets/clients/reading-fc.svg',                sector: 'Sport' },
     { name: 'Bellway',                            short: 'Bellway',           file: '/assets/clients/bellway.svg',                   sector: 'Property' },
     { name: 'Savills Estate Agents',              short: 'Savills',           file: '/assets/clients/savills.svg',                   sector: 'Property' },
-    { name: 'Avocado Estate Agents',              short: 'Avocado',           file: '/assets/clients/avocado-estate-agents.svg',     sector: 'Property' },
+    { name: 'Avocado Property',                   short: 'Avocado',           file: '/assets/clients/avocado-property.jpg',          sector: 'Property' },
     { name: 'Inara Home Imagery',                 short: 'Inara',             file: '/assets/clients/inara-home-imagery.jpg',        sector: 'Property' },
     { name: 'Wall 2 Wall Construction',           short: 'Wall 2 Wall',       file: '/assets/clients/wall-2-wall-construction.png',  sector: 'Construction' },
     { name: 'Associated Asphalt',                 short: 'Assoc. Asphalt',    file: '/assets/clients/associated-asphalt.svg',        sector: 'Construction' },

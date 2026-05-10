@@ -10,6 +10,7 @@ const CSAPP = (() => {
   const PricingPage    = window.CSPAGES2 && window.CSPAGES2.PricingPage;
   const CaseStudyPage  = window.CSPAGES2 && window.CSPAGES2.CaseStudyPage;
   const VideosPage     = window.CSPAGES2 && window.CSPAGES2.VideosPage;
+  const LogosPreviewPage = window.CSLOGOS && window.CSLOGOS.LogosPreviewPage;
 
   function Site({ heroVariant = 'A' }) {
     const [route, go] = useRoute();
@@ -43,6 +44,7 @@ const CSAPP = (() => {
     }
     else if (route === 'portfolio' && PortfolioPage2) body = <PortfolioPage2 go={go} />;
     else if (route === 'portfolio') body = <PortfolioPage go={go} />;
+    else if (route === 'logos-preview' && LogosPreviewPage) body = <LogosPreviewPage go={go} />;
     else body = <HomePage go={go} heroVariant={heroVariant} />;
 
     return (

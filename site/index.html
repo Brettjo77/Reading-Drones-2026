@@ -170,6 +170,16 @@
       .cs-svc { transition: transform .2s ease, box-shadow .2s ease; }
       .cs-svc:hover { transform: rotate(0deg) translateY(-4px) !important; box-shadow: 12px 12px 0 #0d0d10 !important; }
       .cs-svc:focus-visible { outline: 3px solid #ef5a24; outline-offset: 4px; }
+
+      /* Logo-wall tiles — grayscale by default, true colour + lift on hover */
+      .rd-logo-tile:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 #0d0d10 !important; }
+      .rd-logo-tile:hover .rd-logo-mark { filter: none !important; }
+      @media (max-width: 1100px) {
+        .rd-logowall-grid { grid-template-columns: repeat(3, 1fr) !important; }
+      }
+      @media (max-width: 640px) {
+        .rd-logowall-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      }
       .cs-navlink { transition: background .15s ease, transform .15s ease; }
       .cs-navlink:hover { transform: translateY(-2px); }
       .cs-navlink:focus-visible { outline: 3px solid #ef5a24; outline-offset: 3px; }

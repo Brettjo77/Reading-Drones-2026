@@ -11,6 +11,7 @@ import './cs-extras.jsx'
 import './site-frame.jsx'
 import './cs-pages.jsx'
 import './cs-pages2.jsx'
+import './cs-logos.jsx'
 import './cs-app.jsx'
 
 const { Site } = window.CSAPP

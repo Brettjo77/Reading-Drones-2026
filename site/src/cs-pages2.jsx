@@ -382,7 +382,7 @@ const CSPAGES2 = (() => {
               <div>
                 <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 36, margin: '0 0 18px', textTransform: 'uppercase' }}>The <span style={{ color: 'var(--rd-accent)' }}>approach.</span></h2>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, lineHeight: 1.7, color: RD_INK, opacity: 0.88 }}>
-                  Night operations need extra paperwork. We held an A2 CofC and a documented night-ops procedure; the council closed the surrounding pavements for our two-hour window.
+                  Night work needs extra preparation. We flew under the UK Open category with the aircraft's anti-collision lights fitted, a documented night risk assessment, and the council closing the surrounding pavements for our two-hour window.
                 </p>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, lineHeight: 1.7, color: RD_INK, opacity: 0.88, marginTop: 18 }}>
                   Camera-wise: we shot at low ISO with the Mavic 4 Pro's 4/3" sensor, exposure-bracketed, then composited in post for clean shadow detail. Total flight time: 18 minutes.
@@ -413,7 +413,7 @@ const CSPAGES2 = (() => {
 
           <section style={{ background: RD_INK, color: RD_CREAM, padding: '64px 48px', textAlign: 'center' }}>
             <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 48, margin: 0, textTransform: 'uppercase' }}>Got an after-hours brief?</h2>
-            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 16, opacity: 0.85, margin: '16px auto 24px', maxWidth: 460 }}>Night ops, restricted airspace, complex permissions — happy to scope the lot.</p>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 16, opacity: 0.85, margin: '16px auto 24px', maxWidth: 460 }}>Night work, restricted airspace, complex permissions — happy to scope the lot.</p>
             <span onClick={() => go('contact')} style={{ display: 'inline-block' }}>
               <CCBButton primary size={15}>Start a Conversation <Icn d={ICONS.arrow} size={17} /></CCBButton>
             </span>

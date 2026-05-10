@@ -60,6 +60,28 @@ const SITE = (() => {
   }
 
   // Tiny router — query string ?p=services etc
+  const ROUTE_META = {
+    home:      { title: 'Drone Photography & Video Reading | Reading Drones (CAA Certified)', desc: 'Professional aerial photography, video and FPV tours from Reading, Berkshire. CAA A2 CofC certified pilot, £5M public liability insured.' },
+    services:  { title: 'Drone Services | Aerial Photography, Video & FPV | Reading Drones', desc: 'Aerial photography, aerial video, FPV tours, roof inspections, residential and day rates — covering Reading, Berkshire and the Thames Valley.' },
+    portfolio: { title: 'Portfolio | Recent Drone Projects | Reading Drones', desc: 'Recent aerial photography and video projects across Berkshire, Oxfordshire and the Thames Valley.' },
+    videos:    { title: 'Showreels | Cinematic, Construction & FPV Drone Video | Reading Drones', desc: 'Selected cinematic, construction and FPV drone reels from Reading Drones.' },
+    pricing:   { title: 'Drone Photography Packages & Pricing | Reading Drones', desc: 'Three flexible drone packages plus bespoke quotes — single shoot, standard, and full production day.' },
+    contact:   { title: 'Contact | Get a Quote | Reading Drones', desc: 'Send a brief and get a no-obligation quote within one working day. CAA certified, £5M insured.' },
+    about:     { title: 'About | The Studio | Reading Drones', desc: 'A small Berkshire-based aerial studio. CAA-licensed, £5M insured, eight years professional.' },
+    privacy:   { title: 'Privacy Policy | Reading Drones', desc: 'How Reading Drones handles your enquiry data and footage. UK GDPR-compliant.' },
+  };
+  function applyRouteMeta(p) {
+    const key = (typeof p === 'string' && p.indexOf('case:') === 0) ? 'portfolio' : (ROUTE_META[p] ? p : 'home');
+    const meta = ROUTE_META[key];
+    try { document.title = meta.title; } catch (e) {}
+    try {
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc) desc.setAttribute('content', meta.desc);
+      const can = document.querySelector('link[rel="canonical"]');
+      if (can) can.setAttribute('href', key === 'home' ? 'https://readingdrones.co.uk/' : `https://readingdrones.co.uk/?p=${key}`);
+    } catch (e) {}
+  }
+
   function useRoute() {
     const [route, setRoute] = React.useState(() => {
       try { return new URL(location.href).searchParams.get('p') || 'home'; }
@@ -67,10 +89,16 @@ const SITE = (() => {
     });
     React.useEffect(() => {
       const onPop = () => {
-        try { setRoute(new URL(location.href).searchParams.get('p') || 'home'); }
+        try {
+          const p = new URL(location.href).searchParams.get('p') || 'home';
+          setRoute(p);
+          applyRouteMeta(p);
+        }
         catch (e) { setRoute('home'); }
       };
       window.addEventListener('popstate', onPop);
+      // Also set initial meta on first mount.
+      try { applyRouteMeta(new URL(location.href).searchParams.get('p') || 'home'); } catch (e) {}
       return () => window.removeEventListener('popstate', onPop);
     }, []);
     const go = React.useCallback((p) => {
@@ -92,8 +120,21 @@ const SITE = (() => {
       } catch (e) {
         try { window.scrollTo(0, 0); } catch (e2) {}
       }
+      applyRouteMeta(p);
     }, []);
     return [route, go];
+  }
+
+  // Build the canonical URL for a route key (used for nav anchors so they're keyboard reachable + middle-clickable).
+  function hrefFor(p) {
+    return p === 'home' ? '?' : `?p=${p}`;
+  }
+
+  // CSNav-internal click handler: support modifier keys (open in new tab), otherwise SPA navigate.
+  function navClick(e, go, p) {
+    if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return; // let the browser handle it
+    if (e && e.preventDefault) e.preventDefault();
+    go(p);
   }
 
   // CS-prefixed nav (uses CSS vars for primary/accent)
@@ -114,7 +155,7 @@ const SITE = (() => {
       }} className="cs-nav-header">
         {/* logo (left) */}
         <div className="cs-nav-left" style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-          <a onClick={() => goAndClose('home')} style={{ cursor: 'pointer' }}><CompactLockup size={22} /></a>
+          <a href={hrefFor('home')} onClick={(e) => { navClick(e, go, 'home'); setOpen(false); }} aria-label="Reading Drones — home" style={{ cursor: 'pointer', textDecoration: 'none', color: RD_INK }}><CompactLockup size={22} /></a>
         </div>
         {/* socials — flex:1 wrapper centers them in the gap between logo and nav */}
         <div className="cs-nav-socials-wrap" style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
@@ -148,25 +189,27 @@ const SITE = (() => {
           {links.map(([p, l]) => {
             const on = route === p || (p === 'portfolio' && typeof route === 'string' && route.indexOf('case:') === 0);
             return (
-              <a key={p} onClick={() => goAndClose(p)} className="cs-navlink" style={{
+              <a key={p} href={hrefFor(p)} onClick={(e) => { navClick(e, go, p); setOpen(false); }} className="cs-navlink" aria-current={on ? 'page' : undefined} style={{
                 fontFamily: '"Archivo Black", sans-serif', fontSize: 13,
                 textTransform: 'uppercase', color: RD_INK, letterSpacing: '0.05em',
                 padding: '8px 14px', cursor: 'pointer', borderRadius: 8,
                 background: on ? 'var(--rd-primary)' : 'transparent',
                 border: on ? `2.5px solid ${RD_INK}` : '2.5px solid transparent',
                 boxShadow: on ? `3px 3px 0 ${RD_INK}` : 'none',
+                textDecoration: 'none',
               }}>{l}</a>
             );
           })}
           <div className="cs-nav-quote" style={{ marginLeft: 16 }}>
-            <button onClick={() => goAndClose('contact')} style={{
+            <a href={hrefFor('contact')} onClick={(e) => { navClick(e, go, 'contact'); setOpen(false); }} style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               padding: '12px 20px', background: 'var(--rd-accent)', color: RD_INK,
               border: `2.8px solid ${RD_INK}`, borderRadius: 10,
               fontFamily: '"Archivo Black", sans-serif', textTransform: 'uppercase',
               fontSize: 13, letterSpacing: '0.04em',
               boxShadow: `0 5px 0 ${RD_INK}`, cursor: 'pointer',
-            }}>Quote!</button>
+              textDecoration: 'none',
+            }}>Quote!</a>
           </div>
         </nav>
         <button
@@ -227,18 +270,22 @@ const SITE = (() => {
           </div>
           {[
             { h: 'Services', items: [['services','Photography'], ['services','Video'], ['services','FPV Tours'], ['services','Inspections'], ['services','Day Rates']] },
-            { h: 'Studio',  items: [['contact','About'], ['portfolio','Portfolio'], ['pricing','Packages'], ['videos','Videos']] },
+            { h: 'Studio',  items: [['about','About'], ['portfolio','Portfolio'], ['pricing','Packages'], ['videos','Videos'], ['privacy','Privacy']] },
             { h: 'Reach Us',  items: [['contact','contact@readingdrones.co.uk'], ['contact','07801 881403'], ['contact','Reading, Berkshire']] },
           ].map((col) => (
             <div key={col.h}>
               <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 13, color: 'var(--rd-accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>{col.h}</div>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {col.items.map(([p, t]) => <li key={t} onClick={() => go(p)} style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, opacity: 0.78, cursor: 'pointer' }}>{t}</li>)}
+                {col.items.map(([p, t]) => (
+                  <li key={t} style={{ fontFamily: 'Inter, sans-serif', fontSize: 13 }}>
+                    <a href={hrefFor(p)} onClick={(e) => navClick(e, go, p)} style={{ color: RD_INK, opacity: 0.78, textDecoration: 'none', cursor: 'pointer' }}>{t}</a>
+                  </li>
+                ))}
               </ul>
             </div>
           ))}
         </div>
-        <div style={{ borderTop: `2px solid ${RD_INK}`, marginTop: 36, paddingTop: 16, display: 'flex', justifyContent: 'space-between', fontFamily: '"Archivo Black", sans-serif', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+        <div style={{ borderTop: `2px solid ${RD_INK}`, marginTop: 36, paddingTop: 16, display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'space-between', fontFamily: '"Archivo Black", sans-serif', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
           <span>© 2026 Reading Drones</span>
           <span>CAA A2 · £5M Coverdrone</span>
         </div>
@@ -252,14 +299,22 @@ const SITE = (() => {
     React.useEffect(() => {
       if (!enabled) return;
       const el = scrollerRef.current;
-      if (!el) return;
+      // In production cs-scroller is set to overflow:visible (main.jsx),
+      // so the real scroll lives on window. Detect at runtime and bind to the right target.
+      const usingWindow = !el || el.scrollHeight <= el.clientHeight + 1;
       const onScroll = () => {
-        const max = el.scrollHeight - el.clientHeight;
-        setProgress(max > 0 ? Math.min(1, el.scrollTop / max) : 0);
+        if (usingWindow) {
+          const max = (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
+          setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
+        } else {
+          const max = el.scrollHeight - el.clientHeight;
+          setProgress(max > 0 ? Math.min(1, el.scrollTop / max) : 0);
+        }
       };
-      el.addEventListener('scroll', onScroll);
+      const target = usingWindow ? window : el;
+      target.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
-      return () => el.removeEventListener('scroll', onScroll);
+      return () => target.removeEventListener('scroll', onScroll);
     }, [enabled, scrollerRef]);
 
     if (!enabled) return null;

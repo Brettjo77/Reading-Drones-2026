@@ -8,6 +8,8 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+Sitemap: https://readingdrones.co.uk/sitemap.xml
+
 User-agent: PerplexityBot
 Allow: /
 

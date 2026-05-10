@@ -45,7 +45,7 @@ const CSPAGES = (() => {
                 inner wrapper applies B&W so the sticker frame stays white. */}
             <div className="cs-hero-card cs-hero-card-1" style={{ position: 'absolute', right: 20, top: 20, width: 580, height: 440, background: '#fff', padding: 12, boxSizing: 'border-box', border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(3deg)' }}>
               <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', filter: 'grayscale(1) contrast(1.05)' }}>
-                <AerialPlaceholder src="/assets/photos/london-tower-bridge.jpg" label="Tower Bridge · London" />
+                <AerialPlaceholder src="/assets/photos/london-tower-bridge.jpg" label="Tower Bridge · London" eager />
               </div>
             </div>
             <div className="cs-hero-card cs-hero-card-2" style={{ position: 'absolute', left: -40, bottom: 30, width: 520, height: 360, background: '#fff', padding: 12, boxSizing: 'border-box', border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(-4deg)' }}>
@@ -220,7 +220,7 @@ const CSPAGES = (() => {
         {/* trust strip */}
         <div style={{ background: RD_INK, color: RD_CREAM, padding: '14px 48px', borderTop: `3px solid ${RD_INK}` }}>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 48, flexWrap: 'wrap', fontFamily: '"Archivo Black", sans-serif', fontSize: 13, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            <span>★ CAA A2 Certified</span><span>★ £5M Coverdrone Insured</span><span>★ 8+ Yrs Pro</span><span>★ DJI Pro Fleet</span><span>★ Free Travel · 20mi</span>
+            <span>★ CAA A2 Certified</span><span>★ £5M Public Liability (Coverdrone)</span><span>★ 8+ Years Professional</span><span>★ DJI Pro Fleet</span><span>★ Free Travel · 20mi</span>
           </div>
         </div>
 
@@ -266,7 +266,15 @@ const CSPAGES = (() => {
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
               {services.map((s, i) => (
-                <div key={s.t} className="cs-svc" onClick={() => go('services')} style={{
+                <div
+                  key={s.t}
+                  className="cs-svc"
+                  role="link"
+                  tabIndex={0}
+                  aria-label={`${s.t} \u2014 see services`}
+                  onClick={() => go('services')}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go('services'); } }}
+                  style={{
                   background: RD_CREAM, border: `4px solid ${RD_INK}`, borderRadius: 12,
                   boxShadow: `8px 8px 0 ${RD_INK}`, overflow: 'hidden', cursor: 'pointer',
                   transform: i % 2 === 0 ? 'rotate(-0.5deg)' : 'rotate(0.5deg)',
@@ -463,16 +471,20 @@ const CSPAGES = (() => {
 
   // ── Contact / quote form
   function ContactPage({ go }) {
-    const [vals, setVals] = React.useState({ name: '', email: '', phone: '', brief: '' });
+    const [vals, setVals] = React.useState({ name: '', email: '', phone: '', brief: '', botcheck: '' });
     const [sent, setSent] = React.useState(false);
     const [submitting, setSubmitting] = React.useState(false);
     const [error, setError] = React.useState('');
+    const [status, setStatus] = React.useState('');
     const set = (k) => (e) => setVals(v => ({ ...v, [k]: e.target.value }));
 
     const submit = async (e) => {
       e.preventDefault();
+      // Real honeypot — if a bot filled the hidden field, silently “succeed”.
+      if (vals.botcheck) { setSent(true); return; }
       setSubmitting(true);
       setError('');
+      setStatus('Sending…');
       try {
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
@@ -485,18 +497,20 @@ const CSPAGES = (() => {
             email: vals.email,
             phone: vals.phone,
             brief: vals.brief,
-            // Honeypot — Web3Forms ignores submissions where this is filled
-            botcheck: '',
+            botcheck: vals.botcheck,
           }),
         });
         const data = await res.json();
         if (data.success) {
           setSent(true);
+          setStatus('Message sent. We’ll reply within one working day.');
         } else {
           setError(data.message || 'Something went wrong. Please email us directly.');
+          setStatus('There was a problem sending the form.');
         }
       } catch (err) {
         setError('Network error. Please email contact@readingdrones.co.uk directly.');
+        setStatus('Network error — please email us instead.');
       } finally {
         setSubmitting(false);
       }
@@ -526,13 +540,24 @@ const CSPAGES = (() => {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={submit}>
+                <form onSubmit={submit} noValidate>
                   <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 32, margin: '0 0 8px', textTransform: 'uppercase' }}>Get a Quote</h2>
                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, color: RD_INK, opacity: 0.7, margin: '0 0 24px' }}>Quick form. We'll reply within a working day.</p>
-                  {[['name','Your name','text'],['email','Email','email'],['phone','Phone','tel']].map(([k,l,t]) => (
+                  {/* Real honeypot — hidden from sighted + AT users; bots tend to fill every field. */}
+                  <input
+                    type="text"
+                    name="botcheck"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    value={vals.botcheck}
+                    onChange={set('botcheck')}
+                    style={{ position: 'absolute', left: '-10000px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}
+                  />
+                  {[['name','Your name','text', true],['email','Email','email', true],['phone','Phone (optional)','tel', false]].map(([k,l,t,req]) => (
                     <label key={k} style={{ display: 'block', marginBottom: 16 }}>
-                      <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>{l}</div>
-                      <input required type={t} value={vals[k]} onChange={set(k)} style={{
+                      <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>{l}{req ? ' *' : ''}</div>
+                      <input required={req} type={t} value={vals[k]} onChange={set(k)} autoComplete={k === 'name' ? 'name' : k === 'email' ? 'email' : 'tel'} style={{
                         width: '100%', boxSizing: 'border-box',
                         padding: '14px 16px', border: `2.5px solid ${RD_INK}`, borderRadius: 10,
                         background: RD_CREAM, fontFamily: 'Inter, sans-serif', fontSize: 16, color: RD_INK,
@@ -549,12 +574,17 @@ const CSPAGES = (() => {
                     }}/>
                   </label>
                   {error && (
-                    <div style={{
+                    <div role="alert" style={{
                       background: '#ffe5e0', border: `2.5px solid ${RD_INK}`, borderRadius: 8,
                       padding: '12px 16px', marginBottom: 16,
                       fontFamily: 'Inter, sans-serif', fontSize: 14, color: RD_INK,
                     }}>{error}</div>
                   )}
+                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 12, color: RD_INK, opacity: 0.65, lineHeight: 1.5, margin: '0 0 16px' }}>
+                    We use the details you submit only to reply to your enquiry. See our <a href="?p=privacy" onClick={(e) => { e.preventDefault(); go('privacy'); }} style={{ color: RD_INK, textDecoration: 'underline' }}>privacy policy</a>.
+                  </p>
+                  {/* Live region announces send/error state to AT */}
+                  <div aria-live="polite" role="status" style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}>{status}</div>
                   <button type="submit" disabled={submitting} style={{
                     display: 'inline-flex', alignItems: 'center', gap: 10,
                     padding: '16px 28px', background: submitting ? RD_PAPER : 'var(--rd-accent)', color: RD_INK,
@@ -787,7 +817,46 @@ const CSPAGES = (() => {
     );
   }
 
-  return { HomePage, ServicesPage, ContactPage, AboutPage, PortfolioPage, SOCIAL };
+  // ── Privacy policy stub (UK GDPR-friendly boilerplate; owner can edit)
+  function PrivacyPage({ go }) {
+    const sec = (t, body) => (
+      <section style={{ marginBottom: 28 }}>
+        <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 22, margin: '0 0 10px', textTransform: 'uppercase' }}>{t}</h2>
+        <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 15, lineHeight: 1.6, color: RD_INK, opacity: 0.85 }}>{body}</div>
+      </section>
+    );
+    return (
+      <div>
+        <section style={{ background: 'var(--rd-primary)', padding: '64px 48px', borderBottom: `4px solid ${RD_INK}` }}>
+          <div style={{ maxWidth: 900, margin: '0 auto' }}>
+            <SpeechBadge size={14} color={RD_CREAM} rotate={-3}>● Privacy</SpeechBadge>
+            <h1 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 72, margin: '20px 0 0', textTransform: 'uppercase', lineHeight: 0.92 }}>
+              Privacy <span style={{ color: 'var(--rd-accent)', WebkitTextStroke: `3px ${RD_INK}`, paintOrder: 'stroke fill' }}>Policy.</span>
+            </h1>
+          </div>
+        </section>
+        <section style={{ background: RD_CREAM, padding: '64px 48px' }}>
+          <div style={{ maxWidth: 820, margin: '0 auto', background: RD_PAPER, border: `4px solid ${RD_INK}`, borderRadius: 12, boxShadow: `8px 8px 0 var(--rd-primary)`, padding: 36 }}>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, opacity: 0.7, margin: '0 0 24px' }}>Last updated: May 2026.</p>
+            {sec('Who we are', <p>Reading Drones is a small aerial photography and video studio based in Reading, Berkshire, United Kingdom. We are the data controller for the personal data described in this policy. Contact: <a href="mailto:contact@readingdrones.co.uk" style={{ color: RD_INK }}>contact@readingdrones.co.uk</a>.</p>)}
+            {sec('What we collect', <p>When you submit the quote form we collect the name, email address, optional phone number, and project brief that you provide. Our website does not set marketing or analytics cookies.</p>)}
+            {sec('Why we use it', <p>To reply to your enquiry and, if you become a client, to deliver the work and keep records required by HMRC. We do not sell your data, and we do not use it for marketing without your consent.</p>)}
+            {sec('Lawful basis', <p>For enquiries: legitimate interest (responding to a request you initiated). For ongoing client work: performance of a contract. For accounting records: legal obligation.</p>)}
+            {sec('Footage and likenesses', <p>If we capture footage of identifiable individuals on a commissioned shoot, the commissioning client is responsible for obtaining any needed consents from people in the frame. We retain raw footage for up to 12 months unless otherwise agreed.</p>)}
+            {sec('Sharing', <p>The contact form is delivered via Web3Forms, which forwards your message to our inbox. Email is hosted by our domain provider. We do not share enquiry data with anyone else.</p>)}
+            {sec('Retention', <p>Enquiry messages are kept for up to 24 months and then deleted. Client invoices and contracts are kept for 6 years to comply with UK tax rules.</p>)}
+            {sec('Your rights', <p>You can ask us to access, correct, or delete your personal data, or to stop processing it, by emailing the address above. You can also complain to the Information Commissioner&rsquo;s Office (ico.org.uk).</p>)}
+            {sec('CAA', <p>We operate under UK Civil Aviation Authority rules with an A2 Certificate of Competency and a registered Operator ID. Flights involving people or property are recorded in our flight log alongside any required risk assessment.</p>)}
+            <div style={{ marginTop: 24, paddingTop: 18, borderTop: `2px solid ${RD_INK}22` }}>
+              <a href="?p=contact" onClick={(e) => { e.preventDefault(); go('contact'); }} style={{ color: RD_INK, fontFamily: '"Archivo Black", sans-serif', textTransform: 'uppercase', fontSize: 13 }}>&larr; Back to contact</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  return { HomePage, ServicesPage, ContactPage, AboutPage, PortfolioPage, PrivacyPage, SOCIAL };
 })();
 
 window.CSPAGES = CSPAGES;

@@ -3,7 +3,7 @@ import React from 'react'
 
 const CSAPP = (() => {
   const { CSNav, CSFooter, SiteTweaks, useRoute, ScrollDrone, applyPalette, TWEAK_DEFAULTS } = window.SITE;
-  const { HomePage, ServicesPage, ContactPage, AboutPage, PortfolioPage } = window.CSPAGES;
+  const { HomePage, ServicesPage, ContactPage, AboutPage, PortfolioPage, PrivacyPage } = window.CSPAGES;
   const { RD_INK } = window;
   // New pages (loaded after CSPAGES)
   const PortfolioPage2 = window.CSPAGES2 && window.CSPAGES2.PortfolioPage;
@@ -33,13 +33,16 @@ const CSAPP = (() => {
 
     let body;
     if (route === 'services') body = <ServicesPage go={go} />;
-    else if (route === 'contact' || route === 'about') body = <ContactPage go={go} />;
+    else if (route === 'about' && AboutPage) body = <AboutPage go={go} />;
+    else if (route === 'contact') body = <ContactPage go={go} />;
+    else if (route === 'privacy' && PrivacyPage) body = <PrivacyPage go={go} />;
     else if (route === 'videos' && VideosPage) body = <VideosPage go={go} />;
     else if (route === 'pricing' && PricingPage) body = <PricingPage go={go} />;
     else if (route && route.indexOf && route.indexOf('case:') === 0 && CaseStudyPage) {
       body = <CaseStudyPage go={go} id={route.slice(5)} />;
     }
-    else if (route === 'portfolio') body = (PortfolioPage2 ? <PortfolioPage2 go={go} /> : <PortfolioPage go={go} />);
+    else if (route === 'portfolio' && PortfolioPage2) body = <PortfolioPage2 go={go} />;
+    else if (route === 'portfolio') body = <PortfolioPage go={go} />;
     else body = <HomePage go={go} heroVariant={heroVariant} />;
 
     return (
@@ -47,10 +50,11 @@ const CSAPP = (() => {
         width: '100%', height: '100%', overflow: 'auto', background: '#fff',
         position: 'relative',
       }}>
+        <a href="#main" className="rd-skip-link">Skip to main content</a>
         <CSNav route={route} go={go} />
         {/* Spacer: nav is position:fixed so reserve its height to keep page content below it */}
         <div className="cs-nav-spacer" style={{ height: 'var(--rd-nav-h, 76px)' }} aria-hidden="true" />
-        {body}
+        <main id="main" tabIndex={-1}>{body}</main>
         <CSFooter go={go} />
         <ScrollDrone enabled={enableDrone} scrollerRef={scrollerRef} />
       </div>

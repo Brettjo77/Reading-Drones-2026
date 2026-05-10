@@ -152,15 +152,22 @@ const TONE_PHOTOS = {
 
 // Aerial photo — real photo when available, abstract SVG fallback otherwise.
 // Keeps the same API as the original placeholder so nothing else needs to change.
-function AerialPlaceholder({ tone = 'fields', label = 'Aerial Photo Placeholder', children, src }) {
+function AerialPlaceholder({ tone = 'fields', label = 'Aerial Photo Placeholder', children, src, eager = false }) {
   const photo = src || TONE_PHOTOS[tone];
   if (photo) {
     return (
       <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', background: RD_INK }}>
-        <img src={photo} alt={label} loading="lazy" style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%',
-          objectFit: 'cover', display: 'block',
-        }} />
+        <img
+          src={photo}
+          alt={label}
+          loading={eager ? 'eager' : 'lazy'}
+          decoding={eager ? 'sync' : 'async'}
+          fetchpriority={eager ? 'high' : 'auto'}
+          style={{
+            position: 'absolute', inset: 0, width: '100%', height: '100%',
+            objectFit: 'cover', display: 'block',
+          }}
+        />
         {children}
       </div>
     );

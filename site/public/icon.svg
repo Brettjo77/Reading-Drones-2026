@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#fcd34d"/>
+  <!-- comic ink frame -->
+  <rect x="2" y="2" width="60" height="60" rx="11" fill="none" stroke="#0d0d10" stroke-width="4"/>
+  <!-- four propeller circles -->
+  <circle cx="18" cy="18" r="7" fill="#fff" stroke="#0d0d10" stroke-width="3"/>
+  <circle cx="46" cy="18" r="7" fill="#fff" stroke="#0d0d10" stroke-width="3"/>
+  <circle cx="18" cy="46" r="7" fill="#fff" stroke="#0d0d10" stroke-width="3"/>
+  <circle cx="46" cy="46" r="7" fill="#fff" stroke="#0d0d10" stroke-width="3"/>
+  <!-- arms -->
+  <line x1="18" y1="18" x2="46" y2="46" stroke="#0d0d10" stroke-width="4" stroke-linecap="round"/>
+  <line x1="46" y1="18" x2="18" y2="46" stroke="#0d0d10" stroke-width="4" stroke-linecap="round"/>
+  <!-- body -->
+  <rect x="24" y="24" width="16" height="16" rx="3" fill="#ef5a24" stroke="#0d0d10" stroke-width="3"/>
+</svg>

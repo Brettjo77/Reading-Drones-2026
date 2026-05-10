@@ -1,0 +1,23 @@
+All Rights Reserved.
+
+Copyright (c) 2024–2026 Reading Drones (Brett Johnson, Reading, Berkshire, UK).
+
+The source code, design, copy, photography and other assets in this repository
+are the property of Reading Drones unless otherwise noted. They are published
+on GitHub for transparency and reference only.
+
+You may NOT, without prior written permission:
+
+  * copy, modify or redistribute this code or its assets;
+  * deploy this site, in whole or in part, under another brand or domain;
+  * use the photography, branding, copy or testimonials in any other project,
+    commercial or otherwise;
+  * train machine-learning models on the contents of this repository.
+
+You MAY:
+
+  * read the code for personal study;
+  * file issues or open pull requests against this repository proposing
+    improvements (which, if merged, become subject to this licence).
+
+Third-party dependencies retain their own licences (see site/package.json).

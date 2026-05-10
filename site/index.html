@@ -10,11 +10,17 @@
     <meta name="author" content="Reading Drones" />
     <link rel="canonical" href="https://readingdrones.co.uk/" />
 
+    <!-- Security headers (GH Pages can't set HTTP headers; meta-equiv is the supported subset). -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.youtube-nocookie.com https://www.youtube.com; connect-src https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
     <!-- Favicons / PWA -->
-    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <!-- TODO: drop a real /favicon.ico, /apple-touch-icon.png and /og-cover.jpg into site/public/ -->
+
+    <!-- Preload the LCP hero image so it starts downloading before React mounts -->
+    <link rel="preload" as="image" href="/assets/photos/london-tower-bridge.jpg" fetchpriority="high" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -88,10 +94,26 @@
           "@type": "EducationalOccupationalCredential",
           "credentialCategory": "certification",
           "name": "CAA A2 Certificate of Competency"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certification",
+          "name": "CAA A1/A3 Open Category"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "08:00",
+          "closes": "19:00"
         }
       ],
       "sameAs": [
-        "https://www.youtube.com/@readingdrones"
+        "https://www.youtube.com/@readingdrones",
+        "https://www.instagram.com/readingdrones/",
+        "https://www.facebook.com/readingdrones",
+        "https://www.linkedin.com/company/105997088/"
       ]
     }
     </script>
@@ -123,7 +145,7 @@
           "name": "How much does a drone shoot cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Aerial photography starts from £200 and aerial filming from £250. The final price depends on travel, flight time, edit complexity and deliverables agreed in your consultation."
+            "text": "Every brief is quoted bespoke based on travel, flight time, edit complexity and deliverables. Send the brief and we will return a no-obligation quote within one working day."
           }
         },
         {
@@ -147,8 +169,32 @@
       body::-webkit-scrollbar-thumb { background: rgba(0,0,0,.25); border-radius: 5px; }
       .cs-svc { transition: transform .2s ease, box-shadow .2s ease; }
       .cs-svc:hover { transform: rotate(0deg) translateY(-4px) !important; box-shadow: 12px 12px 0 #0d0d10 !important; }
+      .cs-svc:focus-visible { outline: 3px solid #ef5a24; outline-offset: 4px; }
       .cs-navlink { transition: background .15s ease, transform .15s ease; }
       .cs-navlink:hover { transform: translateY(-2px); }
+      .cs-navlink:focus-visible { outline: 3px solid #ef5a24; outline-offset: 3px; }
+      a:focus-visible, button:focus-visible { outline: 3px solid #ef5a24; outline-offset: 2px; }
+
+      /* Skip-to-main link \u2014 hidden until focused */
+      .rd-skip-link {
+        position: absolute; left: 8px; top: -100px;
+        background: #fcd34d; color: #0d0d10;
+        padding: 10px 14px; border: 2.5px solid #0d0d10; border-radius: 8px;
+        font-family: 'Archivo Black', sans-serif; text-transform: uppercase; font-size: 13px;
+        text-decoration: none; z-index: 1000;
+        box-shadow: 3px 3px 0 #0d0d10;
+      }
+      .rd-skip-link:focus { top: 8px; }
+
+      /* Honour reduced-motion at the platform level */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
       .cs-social { transition: transform .15s ease; }
       .cs-social:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #0d0d10 !important; }
 
@@ -326,7 +372,7 @@
         </ul>
 
         <h2>Pricing</h2>
-        <p>Aerial photography from £200. Aerial filming from £250. Each job includes consultation, planning, flight and a first pass edit.</p>
+        <p>Every brief gets a bespoke quote, returned within one working day. Quotes cover consultation, planning, flight and a first-pass edit.</p>
 
         <h2>Contact</h2>
         <p>

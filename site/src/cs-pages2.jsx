@@ -160,7 +160,7 @@ const CSPAGES2 = (() => {
         </section>
 
         {/* Filter chips */}
-        <section style={{ background: RD_CREAM, padding: '28px 48px', borderBottom: `2px solid ${RD_INK}22`, position: 'sticky', top: 76, zIndex: 5 }}>
+        <section style={{ background: RD_CREAM, padding: '28px 48px', borderBottom: `2px solid ${RD_INK}22`, position: 'sticky', top: 'var(--rd-nav-h)', zIndex: 5 }}>
           <div style={{ maxWidth: 1300, margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: 10 }}>
             {CATS.map((c) => {
               const on = c.k === cat;
@@ -168,7 +168,7 @@ const CSPAGES2 = (() => {
                 <button key={c.k} onClick={() => setCat(c.k)} style={{
                   fontFamily: '"Archivo Black", sans-serif', fontSize: 12,
                   textTransform: 'uppercase', letterSpacing: '0.05em',
-                  padding: '10px 16px',
+                  padding: '12px 18px',
                   background: on ? 'var(--rd-accent)' : RD_PAPER,
                   color: RD_INK,
                   border: `2.5px solid ${RD_INK}`, borderRadius: 999,
@@ -222,7 +222,7 @@ const CSPAGES2 = (() => {
     if (id === 'stonehenge') {
       return (
         <div>
-          <section style={{ position: 'relative', height: 620, overflow: 'hidden', background: RD_INK }}>
+          <section style={{ position: 'relative', minHeight: 'clamp(420px, 70vh, 620px)', overflow: 'hidden', background: RD_INK }}>
             <img src={STONEHENGE} alt="Stonehenge aerial" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${RD_INK}22 0%, ${RD_INK}cc 100%)` }}></div>
             <div style={{ position: 'absolute', left: 48, bottom: 64, right: 48, color: RD_CREAM, maxWidth: 1300, margin: '0 auto' }}>
@@ -333,7 +333,7 @@ const CSPAGES2 = (() => {
     if (id === 'spiral') {
       return (
         <div>
-          <section style={{ position: 'relative', height: 620, overflow: 'hidden', background: RD_INK }}>
+          <section style={{ position: 'relative', minHeight: 'clamp(420px, 70vh, 620px)', overflow: 'hidden', background: RD_INK }}>
             <img src={SPIRAL} alt="Reading multi-storey at night" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${RD_INK}22 0%, ${RD_INK}cc 100%)` }}></div>
             <div style={{ position: 'absolute', left: 48, bottom: 64, right: 48, color: RD_CREAM, maxWidth: 1300, margin: '0 auto' }}>
@@ -541,8 +541,9 @@ const CSPAGES2 = (() => {
             <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 40, margin: '0 0 32px', textTransform: 'uppercase', textAlign: 'center' }}>
               Compare <span style={{ color: 'var(--rd-accent)' }}>packages.</span>
             </h2>
-            <div style={{ background: RD_CREAM, border: `4px solid ${RD_INK}`, borderRadius: 14, overflow: 'auto', boxShadow: `8px 8px 0 ${RD_INK}`, WebkitOverflowScrolling: 'touch' }}>
-              <table style={{ width: '100%', minWidth: 560, borderCollapse: 'collapse', fontFamily: 'Inter, sans-serif' }}>
+            {/* Desktop table — hidden at <=768px in favour of the per-tier card stack below. */}
+            <div className="rd-pricing-table" style={{ background: RD_CREAM, border: `4px solid ${RD_INK}`, borderRadius: 14, overflow: 'hidden', boxShadow: `8px 8px 0 ${RD_INK}` }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'Inter, sans-serif' }}>
                 <thead>
                   <tr style={{ background: RD_INK, color: RD_CREAM }}>
                     <th style={{ textAlign: 'left', padding: '18px 24px', fontFamily: '"Archivo Black", sans-serif', fontSize: 13, textTransform: 'uppercase', letterSpacing: '0.08em' }}></th>
@@ -562,6 +563,33 @@ const CSPAGES2 = (() => {
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            {/* Mobile per-tier cards — shown only at <=768px. Same data, no horizontal scroll. */}
+            <div className="rd-pricing-cards" style={{ display: 'none', flexDirection: 'column', gap: 18 }}>
+              {tiers.map((t, ti) => (
+                <div key={t.name} style={{
+                  background: t.popular ? 'var(--rd-primary)' : RD_CREAM,
+                  border: `4px solid ${RD_INK}`, borderRadius: 14,
+                  boxShadow: `6px 6px 0 ${RD_INK}`, overflow: 'hidden',
+                }}>
+                  <div style={{ background: RD_INK, color: t.popular ? 'var(--rd-primary)' : RD_CREAM, padding: '14px 18px', fontFamily: '"Archivo Black", sans-serif', fontSize: 16, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                    {t.name}{t.popular ? ' · ★ Most popular' : ''}
+                  </div>
+                  <dl style={{ margin: 0, padding: '6px 0' }}>
+                    {compareRows.map((row, ri) => (
+                      <div key={row[0]} style={{
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16,
+                        padding: '12px 18px',
+                        borderTop: ri === 0 ? 'none' : `2px solid ${RD_INK}15`,
+                      }}>
+                        <dt style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.06em', color: RD_INK, opacity: 0.75 }}>{row[0]}</dt>
+                        <dd style={{ margin: 0, fontFamily: 'Inter, sans-serif', fontSize: 15, fontWeight: row[ti + 1] === '✓' ? 700 : 500, color: RD_INK, textAlign: 'right' }}>{row[ti + 1]}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              ))}
             </div>
           </div>
         </section>

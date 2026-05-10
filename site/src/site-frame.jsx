@@ -140,11 +140,25 @@ const SITE = (() => {
   // CS-prefixed nav (uses CSS vars for primary/accent)
   function CSNav({ route, go }) {
     const [open, setOpen] = React.useState(false);
+    const navRef = React.useRef(null);
+    const burgerRef = React.useRef(null);
     const links = [
       ['home', 'Home'], ['services', 'Services'], ['portfolio', 'Portfolio'],
       ['videos', 'Videos'], ['pricing', 'Packages'], ['contact', 'Contact'],
     ];
     const goAndClose = (p) => { setOpen(false); go(p); };
+
+    // Mobile drawer a11y: Escape to close, focus first link on open, return focus to burger on close.
+    React.useEffect(() => {
+      if (!open) return;
+      const onKey = (e) => { if (e.key === 'Escape') { setOpen(false); burgerRef.current?.focus(); } };
+      document.addEventListener('keydown', onKey);
+      // Move focus into the drawer (first nav link) once it's visible.
+      const firstLink = navRef.current?.querySelector('a');
+      firstLink?.focus();
+      return () => document.removeEventListener('keydown', onKey);
+    }, [open]);
+
     return (
       <header style={{
         display: 'flex', alignItems: 'center',
@@ -185,7 +199,14 @@ const SITE = (() => {
           </div>
         </div>
         {/* nav (right) */}
-        <nav className={`cs-nav ${open ? 'cs-nav-open' : ''}`} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+        <nav
+          id="cs-mobile-nav"
+          ref={navRef}
+          className={`cs-nav ${open ? 'cs-nav-open' : ''}`}
+          aria-label="Primary"
+          aria-hidden={open ? undefined : (typeof window !== 'undefined' && window.innerWidth <= 768 ? 'true' : undefined)}
+          style={{ display: 'flex', gap: 6, alignItems: 'center' }}
+        >
           {links.map(([p, l]) => {
             const on = route === p || (p === 'portfolio' && typeof route === 'string' && route.indexOf('case:') === 0);
             return (
@@ -213,8 +234,10 @@ const SITE = (() => {
           </div>
         </nav>
         <button
-          aria-label="Menu"
+          ref={burgerRef}
+          aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="cs-mobile-nav"
           onClick={() => setOpen(o => !o)}
           className="cs-nav-burger"
           style={{
@@ -230,6 +253,15 @@ const SITE = (() => {
           <span style={{ display: 'block', width: 22, height: 3, background: RD_INK, borderRadius: 2, opacity: open ? 0 : 1, transition: 'opacity .2s' }}></span>
           <span style={{ display: 'block', width: 22, height: 3, background: RD_INK, borderRadius: 2, transform: open ? 'translateY(-7px) rotate(-45deg)' : 'none', transition: 'transform .2s' }}></span>
         </button>
+        {/* Tap-outside overlay for the mobile drawer. Rendered only when open
+            and only on phones via the cs-nav-overlay class (display: none on desktop). */}
+        {open && (
+          <div
+            className="cs-nav-overlay"
+            onClick={() => setOpen(false)}
+            aria-hidden="true"
+          />
+        )}
       </header>
     );
   }
@@ -243,7 +275,7 @@ const SITE = (() => {
             <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, lineHeight: 1.5, marginTop: 14, opacity: 0.75, maxWidth: 280 }}>
               Aerial photography, video and FPV tours from Reading, Berkshire.
             </p>
-            <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
+            <div style={{ display: 'flex', gap: 12, marginTop: 18 }}>
               {Object.values(SOCIAL).map((s) => (
                 <a
                   key={s.key}
@@ -254,7 +286,7 @@ const SITE = (() => {
                   title={s.label}
                   className="rd-social-tile"
                   style={{
-                    width: 40, height: 40, borderRadius: 10,
+                    width: 48, height: 48, borderRadius: 10,
                     border: `2.5px solid ${RD_INK}`,
                     background: 'var(--rd-primary)',
                     boxShadow: `3px 3px 0 ${RD_INK}`,
@@ -263,7 +295,7 @@ const SITE = (() => {
                     transition: 'transform .15s ease, box-shadow .15s ease, background .15s ease',
                   }}
                 >
-                  <SocialIcon brand={s.key} size={18} fg={RD_INK} />
+                  <SocialIcon brand={s.key} size={20} fg={RD_INK} />
                 </a>
               ))}
             </div>

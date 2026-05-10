@@ -477,7 +477,16 @@ const CSPAGES = (() => {
     const [submitting, setSubmitting] = React.useState(false);
     const [error, setError] = React.useState('');
     const [status, setStatus] = React.useState('');
+    const errorRef = React.useRef(null);
     const set = (k) => (e) => setVals(v => ({ ...v, [k]: e.target.value }));
+
+    // Scroll the error block into view when it appears — on mobile it would
+    // otherwise sit above the submit button and be hidden behind the keyboard.
+    React.useEffect(() => {
+      if (error && errorRef.current) {
+        errorRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, [error]);
 
     const submit = async (e) => {
       e.preventDefault();
@@ -571,11 +580,11 @@ const CSPAGES = (() => {
                     <textarea required rows={5} value={vals.brief} onChange={set('brief')} placeholder="What are you shooting? Where? Any timing in mind?" style={{
                       width: '100%', boxSizing: 'border-box',
                       padding: '14px 16px', border: `2.5px solid ${RD_INK}`, borderRadius: 10,
-                      background: RD_CREAM, fontFamily: 'Inter, sans-serif', fontSize: 15, color: RD_INK, resize: 'vertical',
+                      background: RD_CREAM, fontFamily: 'Inter, sans-serif', fontSize: 16, color: RD_INK, resize: 'vertical',
                     }}/>
                   </label>
                   {error && (
-                    <div role="alert" style={{
+                    <div ref={errorRef} role="alert" style={{
                       background: '#ffe5e0', border: `2.5px solid ${RD_INK}`, borderRadius: 8,
                       padding: '12px 16px', marginBottom: 16,
                       fontFamily: 'Inter, sans-serif', fontSize: 14, color: RD_INK,

@@ -171,6 +171,12 @@
       .cs-svc:hover { transform: rotate(0deg) translateY(-4px) !important; box-shadow: 12px 12px 0 #0d0d10 !important; }
       .cs-svc:focus-visible { outline: 3px solid #ef5a24; outline-offset: 4px; }
 
+      /* Pricing comparison: swap from desktop table to per-tier cards on phones. */
+      @media (max-width: 768px) {
+        .rd-pricing-table { display: none !important; }
+        .rd-pricing-cards { display: flex !important; }
+      }
+
       /* Logo-wall tiles — display real client colours, no hover transform */
       @media (max-width: 1100px) {
         .rd-logowall-grid { grid-template-columns: repeat(3, 1fr) !important; }
@@ -298,14 +304,19 @@
 
         /* Tilted hero photo cards: untilt slightly so they don't poke off-screen */
         [style*="rotate(3deg)"], [style*="rotate(-3deg)"],
-        [style*="rotate(4deg)"], [style*="rotate(-4deg)"] {
+        [style*="rotate(4deg)"], [style*="rotate(-4deg)"],
+        [style*="rotate(8deg)"], [style*="rotate(-8deg)"],
+        [style*="rotate(12deg)"], [style*="rotate(-12deg)"] {
           transform: none !important;
         }
 
         /* Absolutely positioned hero badges that hang off edges — bring back inside */
-        [style*="right: -20"], [style*="right: -22"], [style*="right: -18"] { right: 0 !important; }
-        [style*="left: -30"], [style*="left: -12"] { left: 0 !important; }
-        [style*="bottom: -10"], [style*="top: -10"] { bottom: 0 !important; top: auto !important; }
+        [style*="right: -16"], [style*="right: -18"], [style*="right: -20"], [style*="right: -22"], [style*="right: -28"] { right: 0 !important; }
+        [style*="left: -10"], [style*="left: -12"], [style*="left: -16"], [style*="left: -30"] { left: 0 !important; }
+        [style*="bottom: -8"], [style*="bottom: -10"], [style*="top: -10"], [style*="top: -16"], [style*="top: -36"] { bottom: auto !important; top: auto !important; }
+
+        /* Force any min-width on tables back to fluid — pricing table etc. */
+        table[style*="min-width"], table[style*="minWidth"] { min-width: 0 !important; }
       }
 
       /* HeroA stack: turn absolute pile into a simple 2-card column on mobile */
@@ -322,6 +333,7 @@
       }
 
       /* Mobile nav: hamburger drawer */
+      .cs-nav-overlay { display: none; }
       @media (max-width: 768px) {
         .cs-nav-header { padding: 14px 18px !important; }
         .cs-nav-burger { display: flex !important; }
@@ -347,12 +359,44 @@
         .cs-nav .cs-navlink { font-size: 16px !important; padding: 14px 16px !important; }
         .cs-nav-quote { margin-left: 0 !important; margin-top: 6px; }
         .cs-nav-quote button { width: 100%; justify-content: center; }
+        /* Overlay sits behind the drawer (z=40) and above the page; tap to close. */
+        .cs-nav-overlay {
+          display: block;
+          position: fixed;
+          top: 64px; left: 0; right: 0; bottom: 0;
+          background: rgba(13,13,16,0.35);
+          z-index: 35;
+          cursor: pointer;
+        }
+      }
+
+      /* Tablet / large-phone landscape (600–767px): let 3- and 4-col grids
+         degrade to 2-col instead of jumping straight to 1-col like the
+         <=768px catch-all does. Selectors mirror the existing override patterns
+         and must come AFTER the <=768px block to win the cascade. */
+      @media (min-width: 600px) and (max-width: 767px) {
+        [style*="grid-template-columns"][style*="repeat(2"],
+        [style*="grid-template-columns"][style*="repeat(3"],
+        [style*="grid-template-columns"][style*="repeat(4"],
+        [style*="gridTemplateColumns"][style*="repeat(2"],
+        [style*="gridTemplateColumns"][style*="repeat(3"],
+        [style*="gridTemplateColumns"][style*="repeat(4"],
+        [style*="1fr 1fr"],
+        [style*="1.1fr 1fr"], [style*="1fr 1.1fr"],
+        [style*="1.2fr 1fr"], [style*="1fr 1.2fr"],
+        [style*="1.4fr 1fr"], [style*="1fr 1.4fr"],
+        [style*="1.5fr 1fr"], [style*="1fr 1.5fr"] {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 18px !important;
+        }
       }
 
       @media (max-width: 480px) {
         /* Ultra-narrow tweak — keep most of the above and shrink a touch more */
         h1 { font-size: clamp(32px, 10vw, 44px) !important; }
         section { padding-left: 16px !important; padding-right: 16px !important; }
+        /* Body copy at 17–18px gives <35 chars/line on small phones; pull it down. */
+        p { font-size: 15.5px !important; }
       }
 
       /* Noscript fallback styling */

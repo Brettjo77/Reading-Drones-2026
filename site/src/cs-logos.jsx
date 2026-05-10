@@ -23,7 +23,7 @@ const CSLOGOS = (() => {
     { name: 'Wall 2 Wall Construction',           short: 'Wall 2 Wall',       file: '/assets/clients/wall-2-wall-construction.png',  sector: 'Construction' },
     { name: 'Associated Asphalt',                 short: 'Assoc. Asphalt',    file: '/assets/clients/associated-asphalt.svg',        sector: 'Construction' },
     { name: 'The Emmbrook School',                short: 'Emmbrook',          file: '/assets/clients/emmbrook-school.svg',           sector: 'Education & faith' },
-    { name: "Shinfield St Mary's Junior School",  short: 'St Mary\u2019s',    file: '/assets/clients/shinfield-st-marys.svg',        sector: 'Education & faith' },
+    { name: "Shinfield St Mary's Junior School",  short: 'St Mary\u2019s',    file: '/assets/clients/shinfield-st-marys.jpg',        sector: 'Education & faith' },
     { name: 'Shinfield Baptist Church',           short: 'Shinfield Baptist', file: '/assets/clients/shinfield-baptist-church.png',  sector: 'Education & faith' },
   ];
 

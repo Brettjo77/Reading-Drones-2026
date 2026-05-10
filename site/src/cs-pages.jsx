@@ -265,7 +265,7 @@ const CSPAGES = (() => {
             <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 72, margin: '32px 0 56px', lineHeight: 0.92, textTransform: 'uppercase', textAlign: 'center', letterSpacing: '-0.01em' }}>
               What we <span style={{ color: 'var(--rd-accent)', WebkitTextStroke: `2px ${RD_INK}`, paintOrder: 'stroke fill' }}>shoot.</span>
             </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
+            <div className="cs-svc-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
               {services.map((s, i) => (
                 <div
                   key={s.t}

@@ -254,6 +254,7 @@
         /* Trust strip + any inline-styled <div> using the same 48px gutter pattern. */
         div[style*="padding: 14px 48px"],
         div[style*="padding: '14px 48px'"] { padding-left: 20px !important; padding-right: 20px !important; box-sizing: border-box; }
+
         /* Reduce vertical padding too */
         section[style*="96px 48px"] { padding-top: 56px !important; padding-bottom: 56px !important; }
         section[style*="80px 48px"] { padding-top: 48px !important; padding-bottom: 48px !important; }
@@ -273,6 +274,14 @@
         [style*="1.5fr 1fr"], [style*="1fr 1.5fr"] {
           grid-template-columns: 1fr !important;
           gap: 20px !important;
+        }
+
+        /* Homepage 'What we shoot' service tiles: opt out of the 1-col collapse
+           and keep 2 columns. Specificity matches (class + attr = 0,2,0) so
+           later source order wins. */
+        .cs-svc-grid[style*="grid-template-columns"] {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 14px !important;
         }
 
         /* Heroes: scale down giant headlines */

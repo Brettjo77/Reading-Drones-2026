@@ -595,7 +595,7 @@ const CSPAGES2 = (() => {
           // TODO: replace ID with real upload for "Tamar Bridge"
           { id: 'thvwXQ9eoKY', t: 'Tamar Bridge' },
           { id: 'vJJRWkx4cFw', t: 'Cyprus Shipwreck' },
-          { id: 'k2ckxMDVvvk', t: 'Spooky Hotel' },
+          { id: 'ZmRhboNz4qU', t: 'Scotland' },
         ],
       },
       {

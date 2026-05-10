@@ -18,7 +18,7 @@ const CSPAGES = (() => {
         </div>
         <div style={{ position: 'absolute', inset: 0, background: HALFTONE, opacity: 0.12 }}></div>
         <div style={{ position: 'relative', maxWidth: 1300, margin: '0 auto', padding: '64px 48px 88px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center' }}>
-          <div>
+          <div className="cs-hero-copy">
             <SpeechBadge size={14} color={RD_CREAM} rotate={-3}>● Reading · Berkshire ·</SpeechBadge>
             <h1 style={{
               fontFamily: '"Archivo Black", sans-serif', fontSize: 92, lineHeight: 0.88, margin: '24px 0 0',
@@ -36,7 +36,7 @@ const CSPAGES = (() => {
             }}>
               Aerial photography, video and FPV tours for the projects that need a little more <em>oomph</em>. Eight years of pro work. CAA-licensed. £5M insured. <strong>An eye for detail and a sense of fun.</strong>
             </p>
-            <div style={{ display: 'flex', gap: 14, marginTop: 32, alignItems: 'center' }}>
+            <div className="cs-hero-cta" style={{ display: 'flex', gap: 14, marginTop: 32, alignItems: 'center' }}>
               <CCBButton primary size={16} onClick={() => go('services')}>See Services <Icn d={ICONS.arrow} size={18} /></CCBButton>
               <CCBButton size={16} onClick={() => go('contact')}>Get a Quote</CCBButton>
             </div>

@@ -318,9 +318,10 @@ const SITE = (() => {
     }, [enabled, scrollerRef]);
 
     if (!enabled) return null;
-    // sweeps left↔right & dips up/down as scrolling progresses
-    const x = 8 + progress * 84;            // 8% → 92% across viewport
-    const y = 18 + Math.sin(progress * Math.PI * 2) * 10; // bob
+    // Keep the drone in the far-left lane so it never covers the hero photo
+    // or other centred content. Sweeps a narrow band as you scroll.
+    const x = 3 + progress * 18;            // 3% → 21% across viewport
+    const y = 22 + Math.sin(progress * Math.PI * 2) * 10; // bob
     const tilt = -8 + Math.sin(progress * Math.PI * 3) * 14;
     return (
       <div style={{

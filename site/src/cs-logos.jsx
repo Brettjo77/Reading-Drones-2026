@@ -58,13 +58,15 @@ const CSLOGOS = (() => {
             color: captionLight ? RD_CREAM : RD_INK,
           }}>{c.short}</div>
         ) : (
-          // Fixed-height inner box: every logo is forced to fit a 52px-tall
-          // area regardless of the tile's actual height. That gives uniform
-          // visual mass — wide marks (ITN) and crests (Emmbrook) end up the
-          // same height. The CSS class on the inner div lets us bump the
-          // height responsively at wider breakpoints.
+          // Fixed-height inner box: every logo is forced to fit the same
+          // vertical area regardless of the tile's actual height, which gives
+          // uniform visual mass across wide marks (ITN) and crests (Emmbrook).
+          // The img uses height:100% (not maxHeight:%) so SVGs without explicit
+          // width/height attributes still render — WebKit otherwise sizes them
+          // to 0x0 when no intrinsic size is available. The CSS class on the
+          // inner div lets us bump the height responsively at wider breakpoints.
           <div className="rd-logo-mark" style={{
-            height: 52, maxWidth: '90%',
+            height: 60, maxWidth: '92%',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
             <img
@@ -72,7 +74,7 @@ const CSLOGOS = (() => {
               alt={c.name}
               loading="lazy"
               onError={() => setBroken(true)}
-              style={{ display: 'block', maxHeight: '100%', maxWidth: '100%', width: 'auto', height: 'auto', objectFit: 'contain' }}
+              style={{ display: 'block', height: '100%', width: 'auto', maxWidth: '100%', objectFit: 'contain' }}
             />
           </div>
         )}

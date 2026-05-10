@@ -40,15 +40,15 @@ const CSPAGES = (() => {
               <CCBButton size={16} onClick={() => go('contact')}>Get a Quote</CCBButton>
             </div>
           </div>
-          <div className="cs-hero-stack" style={{ position: 'relative', height: 650 }}>
+          <div className="cs-hero-stack" style={{ position: 'relative', height: 760 }}>
             {/* Comic-sticker frame: white "matt" border inside the ink outline,
                 inner wrapper applies B&W so the sticker frame stays white. */}
-            <div className="cs-hero-card cs-hero-card-1" style={{ position: 'absolute', right: 20, top: 20, width: 450, height: 350, background: '#fff', padding: 12, boxSizing: 'border-box', border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(3deg)' }}>
+            <div className="cs-hero-card cs-hero-card-1" style={{ position: 'absolute', right: 20, top: 20, width: 580, height: 440, background: '#fff', padding: 12, boxSizing: 'border-box', border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(3deg)' }}>
               <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', filter: 'grayscale(1) contrast(1.05)' }}>
                 <AerialPlaceholder src="/assets/photos/london-tower-bridge.jpg" label="Tower Bridge · London" />
               </div>
             </div>
-            <div className="cs-hero-card cs-hero-card-2" style={{ position: 'absolute', left: 0, bottom: 30, width: 400, height: 275, background: '#fff', padding: 12, boxSizing: 'border-box', border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(-4deg)' }}>
+            <div className="cs-hero-card cs-hero-card-2" style={{ position: 'absolute', left: 0, bottom: 30, width: 520, height: 360, background: '#fff', padding: 12, boxSizing: 'border-box', border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(-4deg)' }}>
               <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', filter: 'grayscale(1) contrast(1.05)' }}>
                 <AerialPlaceholder src="/assets/photos/stonehenge-misty-sunrise.jpg" label="Stonehenge · Wiltshire" />
               </div>

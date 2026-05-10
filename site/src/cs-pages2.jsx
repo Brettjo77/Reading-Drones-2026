@@ -504,8 +504,8 @@ const CSPAGES2 = (() => {
                 transform: t.popular ? 'translateY(-12px)' : 'none',
               }}>
                 {t.popular && (
-                  <div style={{ position: 'absolute', top: -22, right: -18 }}>
-                    <BurstBadge size={88} rotate={-12}>Most<br/>popular!</BurstBadge>
+                  <div style={{ position: 'absolute', top: -18, left: '50%', transform: 'translateX(-50%)', zIndex: 2 }}>
+                    <SpeechBadge size={13} color="var(--rd-accent)" rotate={-3}>★ Most popular ★</SpeechBadge>
                   </div>
                 )}
                 <div style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 12, color: RD_INK, opacity: 0.65, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 4 }}>{t.tagline}</div>
@@ -592,21 +592,8 @@ const CSPAGES2 = (() => {
         accent: 'var(--rd-accent)',
         blurb: 'Long-form cinematic work — the pieces we are most proud of. Best watched full-screen.',
         videos: [
-          { id: 'thvwXQ9eoKY', t: 'Tamar Bridge' },
-          { id: 'vJJRWkx4cFw', t: 'Cyprus Shipwreck' },
-          { id: 'k2ckxMDVvvk', t: 'Spooky Hotel' },
-        ],
-      },
-      {
-        kind: 'fpv',
-        title: 'FPV',
-        accent: 'var(--rd-tint)',
-        blurb: 'First-person flight. Cinewhoop walkthroughs, single-take fly-throughs — venues, properties, environments brought to life from the inside.',
-        videos: [
-          { id: 'V9MM7U9Y_b4', t: 'FPV reel · I' },
-          { id: 'f9mo7RJcfQk', t: 'FPV reel · II' },
-          { id: 'e1Uh7EBqz34', t: 'FPV reel · III' },
-          { id: '-qFVhbmP9ic', t: 'FPV reel · IV' },
+          // TODO: replace ID with real upload for "Shinfield Cinema"
+          { id: 'thvwXQ9eoKY', t: 'Shinfield Cinema' },
         ],
       },
       {
@@ -615,9 +602,18 @@ const CSPAGES2 = (() => {
         accent: 'var(--rd-primary)',
         blurb: 'Infrastructure, sites, progress timelapses. Aerial captures from active sites and finished hand-overs.',
         videos: [
-          { id: 't5ItrbnOego', t: 'Construction · I' },
-          { id: 'hM9Rv7eaxdI', t: 'Construction · II' },
-          { id: 'HFp3yQMKqlU', t: 'Construction · III' },
+          // TODO: replace ID with real upload for "Berkshire Tile Company"
+          { id: 't5ItrbnOego', t: 'Berkshire Tile Company' },
+        ],
+      },
+      {
+        kind: 'fpv',
+        title: 'FPV',
+        accent: 'var(--rd-tint)',
+        blurb: 'First-person flight. Cinewhoop walkthroughs, single-take fly-throughs — venues, properties, environments brought to life from the inside.',
+        videos: [
+          // TODO: replace ID with real upload for "FPV Lidl Store Build"
+          { id: 'V9MM7U9Y_b4', t: 'FPV Lidl Store Build' },
         ],
       },
     ];
@@ -674,7 +670,7 @@ const CSPAGES2 = (() => {
                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 16, lineHeight: 1.55, color: RD_INK, opacity: 0.8, margin: 0, maxWidth: 640 }}>{g.blurb}</p>
                 </div>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 24, maxWidth: 720, margin: '0 auto' }}>
                 {g.videos.map((v, i) => <VideoCard key={v.id} v={v} i={i} />)}
               </div>
             </div>
@@ -685,7 +681,7 @@ const CSPAGES2 = (() => {
         <section style={{ background: RD_INK, color: RD_CREAM, padding: '72px 48px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: HALFTONE, opacity: 0.06 }}></div>
           <div style={{ position: 'relative', maxWidth: 900, margin: '0 auto' }}>
-            <BurstBadge size={110} rotate={-8}>More on<br/>YouTube!</BurstBadge>
+            <SpeechBadge size={14} color="var(--rd-primary)" rotate={-3}>★ More on YouTube ★</SpeechBadge>
             <h2 style={{ fontFamily: '"Archivo Black", sans-serif', fontSize: 56, margin: '24px 0 16px', textTransform: 'uppercase', lineHeight: 0.95 }}>
               Got a reel<br/><span style={{ color: 'var(--rd-primary)' }}>in mind?</span>
             </h2>

@@ -140,7 +140,8 @@
 
     <style>
       html, body { margin: 0; padding: 0; background: #faf6ec; font-family: Inter, system-ui, sans-serif; overflow-x: hidden; }
-      :root { --rd-primary: #fcd34d; --rd-accent: #ef5a24; --rd-tint: #2aa7c8; }
+      :root { --rd-primary: #fcd34d; --rd-accent: #ef5a24; --rd-tint: #2aa7c8; --rd-nav-h: 76px; }
+      @media (max-width: 768px) { :root { --rd-nav-h: 64px; } }
       #root { min-height: 100vh; }
       body::-webkit-scrollbar { width: 10px; }
       body::-webkit-scrollbar-thumb { background: rgba(0,0,0,.25); border-radius: 5px; }

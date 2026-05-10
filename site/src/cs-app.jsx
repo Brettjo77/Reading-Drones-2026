@@ -48,6 +48,8 @@ const CSAPP = (() => {
         position: 'relative',
       }}>
         <CSNav route={route} go={go} />
+        {/* Spacer: nav is position:fixed so reserve its height to keep page content below it */}
+        <div className="cs-nav-spacer" style={{ height: 'var(--rd-nav-h, 76px)' }} aria-hidden="true" />
         {body}
         <CSFooter go={go} />
         <ScrollDrone enabled={enableDrone} scrollerRef={scrollerRef} />

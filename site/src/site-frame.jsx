@@ -80,11 +80,18 @@ const SITE = (() => {
         history.pushState({}, '', u);
       } catch (e) {}
       setRoute(p);
-      // scroll the inner scroller back to top
+      // Reset scroll on route change. In production the real scroll lives on window
+      // (cs-scroller is set to overflow:visible in main.jsx); the inner scroller reset
+      // is kept for the designer/preview shell where cs-scroller owns the scroll.
       try {
         const sc = document.getElementById('cs-scroller');
         if (sc) sc.scrollTop = 0;
       } catch (e) {}
+      try {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      } catch (e) {
+        try { window.scrollTo(0, 0); } catch (e2) {}
+      }
     }, []);
     return [route, go];
   }
@@ -102,7 +109,7 @@ const SITE = (() => {
         display: 'flex', alignItems: 'center',
         padding: '18px 48px', background: RD_CREAM,
         borderBottom: `4px solid ${RD_INK}`,
-        position: 'sticky', top: 0, zIndex: 30,
+        position: 'fixed', top: 0, left: 0, right: 0, width: '100%', zIndex: 30,
       }} className="cs-nav-header">
         {/* logo (left) */}
         <div className="cs-nav-left" style={{ display: 'flex', alignItems: 'center', gap: 18 }}>

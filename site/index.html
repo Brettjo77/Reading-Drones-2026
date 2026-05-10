@@ -293,8 +293,28 @@
            later source order wins. */
         .cs-svc-grid[style*="grid-template-columns"] {
           grid-template-columns: repeat(2, 1fr) !important;
-          gap: 14px !important;
+          gap: 12px !important;
         }
+        /* Cards in that grid: allow them to shrink below their intrinsic
+           content size (default min-width on grid items is auto, which is
+           why long uppercase headings like INSPECTIONS were clipping the
+           card). Tighten paddings, shrink the headline, and let it wrap. */
+        .cs-svc-grid > .cs-svc { min-width: 0; }
+        .cs-svc-grid .cs-svc h3 {
+          font-size: 15px !important;
+          line-height: 1.05 !important;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          hyphens: auto;
+        }
+        /* Card body padding: the JSX uses padding:'20px 22px 22px' inline,
+           which the catch-all reduces but not enough for two-up at 390px. */
+        .cs-svc-grid .cs-svc [style*="padding: '20px 22px 22px'"],
+        .cs-svc-grid .cs-svc [style*="padding: 20px 22px 22px"] {
+          padding: 12px 12px 14px !important;
+          gap: 6px !important;
+        }
+        .cs-svc-grid .cs-svc p { font-size: 12.5px !important; line-height: 1.45 !important; }
 
         /* Heroes: scale down giant headlines */
         h1 { font-size: clamp(36px, 11vw, 56px) !important; line-height: 1 !important; word-wrap: break-word; }
@@ -361,10 +381,39 @@
         .cs-nav-socials { display: none !important; }
       }
 
-      /* Hide the scroll-flying drone on phones — it covered the leftmost
-         content (logos, hero card) on narrow viewports. */
+      /* Scroll-flying drone on phones: shrink it and let it fly along the
+         bottom-right area only, well clear of left-aligned content. The
+         JS still updates left/top per scroll position; we mirror that to
+         a constrained right/bottom sweep via CSS, and stack a subtle
+         hover bob on top so it always feels alive. */
+      /* Mobile scroll-drone: fly animation. Compositor-only — animates
+         `transform` on the inner element, which has no JS-set transform
+         on mobile (the parent owns position via right/bottom inset). */
+      @keyframes rd-drone-fly {
+        0%   { transform: translate(0, 0) rotate(-6deg); }
+        25%  { transform: translate(-14px, -8px) rotate(-12deg); }
+        50%  { transform: translate(0, -14px) rotate(-4deg); }
+        75%  { transform: translate(-10px, -6px) rotate(-10deg); }
+        100% { transform: translate(0, 0) rotate(-6deg); }
+      }
       @media (max-width: 768px) {
-        .cs-scroll-drone { display: none !important; }
+        .cs-scroll-drone {
+          /* anchor to bottom-right corner; ignore JS-driven left/top */
+          left: auto !important;
+          top: auto !important;
+          right: clamp(8px, 6vw, 36px) !important;
+          bottom: clamp(40px, 14vh, 120px) !important;
+          transition: none !important;
+        }
+        .cs-scroll-drone-inner {
+          transform: none !important;
+          animation: rd-drone-fly 4.5s ease-in-out infinite !important;
+          transition: none !important;
+        }
+        .cs-scroll-drone svg { width: 52px !important; height: 52px !important; }
+      }
+      @media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+        .cs-scroll-drone-inner { animation: none !important; }
       }
 
       /* Mobile nav: hamburger drawer */

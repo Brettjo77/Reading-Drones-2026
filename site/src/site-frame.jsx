@@ -356,13 +356,22 @@ const SITE = (() => {
     const y = 22 + Math.sin(progress * Math.PI * 2) * 10; // bob
     const tilt = -8 + Math.sin(progress * Math.PI * 3) * 14;
     return (
+      // Outer wrapper holds the JS-driven scroll position; inner element
+      // owns the rotation/tilt + any CSS-driven hover animation. Splitting
+      // them lets the mobile CSS animate `transform` on the inner without
+      // fighting the inline left/top updates from scroll.
       <div className="cs-scroll-drone" style={{
         position: 'fixed', left: `${x}%`, top: `${y}%`,
-        transform: `translate(-50%, -50%) rotate(${tilt}deg)`,
-        pointerEvents: 'none', zIndex: 25, transition: 'left .12s linear, top .12s linear, transform .12s linear',
-        filter: `drop-shadow(0 6px 0 ${RD_INK}33)`,
+        pointerEvents: 'none', zIndex: 25,
+        transition: 'left .12s linear, top .12s linear',
       }}>
-        <window.MavicHero treatment="comic" size={68} outline={RD_INK} accent="var(--rd-accent)" />
+        <div className="cs-scroll-drone-inner" style={{
+          transform: `translate(-50%, -50%) rotate(${tilt}deg)`,
+          transition: 'transform .12s linear',
+          filter: `drop-shadow(0 6px 0 ${RD_INK}33)`,
+        }}>
+          <window.MavicHero treatment="comic" size={68} outline={RD_INK} accent="var(--rd-accent)" />
+        </div>
       </div>
     );
   }

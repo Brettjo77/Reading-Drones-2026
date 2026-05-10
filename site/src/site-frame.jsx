@@ -109,7 +109,8 @@ const SITE = (() => {
         display: 'flex', alignItems: 'center',
         padding: '18px 48px', background: RD_CREAM,
         borderBottom: `4px solid ${RD_INK}`,
-        position: 'fixed', top: 0, left: 0, right: 0, width: '100%', zIndex: 30,
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 30,
+        boxSizing: 'border-box',
       }} className="cs-nav-header">
         {/* logo (left) */}
         <div className="cs-nav-left" style={{ display: 'flex', alignItems: 'center', gap: 18 }}>

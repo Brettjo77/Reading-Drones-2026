@@ -594,6 +594,8 @@ const CSPAGES2 = (() => {
         videos: [
           // TODO: replace ID with real upload for "Shinfield Cinema"
           { id: 'thvwXQ9eoKY', t: 'Shinfield Cinema' },
+          { id: 'vJJRWkx4cFw', t: 'Cyprus Shipwreck' },
+          { id: 'k2ckxMDVvvk', t: 'Spooky Hotel' },
         ],
       },
       {
@@ -604,6 +606,8 @@ const CSPAGES2 = (() => {
         videos: [
           // TODO: replace ID with real upload for "Berkshire Tile Company"
           { id: 't5ItrbnOego', t: 'Berkshire Tile Company' },
+          { id: 'hM9Rv7eaxdI', t: 'Construction · II' },
+          { id: 'HFp3yQMKqlU', t: 'Construction · III' },
         ],
       },
       {
@@ -614,6 +618,8 @@ const CSPAGES2 = (() => {
         videos: [
           // TODO: replace ID with real upload for "FPV Lidl Store Build"
           { id: 'V9MM7U9Y_b4', t: 'FPV Lidl Store Build' },
+          { id: 'f9mo7RJcfQk', t: 'FPV reel · II' },
+          { id: 'e1Uh7EBqz34', t: 'FPV reel · III' },
         ],
       },
     ];
@@ -670,7 +676,7 @@ const CSPAGES2 = (() => {
                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 16, lineHeight: 1.55, color: RD_INK, opacity: 0.8, margin: 0, maxWidth: 640 }}>{g.blurb}</p>
                 </div>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 24, maxWidth: 720, margin: '0 auto' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
                 {g.videos.map((v, i) => <VideoCard key={v.id} v={v} i={i} />)}
               </div>
             </div>

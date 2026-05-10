@@ -21,31 +21,31 @@ const CSLOGOS = (() => {
     { name: 'Avocado Property',                   short: 'Avocado',           file: '/assets/clients/avocado-property.jpg',          sector: 'Property' },
     { name: 'Inara Home Imagery',                 short: 'Inara',             file: '/assets/clients/inara-home-imagery.jpg',        sector: 'Property' },
     { name: 'Wall 2 Wall Construction',           short: 'Wall 2 Wall',       file: '/assets/clients/wall-2-wall-construction.png',  sector: 'Construction' },
-    { name: 'Associated Asphalt',                 short: 'Assoc. Asphalt',    file: '/assets/clients/associated-asphalt.svg',        sector: 'Construction' },
-    { name: 'The Emmbrook School',                short: 'Emmbrook',          file: '/assets/clients/emmbrook-school.svg',           sector: 'Education & faith' },
+    { name: 'Associated Asphalt',                 short: 'Assoc. Asphalt',    file: '/assets/clients/associated-asphalt.svg',        sector: 'Construction',     bg: RD_INK },
+    { name: 'The Emmbrook School',                short: 'Emmbrook',          file: '/assets/clients/emmbrook-school.svg',           sector: 'Education & faith', bg: RD_INK },
     { name: "Shinfield St Mary's Junior School",  short: 'St Mary\u2019s',    file: '/assets/clients/shinfield-st-marys.jpg',        sector: 'Education & faith' },
     { name: 'Shinfield Baptist Church',           short: 'Shinfield Baptist', file: '/assets/clients/shinfield-baptist-church.png',  sector: 'Education & faith' },
   ];
 
-  // Tile renderer — tries the SVG file, falls back to a wordmark if missing.
+  // Tile renderer — tries the logo file, falls back to a wordmark if missing.
   function LogoTile({ c, showCaption = true, height = 84 }) {
     const [broken, setBroken] = React.useState(false);
+    // Some logos are white-on-transparent; honour a per-client background override.
+    const tileBg = c.bg || '#fff';
+    const captionLight = tileBg !== '#fff';
     return (
       <div className="rd-logo-tile" style={{
-        background: '#fff',
+        background: tileBg,
         border: `3px solid ${RD_INK}`,
         borderRadius: 10,
         boxShadow: `5px 5px 0 ${RD_INK}`,
         padding: '18px 14px',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         gap: 10, minHeight: height + 50,
-        transition: 'transform .15s ease, box-shadow .15s ease',
       }}>
         <div className="rd-logo-mark" style={{
           height, width: '100%',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          filter: broken ? 'none' : 'grayscale(1)',
-          transition: 'filter .2s ease',
         }}>
           {broken ? (
             <div style={{
@@ -55,7 +55,7 @@ const CSLOGOS = (() => {
               textAlign: 'center',
               letterSpacing: '-0.01em',
               lineHeight: 1.05,
-              color: RD_INK,
+              color: captionLight ? RD_CREAM : RD_INK,
             }}>{c.short}</div>
           ) : (
             <img
@@ -63,7 +63,7 @@ const CSLOGOS = (() => {
               alt={c.name}
               loading="lazy"
               onError={() => setBroken(true)}
-              style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+              style={{ display: 'block', maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', margin: '0 auto' }}
             />
           )}
         </div>
@@ -73,7 +73,9 @@ const CSLOGOS = (() => {
             fontSize: 11,
             letterSpacing: '0.06em',
             textTransform: 'uppercase',
-            color: RD_INK, opacity: 0.6, textAlign: 'center',
+            color: captionLight ? RD_CREAM : RD_INK,
+            opacity: captionLight ? 0.75 : 0.6,
+            textAlign: 'center',
           }}>{c.note ? `${c.note} \u00b7 ` : ''}{c.name}</div>
         )}
       </div>
@@ -195,7 +197,7 @@ const CSLOGOS = (() => {
           </div>
         </section>
 
-        {banner('Variant A', 'Alphabetical \u00b7 captions on \u00b7 grayscale \u2192 colour on hover')}
+        {banner('Variant A', 'Alphabetical \u00b7 captions on \u00b7 real client colours')}
         <LogoWallA />
 
         {banner('Variant B', 'Grouped by sector \u00b7 captions off \u00b7 names listed under each row')}

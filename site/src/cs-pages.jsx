@@ -51,7 +51,7 @@ const CSPAGES = (() => {
             </div>
             <div className="cs-hero-card cs-hero-card-2" style={{ position: 'absolute', left: -40, bottom: 30, width: 520, height: 360, background: '#fff', padding: 12, boxSizing: 'border-box', border: `4px solid ${RD_INK}`, borderRadius: 8, overflow: 'hidden', boxShadow: `12px 12px 0 ${RD_INK}`, transform: 'rotate(-4deg)' }}>
               <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', filter: 'grayscale(1) contrast(1.05)' }}>
-                <AerialPlaceholder src="/assets/photos/stonehenge-misty-sunrise.jpg" label="Stonehenge · Wiltshire" />
+                <AerialPlaceholder src="/assets/photos/reading-turbine-sunset.jpg" label="Green Park · Reading" />
               </div>
             </div>
             <div className="cs-hero-burst" style={{ position: 'absolute', right: -10, bottom: -10, display: 'flex', flexDirection: 'column', gap: 10 }}>

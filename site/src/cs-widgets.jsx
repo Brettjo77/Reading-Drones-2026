@@ -45,24 +45,28 @@ const CSWIDGETS = (() => {
       blurb: 'Hasselblad triple-camera, 100MP stills, 6K video. The workhorse for property, commercial and cinematic.',
       stats: [['Sensor', '4/3" Hasselblad'], ['Stills', '100MP RAW'], ['Video', '6K · 60fps'], ['Range', '15 km'], ['Wind', '12 m/s']],
       color: 'var(--rd-primary)',
+      img: '/assets/drones/dji-mavic4pro.png',
     },
     {
       id: 'mini4', name: 'DJI Mini 4 Pro', tag: 'Lightweight',
       blurb: 'Sub-250g flexibility for tight permissions or quick turnaround. 4K HDR, vertical shooting, full obstacle sensing.',
       stats: [['Weight', '<249g'], ['Stills', '48MP RAW'], ['Video', '4K · 100fps'], ['Range', '20 km'], ['Class', 'C0 / A1']],
       color: 'var(--rd-accent)',
+      img: '/assets/drones/dji-mini4pro.png',
     },
     {
       id: 'avata2', name: 'DJI Avata 2', tag: 'FPV cinema',
       blurb: 'First-person fly-throughs for venues, restaurants and indoor cinematic work. Cage-protected for tight spaces.',
       stats: [['Type', 'FPV cinewhoop'], ['Video', '4K · 60fps'], ['FOV', '155°'], ['Mode', 'Manual / Acro'], ['Use', 'Indoor + outdoor']],
       color: 'var(--rd-tint)',
+      img: '/assets/drones/dji-avata2.png',
     },
     {
       id: 'neo2', name: 'DJI Neo 2', tag: 'Compact',
       blurb: 'Tiny, autonomous, indoor-safe. Used for quick orientation passes and behind-the-scenes content.',
       stats: [['Weight', '135g'], ['Video', '4K · 30fps'], ['Modes', '6 autonomous'], ['Use', 'BTS, Reels'], ['Class', 'C0']],
       color: 'var(--rd-primary)',
+      img: '/assets/drones/dji-neo2.png',
     },
   ];
 
@@ -111,12 +115,15 @@ const CSWIDGETS = (() => {
                 ))}
               </div>
             </div>
-            <div style={{ background: drone.color, position: 'relative', overflow: 'hidden', borderLeft: `4px solid ${RD_INK}` }}>
+            <div style={{ background: drone.color, position: 'relative', overflow: 'hidden', borderLeft: `4px solid ${RD_INK}`, minHeight: 360 }}>
               <div style={{ position: 'absolute', inset: 0, background: HALFTONE, opacity: 0.18 }}></div>
-              <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ transform: 'rotate(-8deg)' }}>
-                  <MavicHero treatment="comic" size={280} outline={RD_INK} accent={RD_CREAM} />
-                </div>
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+                <img
+                  src={drone.img}
+                  alt={drone.name}
+                  loading="lazy"
+                  style={{ display: 'block', maxWidth: '88%', maxHeight: '82%', width: 'auto', height: 'auto', objectFit: 'contain' }}
+                />
               </div>
               <div style={{ position: 'absolute', top: 16, right: 16, fontFamily: '"Archivo Black", sans-serif', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: RD_INK, background: RD_CREAM, padding: '4px 8px', border: `2px solid ${RD_INK}`, borderRadius: 4 }}>● PRO FLEET</div>
             </div>

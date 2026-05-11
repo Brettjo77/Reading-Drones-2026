@@ -216,22 +216,18 @@ function AerialPlaceholder({ tone = 'fields', label = 'Aerial Photo Placeholder'
   );
 }
 
-// Compact lockup — small drone icon next to the new branded wordmark PNG.
-// The wordmark was previously rendered as live JSX; swapped to the finalised
-// PNG from the May 2026 brand pack so it matches OG, print, and social assets
-// pixel-for-pixel. The drone icon stays as SVG so the comic style remains
-// crisp and the accent colour still responds to palette changes.
+// Compact lockup — small drone icon next to the wordmark word "Reading Drones"
 function CompactLockup({ size = 22, ink = RD_INK }) {
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: size * 0.45 }}>
       <window.MavicHero treatment="comic" size={size * 2.2} outline={ink} accent={RD_ORANGE} />
-      <img
-        src="/logo-wordmark.png"
-        alt="Reading Drones"
-        // Native PNG is 407x220; render at ~2.4x text size so it visually
-        // aligns with the drone icon next to it across every nav height.
-        style={{ display: 'block', height: size * 2.4, width: 'auto' }}
-      />
+      <div style={{
+        fontFamily: '"Archivo Black", sans-serif', fontSize: size, lineHeight: 0.95,
+        textTransform: 'uppercase', color: ink, letterSpacing: '0.01em',
+      }}>
+        <div>Reading</div>
+        <div style={{ color: RD_ORANGE, WebkitTextStroke: `1.5px ${ink}`, paintOrder: 'stroke fill' }}>Drones</div>
+      </div>
     </div>
   );
 }
